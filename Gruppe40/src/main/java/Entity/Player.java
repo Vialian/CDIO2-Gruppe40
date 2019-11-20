@@ -8,11 +8,8 @@ public class Player {
     private String name;
     private Die die;
     private int currentTile;
-    private int[] owendProperties = new int[15];
-
-
-    // Bruges i addProperties metoden
-    private  int i = 0;
+    private int[] ownedProperties;
+    private int ownedSize = 0;
 
     // Kun én terning
     // private Die die2;
@@ -58,14 +55,35 @@ public class Player {
         this.currentTile = position;
     }
 
-    public void addProperties(int position){
-        owendProperties[i] = position;
-                i++;
+    public void addProperty (int position) {
+        int[] newArray = new int[ownedSize+1];
+        for( int i = 0; i < ownedSize; i++) {
+            newArray[i] = ownedProperties[i];
+        }
+        newArray[ownedSize++] = position;
+        ownedProperties = newArray;
+    }
+
+    public void removeProperty (int position) {
+        int i;
+        for (i = 0; i < ownedSize; i++) {
+            if (position == ownedProperties[i])
+                break;
+        }
+        if (i == ownedSize)
+            return;
+        int[] newArray = new int[ownedSize-1];
+        for (int j = 0; j < i; j++) {
+            newArray[j] = ownedProperties[j];
+        }
+        for (int j = i; j < ownedSize-1; j++) {
+            newArray[j] = ownedProperties[j+1];
+        }
+        ownedProperties = newArray;
     }
 
     int[] getProperties(){
-        return owendProperties;
-
+        return ownedProperties;
     }
 
     /*public int getDieValue1() {
