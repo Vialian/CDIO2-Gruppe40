@@ -1,21 +1,28 @@
 package Entity;
 
-public class Tile {
+public abstract class Tile {
+    private String name;
+    private String text; // vil vi have text til felterne ?
+    private String type;
 
-
-    String name = "";
-    String text = "";
-    int money = 0;
-
-
-    public Tile(String _name, String _text, int _money)
+    public Tile(String name, String text)
     {
-        name = _name;
-        text = _text;
-        money = _money;
+        this.name = name;
+        this.text = text;
+
+    }
+    public  String landOn(){
+        return type;
     }
 
-    public String getTitle() { return name; }
-    public String getFlavourText() { return text; }
-    public int getGoldValue() { return money; }
+    public String getName() {
+        return name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+
+
 }

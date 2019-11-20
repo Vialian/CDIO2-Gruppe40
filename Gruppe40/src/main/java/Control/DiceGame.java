@@ -3,6 +3,8 @@ package Control;
 import Entity.Board;
 import Entity.Player;
 import Entity.Tile;
+import Entity.propetyTile;
+import com.sun.deploy.panel.IProperty;
 import gui_codebehind.GUI_Center;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -90,15 +92,52 @@ public class DiceGame {
                     int roll = players[currentPlayer].rollDice();
                     Tile tile = board.getTile(roll-1);
                     System.out.println(currentPlayer);
-                    players[currentPlayer].addPoints(tile.getGoldValue());
-
+                    //players[currentPlayer].addPoints(tile.getGoldValue());
                     updateGui(currentPlayer);
                     showTileMessage(tile);
+                    //lander på tile
+                    processType(tile, players[currentPlayer]);
 
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
             }
         }
+    }
+
+    private <tile extends Tile> void processType( tile, Player pl){
+        String type = tile.landOn();
+        if(type == "propety")
+            prossPropety(tile, pl);
+        else if(type == "chance")
+            prossChance(tile);
+        else if(type == "jail")
+            prossJail(tile);
+    }
+
+    private void prossChance(Tile tile) {
+
+    }
+
+    private void prossPropety(propetyTile tile, Player pl) {
+        if(tile.getOwnedBy() == "None"){
+            String choose = gui.getUserSelection("Vil du købe ejendommen: " + tile.getName()+"?", "ja","nej");
+            if(choose == "ja" ){
+                if(pl.getPoints() >= tile.getCost()){
+                    tile.setOwnedBy(pl.getName());
+                    pl.addPoints(- tile.getCost());
+                    gui.showMessage("Du er ejer nu: "+ tile.getName());
+
+                }else{
+                    gui.showMessage("Du har ikke nok penge");
+                }
+
+            }
+        }
+
+    }
+
+    private void prossJail(Tile tile) {
+
     }
 
     private Boolean doPlayerConditions(Player player) {
