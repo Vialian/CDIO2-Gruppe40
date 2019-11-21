@@ -8,6 +8,11 @@ public class Player {
     private String name;
     private Die die;
     private int currentTile;
+
+    public int[] getOwnedProperties() {
+        return ownedProperties;
+    }
+
     private int[] ownedProperties;
     private int ownedSize = 0;
 

@@ -97,7 +97,6 @@ public class DiceGame {
                     showTileMessage(tile);
                     //lander på tile
                     processType(tile, players[currentPlayer]);
-
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
             }
@@ -154,6 +153,44 @@ public class DiceGame {
             return false;
         }
         return true;
+    }
+
+    private void sellPropety(Player pl){
+        String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
+        if(res != "nej"){
+            int propety =  Integer.parseInt(res);
+            for (int x : pl.getOwnedProperties()){
+                if(propety == x){
+                    String res2 = gui.getUserSelection("hvem vil du sælge til, Spiller, Banken");
+                    if(res2 == "Spiller"){
+                        String sellTo = gui.getUserString("Skriv navnet på spilleren du vil sælge til");
+                        sellToPlayer(propety,sellTo, pl);
+                    } else if(res2 == "Banken"){
+                        pl.addMoney(board.getTileCost(propety));
+                        pl.removeProperty(propety);
+
+                        //postion burde være id;
+                    }
+                }
+            }
+        }
+    }
+
+    private void sellToPlayer(int propety, String sellTo, Player sellFrom) {
+        String res2 = gui.getUserSelection(sellTo + " vil du købe?","ja","nej");
+        if(res2 == "ja"){
+            for(Player pl : players){
+                int cost = board.getTileCost(propety);
+                if(sellTo == pl.getName() && pl.getMoney() >= cost){
+                    pl.addMoney(-cost);
+                    sellFrom.addMoney(cost);
+                    sellFrom.removeProperty(propety);
+                    pl.addProperty(propety);
+                }
+            }
+        }
+
+
     }
 
     private void updateGui(int currentPlayer) {
