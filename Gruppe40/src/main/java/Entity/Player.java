@@ -3,47 +3,90 @@ package Entity;
 import Entity.Die;
 
 public class Player {
-    private int points;
-    private String name;
-    private Die die1;
-    private Die die2;
-    private int currentTile;
 
-    public Player(String name, int initialPoints) {
-        die1 = new Die();
-        die2 = new Die();
-        this.points = initialPoints;
+    private int money;
+    private String name;
+    private Die die;
+    private int currentTile;
+    private int[] ownedProperties;
+    private int ownedSize = 0;
+
+    // Kun én terning
+    // private Die die2;
+
+    public Player(String name, int initialMoney) {
+        die = new Die();
+        //die2 = new Die();
+        this.money = initialMoney;
         this.name = name;
     }
 
-    public int getPoints() {
-        return points;
+    public int getMoney() {
+        return money;
     }
 
-    public void setPoints(int p) {
-        points = p;
+    public void setMoney(int p) {
+        this.money = p;
     }
 
-    public void addPoints(int p) {
-       setPoints(this.points + p);
+    public void addMoney(int p) {
+       setMoney(this.money + p);
     }
 
     public String getName() {
         return this.name;
     }
 
-    public int rollDice() {
-        int value1 = die1.roll();
-        int value2 = die2.roll();
+    /*public void setName(String name){
+        setName(this.name);
+    }*/
 
-        return currentTile = value1 + value2 -1;
+    public int rollDie() {
+        int value1 = die.roll();
+        //int value2 = die2.roll();
+        return currentTile = value1;
     }
 
     public int getCurrentTile() {
         return currentTile;
     }
 
-    public int getDieValue1() {
+    public void setCurrentTile(int position){
+        this.currentTile = position;
+    }
+
+    public void addProperty (int position) {
+        int[] newArray = new int[ownedSize+1];
+        for( int i = 0; i < ownedSize; i++) {
+            newArray[i] = ownedProperties[i];
+        }
+        newArray[ownedSize++] = position;
+        ownedProperties = newArray;
+    }
+
+    public void removeProperty (int position) {
+        int i;
+        for (i = 0; i < ownedSize; i++) {
+            if (position == ownedProperties[i])
+                break;
+        }
+        if (i == ownedSize)
+            return;
+        int[] newArray = new int[ownedSize-1];
+        for (int j = 0; j < i; j++) {
+            newArray[j] = ownedProperties[j];
+        }
+        for (int j = i; j < ownedSize-1; j++) {
+            newArray[j] = ownedProperties[j+1];
+        }
+        ownedProperties = newArray;
+    }
+
+    int[] getProperties(){
+        return ownedProperties;
+    }
+
+    /*public int getDieValue1() {
         return die1.getFaceValue();
     }
 
@@ -53,10 +96,10 @@ public class Player {
 
     /*public Boolean hasDoubles() {
         return die1.getFaceValue() == die2.getFaceValue();
-    }*/
+    }
 
     public Boolean hasWon() {
-        return points >= 3000 /*&& hasDoubleSix()*/;
+        return points >= 3000 /*&& hasDoubleSix();
     }
 
     public Boolean hasLost(){
