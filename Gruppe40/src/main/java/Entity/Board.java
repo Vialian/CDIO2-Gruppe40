@@ -22,11 +22,10 @@ public class Board {
     }
 
     public int getTileCost(int t){
-        for(propetyTile x : tiles){
-            if(t == x.getNr){
-                return  x.getCost();
-            }
-        }
+
+        propetyTile tile = (propetyTile) getTile(t);
+        return tile.getCost();
+
     }
 
     public void addTile(String _name, String _text, int _money)
