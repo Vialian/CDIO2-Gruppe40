@@ -51,7 +51,6 @@ public class Player {
         //int value2 = die2.roll();
         return currentTile = value1;
     }
-
     public int getCurrentTile() {
         return currentTile;
     }

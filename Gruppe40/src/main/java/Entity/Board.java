@@ -25,8 +25,11 @@ public class Board {
                 boardTiles[position] = 	tile;
             }
         }
+        public Tile getTile(int position) {
+            return boardTiles[position];
+        }
 
-        Board(){//spørg hvor det bør ligge, bør controller gøre det her.
+        public Board(){//spørg hvor det bør ligge, bør controller gøre det her.
             boardTiles = new Tile[24];
             addUseless(0,”Go”,”When you pass Go you gain 1 Dollar.”);
             addUseless(6,”Jail”,”This is where the hardest criminals are kept.”);
@@ -57,7 +60,7 @@ public class Board {
         }
 // kan bruges til at udvide bordet i fremtiden,
 //hvor den tager en int, hvor bordet vil have size tiles
-        Board(int size){
+        public Board(int size){
             boardTiles = new Tile[size];
         }
 

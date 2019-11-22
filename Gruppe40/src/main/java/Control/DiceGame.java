@@ -17,186 +17,198 @@ import java.awt.*;
 
 public class DiceGame {
 
-    private Boolean gameHasEnded;
+    private Boolean gameHasEnded;//Den her skal fjernes man kan bare returne når nogen vinder
     private Player[] players;
-    private final int MAX_PLAYERS = 2;
+
+    private int MAX_PLAYERS = 0;
     private GUI_Player[] guiPlayers;
     private Board board;
-    private final int TILES_COUNT = 12;
+    private int TILES_COUNT = 24;
     private GUI_Field[] guiFields;
     private GUI gui;
+    private int youngest = 0;
+    private int passStart = 2;
 
+
+    private void MakePropertyTile(propetyTile tile, int pos)
+    {
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + tile.getCost(), Color.WHITE, Color.BLACK);
+    }
+    private void MakeChanceTile(propetyTile tile, int pos)
+    {
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
+    }
+    private void MakeJailTile(propetyTile tile, int pos)
+    {
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
+    }
+    private void MakeUseless(propetyTile tile, int pos)
+    {
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
+    }
 
     public DiceGame() {
-        createBoard();
+        Board board = new Board();
 
         guiFields = new GUI_Field[TILES_COUNT];
-        for(int i = 0; i < TILES_COUNT; i++){
+        for (int i = 0; i < TILES_COUNT; i++) {
             Tile tile = board.getTile(i);
-            guiFields[i] = new GUI_Street(tile.getTitle(),"", tile.getFlavourText(),"" + tile.getGoldValue(), Color.WHITE, Color.BLACK);
+            if(tile instanceof propetyTile)
+                MakePropertyTile((propetyTile) tile,i);
+            if(tile instanceof chanceTile)
+                MakeChanceTile((chanceTile) tile,i);
+            if(tile instanceof jailTile)
+                MakeJailTile((jailTile) tile,i);
+            if(tile instanceof useLessTile)
+                MakeUseless((uselessTile) tile,i);
         }
         GUI_Center guic = GUI_Center.getInstance();
-
 
 
         gui = new GUI(guiFields);
 
         guic.setBGColor(Color.WHITE);
-        guic.setChanceCard("Velkommen");
+        guic.setChanceCard("Welcome");
 
-        gui.showMessage("Welcome to HyperDice, earthlings! :-D");
+        gui.getUserString("welcome to Hyperdice");
+        while (MAX_PLAYERS < 2 && MAX_PLAYERS > 4) {
+            try {
+                MAX_PLAYERS = Integer.parseInt(gui.getUserString("How many players?"));
+            } catch (Exception e) {
+                gui.getUserString("fejl, indtast et tal 2-4");
+            }
+
+        }
+
 
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
 
-        String playerName1 = gui.getUserString("Player " + (1) + ": What is your name?");
-        players[0] = new Player(playerName1, 1000);
-        gui.addPlayer(guiPlayers[0] = new GUI_Player(playerName1, 1000));
+        int youngestTemp = 200;
+        for (int i = 1; MAX_PLAYERS + 1 >= i; i++) {
+            int s = i - 1;
+            String playerName = gui.getUserString("Player " + i + ": What is your name?");
+            playerName += i;
+            players[s] = new Player(playerName + i, 1000);
+            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName + i, 1000));
+            int playerAge = 0;
+            try {
+                playerAge = Integer.parseInt(gui.getUserString("Player " + i + ": What is your age?"));
+            } catch (Exception e) {
+                gui.getUserString("fejl, indtast alder");
+            }
 
-        String playerName2 = gui.getUserString("Player " + (2) + ": What is your name?");
-        while(playerName1.equals(playerName2)) {
-            playerName2 = gui.getUserString("Player " + (2) + ": Type a different name. Please.");
+            if (youngestTemp > playerAge) {
+                youngest = s;
+                youngestTemp = playerAge;
+            }
+
         }
-        players[1] = new Player(playerName2, 1000);
-        gui.addPlayer(guiPlayers[1] = new GUI_Player(playerName2, 1000));
-        gui.showMessage("Alright, let's get started...");
-    }
-
-    public void createBoard(){
-        board = new Board(12);
-
-        board.addTile("theBlackHole", "Man kan ikke slå 1 med to terninger", 0);
-        board.addTile("Tower", "The TwinTowers have been destroyed", 250);
-        board.addTile("Crater", "The Crater smells bad, but looks great", -100);
-        board.addTile("Palace gates", "The Palace gates looks good but it is not", 100);
-        board.addTile("Cold Desert", "The Cold Desert is not cold it is warm", -20);
-        board.addTile("Walled City", "Walled City is not very walled", 180);
-        board.addTile("Monastery", "Monastery is full of bad boys", 0);
-        board.addTile("Black Cave", "Black caves are good ;)", -70);
-        board.addTile("Huts in the mountain", "Huts in the mountain sucks!", 60);
-        board.addTile("The Warewall", "The werewolf-walls are full of monkeys", -80); //ekstratur
-        board.addTile("The Pit", "Let's have beer!", -50);
-        board.addTile("Goldmine", "No gold in the mine, sorry!", 650);
+        gui.showMessage("Alright, let's get started..., the youngest one " + players[youngest].getName() + " will start");
 
     }
+
 
     public void playDiceGame() {
         gameHasEnded = false;
 
         while (!gameHasEnded) {
-            for(int currentPlayer = 0; currentPlayer < MAX_PLAYERS && !gameHasEnded; currentPlayer++) {
+
+
+            for (int currentPlayer = youngest; currentPlayer < MAX_PLAYERS && !gameHasEnded; currentPlayer++) {
                 Boolean nextPlayer = false;
                 while (!nextPlayer) {
                     gui.getUserString(players[currentPlayer].getName() + ": Will you roll your dice?...");
 
-                    int roll = players[currentPlayer].rollDice();
-                    Tile tile = board.getTile(roll-1);
-                    System.out.println(currentPlayer);
-                    //players[currentPlayer].addPoints(tile.getGoldValue());
+                    int roll = players[currentPlayer].rollDie();
+
+                    int currentPosition = players[currentPlayer].getCurrentTile();
+
+
+                    Tile tile = board.getTile(roll + currentPosition % board.getBoard().length);
+                    if (currentPosition + roll >= board.getBoard().length)
+                        PassingStart(currentPlayer);
+
                     updateGui(currentPlayer);
-                    showTileMessage(tile);
-                    //lander på tile
-                    processType(tile, players[currentPlayer]);
+
+
+
+
+                    showTileMessage(currentPosition, currentPlayer);
+
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
             }
         }
     }
 
-    private <tile extends Tile> void processType( tile, Player pl){
-        String type = tile.landOn();
-        if(type == "propety")
-            prossPropety(tile, pl);
-        else if(type == "chance")
-            prossChance(tile);
-        else if(type == "jail")
-            prossJail(tile);
+    private void PassingStart(int player)
+    {
+        players[player].addMoney(passStart);
     }
 
-    private void prossChance(Tile tile) {
-
-    }
-
-    private void prossPropety(propetyTile tile, Player pl) {
-        if(tile.getOwnedBy() == "None"){
-            String choose = gui.getUserSelection("Vil du købe ejendommen: " + tile.getName()+"?", "ja","nej");
-            if(choose == "ja" ){
-                if(pl.getPoints() >= tile.getCost()){
-                    tile.setOwnedBy(pl.getName());
-                    pl.addPoints(- tile.getCost());
-                    gui.showMessage("Du er ejer nu: "+ tile.getName());
-
-                }else{
-                    gui.showMessage("Du har ikke nok penge");
-                }
-
-            }
-        }
-
-    }
-
-    private void prossJail(Tile tile) {
-
-    }
 
     private Boolean doPlayerConditions(Player player) {
-        if (player.hasWon()) {
-            gui.showMessage(player.getName() + " has won the game!");
-            gameHasEnded = true;
-            return true;
-        } else if (player.hasLost()){
-            gui.showMessage(player.getName() + " has lost the game!");
-            gameHasEnded = true;
-            return true;
-        } else if (player.getCurrentTile() == 9) {
-            gui.showMessage(player.getName() + " has won an extra throw! :-D");
-            return false;
-        }
-        return true;
-    }
-// dette er en ligegyldig kommentar
-    
-    private void sellPropety(Player pl){
-        String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
-        if(res != "nej"){
-            int propety =  Integer.parseInt(res);
-            for (int x : pl.getOwnedProperties()){
-                if(propety == x){
-                    String res2 = gui.getUserSelection("hvem vil du sælge til, Spiller, Banken");
-                    if(res2 == "Spiller"){
-                        String sellTo = gui.getUserString("Skriv navnet på spilleren du vil sælge til");
-                        sellToPlayer(propety,sellTo, pl);
-                    } else if(res2 == "Banken"){
-                        pl.addMoney(board.getTileCost(propety));
-                        pl.removeProperty(propety);
+        if (player.hasLost()) {
+            if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
+                int[][] pl = new int[8][2];
+                int num = 0;
+                int amount = 1;
+                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
+                    for (int s : player.getOwnedProperties()) {
+                        if (s == i)
+                        {
+                            pl[i][num] = amount;
+                            num++;
+                            amount++;
+                            if (amount >= 2)
+                                amount = 1;
+                        }
+                    }
 
-                        //postion burde være id;
+                }
+                int toSale = 0, toSale2 = 3;
+                int value = 0;
+                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
+                    if (pl[i].length <= toSale) {
+                        if (player.getOwnedProperty[i][0].value >= player.getProperty[toSale][0].value) {
+                            toSale = i;
+                            if (player.getProperty[toSale][0].value >= player.getProperty[toSale][1].value && pl[toSale].length >= 2) {
+                                toSale2 = 0;
+                            } else
+                                toSale2 = 1;
+
+                        }
                     }
                 }
+                player.sellTile(toSale, toSale2);
             }
-        }
-    }
+            if (player.getMoney() >= 0) {
+                hasLost = false;
+                return false;
+            }
 
-    private void sellToPlayer(int propety, String sellTo, Player sellFrom) {
-        String res2 = gui.getUserSelection(sellTo + " vil du købe?","ja","nej");
-        if(res2 == "ja"){
-            for(Player pl : players){
-                int cost = board.getTileCost(propety);
-                if(sellTo == pl.getName() && pl.getMoney() >= cost){
-                    pl.addMoney(-cost);
-                    sellFrom.addMoney(cost);
-                    sellFrom.removeProperty(propety);
-                    pl.addProperty(propety);
+            gui.showMessage(player.getName() + " has lost the game!");
+            int mostMoney = 0;
+            int playerWinner = 0;
+            for (int i = 0; MAX_PLAYERS - 1 >= i; i++) {
+                if (mostMoney > players[i].getMoney()) {
+                    mostMoney = players[i].getMoney();
+                    playerWinner = i;
                 }
+
             }
+
+            gui.showMessage(players[playerWinner].getName() + " has won with the most money value at : " + mostMoney);
+            gameHasEnded = true;
+            return true;
         }
-
-
+        return true;
     }
 
     private void updateGui(int currentPlayer) {
         //update all cars
-        for(int f = 0; f < TILES_COUNT; f++) {
+        for (int f = 0; f < TILES_COUNT; f++) {
             guiFields[f].removeAllCars();
         }
 
@@ -204,17 +216,52 @@ public class DiceGame {
             guiFields[players[p].getCurrentTile()].setCar(guiPlayers[p], true);
         }
 
-        guiPlayers[currentPlayer].setBalance(players[currentPlayer].getPoints());
-        gui.setDice(players[currentPlayer].getDieValue1(), players[currentPlayer].getDieValue2());
+        guiPlayers[currentPlayer].setBalance(players[currentPlayer].getMoney());
+        gui.setDice(players[currentPlayer].getDie().getFaceValue());
     }
 
-    private void showTileMessage(Tile tile) {
-        String message = "You have hit " + tile.getTitle() + ": " + tile.getFlavourText() + ". ";
-        int gold = tile.getGoldValue();
-        if(gold > 0)
-            message += "You get " + gold + " points! :-D";
-        else if(gold < 0)
-            message += "You loose " + gold + " points... :(";
+
+    private void showTileMessage(int pos, int currentPlayer) {//Spørg om det er ok at overfører argumenter som man ikke har “strictly” brug for til metoder.
+        String message = "You have landed on " + board.getTile(pos).getName() + ": " + board.getTile(pos).getText() + ". ";
+
+        if (board.getTile(pos) instanceof ChanceTile) {
+            message = board.getTile(pos).toString();
+        }
+        else if (board.getTile(pos) instanceof PropertyTile)
+        {
+            boolean ownedByThemselves = players[currentPlayer].equals(getPlayer(board.getTile(pos).getOwnedBy()));
+
+            if (ownedByThemselves)
+            {
+                message = "You own it yourself";
+                ownedByThemselves = false;
+            }
+
+            if (board.getTile(pos).getOwnedBy() == "None")
+            {
+                message = "you can buy this property";
+                //or
+                //message = title.toString()}
+            }
+			else {
+                    message = "you owe " + board.getTile(pos).getOwnedBy() + " money, pay : " + board.getTile(pos).getCost();
+                }
+        }
+        else if (board.getTile(pos) instanceof jailTile) {
+            message = "go to prusin";
+        }
+        else{
+            if (board.getTile(pos).getName() == "Jailvisit")
+                message = "you are visiting the jail";
+            else if (board.getTile(pos).getName() == "Parkinglot")
+                message = "you are visiting the jail";
+            else
+                message = "Nothing";
+        }
+
+
         gui.showMessage(message);
+
+
     }
 }
