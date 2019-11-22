@@ -3,8 +3,7 @@ package Control;
 import Entity.Board;
 import Entity.Player;
 import Entity.Tile;
-import Entity.propetyTile;
-import com.sun.deploy.panel.IProperty;
+import Entity.PropertyTile;
 import gui_codebehind.GUI_Center;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -117,7 +116,7 @@ public class DiceGame {
 
     }
 
-    private void prossPropety(propetyTile tile, Player pl) {
+    private void prossPropety(PropertyTile tile, Player pl) {
         if(tile.getOwnedBy() == "None"){
             String choose = gui.getUserSelection("Vil du købe ejendommen: " + tile.getName()+"?", "ja","nej");
             if(choose == "ja" ){
@@ -155,7 +154,7 @@ public class DiceGame {
         return true;
     }
 // dette er en ligegyldig kommentar
-    
+
     private void sellPropety(Player pl){
         String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
         if(res != "nej"){
