@@ -3,7 +3,21 @@ package Entity;
 public class JailTile extends Tile {
 
 
-    public JailTile(String name, String text) {
+    private int sendTo = 0;
+
+    public JailTile(String name, String text, int sendTo) {
         super(name, text);
+        this.sendTo = sendTo;
+    }
+    public JailTile(String name, String text){
+        super(name, text);
+
+    }
+
+    public void landOn(Player pl) {
+        if(sendTo!= 0){
+            pl.setCurrentTile(sendTo);
+            //boardet skal updaters efter i diceGame Klassen
+        }
     }
 }

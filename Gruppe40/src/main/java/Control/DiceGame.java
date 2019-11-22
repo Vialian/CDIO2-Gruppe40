@@ -23,6 +23,8 @@ public class DiceGame {
     private Board board;
     private final int TILES_COUNT = 12;
     private GUI_Field[] guiFields;
+
+
     private GUI gui;
 
 
@@ -60,6 +62,8 @@ public class DiceGame {
         gui.addPlayer(guiPlayers[1] = new GUI_Player(playerName2, 1000));
         gui.showMessage("Alright, let's get started...");
     }
+
+
 
     public void createBoard(){
         board = new Board(12);
@@ -216,4 +220,5 @@ public class DiceGame {
             message += "You loose " + gold + " points... :(";
         gui.showMessage(message);
     }
+
 }
