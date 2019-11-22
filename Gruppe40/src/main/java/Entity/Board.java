@@ -20,7 +20,7 @@ public class Board {
         }
 
         public void addChance(int[] positions, String name){
-            ChanceTile tile = new ChanceTile(name);
+            ChanceTile tile = new ChanceTile(name, "Prøv lykken");
             for (int position : positions){
                 boardTiles[position] = 	tile;
             }
