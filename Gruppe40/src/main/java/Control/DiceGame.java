@@ -3,8 +3,7 @@ package Control;
 import Entity.Board;
 import Entity.Player;
 import Entity.Tile;
-import Entity.propetyTile;
-import com.sun.deploy.panel.IProperty;
+import Entity.PropertyTile;
 import gui_codebehind.GUI_Center;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -189,17 +188,6 @@ public class DiceGame {
             }
 
             gui.showMessage(player.getName() + " has lost the game!");
-            int mostMoney = 0;
-            int playerWinner = 0;
-            for (int i = 0; MAX_PLAYERS - 1 >= i; i++) {
-                if (mostMoney > players[i].getMoney()) {
-                    mostMoney = players[i].getMoney();
-                    playerWinner = i;
-                }
-
-            }
-
-            gui.showMessage(players[playerWinner].getName() + " has won with the most money value at : " + mostMoney);
             gameHasEnded = true;
             return true;
         }
