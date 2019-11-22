@@ -1,9 +1,9 @@
 package Entity;
 
- public class propetyTile extends Tile {
+ public class PropertyTile extends Tile {
 
      private int cost;
-     private int rent;
+     private int color;
 
      public String getOwnedBy() {
          return ownedBy;
@@ -16,10 +16,10 @@ package Entity;
      private String ownedBy ="None";
      private String type = "propety";
 
-     public propetyTile(String name, String text, int cost, int rent) {
+     public PropertyTile(String name, String text, int cost, int color) {
          super(name, text);
          this.cost = cost;
-         this.rent = rent;
+         this.color = color;
 
      }
 
@@ -32,6 +32,6 @@ package Entity;
          return cost;
      }
      public int getRent() {
-         return rent;
+         return color;
      }
  }
