@@ -217,4 +217,35 @@ public class DiceGame {
             message += "You loose " + gold + " points... :(";
         gui.showMessage(message);
     }
+
+    public boolean colourPair(position){
+
+        // Position
+        Tile tile = board.getTile(position);
+
+        // Tile colour
+        int colour = tile.getColour();
+
+        // Ved nedenstående fås spilleren som ejer den pågældende tile
+        player = getPlayer(tile.getOwnedBy);
+
+        int currentPosition = position;
+
+
+        while(true){
+            currentPosition ++;
+            tile = board.getTile(currentPosition);
+
+            // Kontrol om tile er propertyTile eller ej
+            if (!(tile instanceof propetyTile)){
+                continue;
+            }
+
+            if(colour)
+        }
+
+
+    }
+
+
 }

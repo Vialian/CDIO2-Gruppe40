@@ -15,8 +15,8 @@ package Entity;
          this.ownedBy = ownedBy;
      }
 
-     private String ownedBy ="None";
-     private String type = "propety";
+     private String ownedBy = "None";
+     private String type = "Property";
 
      public propetyTile(String name, String text, int cost, int rent, int colour) {
          super(name, text);
