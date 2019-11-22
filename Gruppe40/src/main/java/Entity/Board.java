@@ -15,7 +15,7 @@ public class Board {
             boardTiles[position] = new JailTile(name, description, sendTo);
         }
 
-        public void addProperty(int position, String name, String description, int price){
+        public void addProperty(int position, String name, String description, int price, int colour){
             boardTiles[position] = new PropertyTile(name, description, price, colour);
         }
 
