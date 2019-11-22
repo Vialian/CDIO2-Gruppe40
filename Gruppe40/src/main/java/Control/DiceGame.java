@@ -154,7 +154,8 @@ public class DiceGame {
         }
         return true;
     }
-
+// dette er en ligegyldig kommentar
+    
     private void sellPropety(Player pl){
         String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
         if(res != "nej"){
