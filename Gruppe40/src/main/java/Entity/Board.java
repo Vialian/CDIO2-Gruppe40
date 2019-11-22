@@ -21,13 +21,6 @@ public class Board {
             return null;
     }
 
-    public int getTileCost(int t){
-
-        propetyTile tile = (propetyTile) getTile(t);
-        return tile.getCost();
-
-    }
-
     public void addTile(String _name, String _text, int _money)
     {
         if (tiles.length >= tileCount) {
