@@ -165,20 +165,14 @@ public class DiceGame {
             int propety =  Integer.parseInt(res);
             for (int x : pl.getOwnedProperties()){
                 if(propety == x){
-                    String res2 = gui.getUserSelection("hvem vil du sælge til, Spiller, Banken");
-                    if(res2 == "Spiller"){
-                        String sellTo = gui.getUserString("Skriv navnet på spilleren du vil sælge til");
-                        sellToPlayer(propety,sellTo, pl);
-                    } else if(res2 == "Banken"){
-                        pl.addMoney(board.getTileCost(propety));
-                        pl.removeProperty(propety);
-
-                        //postion burde være id;
+                    pl.addMoney(board.getTileCost(propety));
+                    pl.removeProperty(propety);
+                    board.getTile().setOwnedBy("None");
                     }
                 }
             }
         }
-    }
+
 
     private void sellToPlayer(int propety, String sellTo, Player sellFrom) {
         String res2 = gui.getUserSelection(sellTo + " vil du købe?","ja","nej");
