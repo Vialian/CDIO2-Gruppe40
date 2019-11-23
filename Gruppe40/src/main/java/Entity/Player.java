@@ -10,6 +10,8 @@ public class Player {
     private int currentTile;
     private Boolean promisedRealEstate;
     private int releaseCards;
+    private int ID;
+    private boolean inJail = false;
 
     public int[] getOwnedProperties() {
         return ownedProperties;
@@ -18,14 +20,16 @@ public class Player {
     private int[] ownedProperties;
     private int ownedSize = 0;
 
+
     // Kun én terning
     // private Die die2;
 
-    public Player(String name, int initialMoney) {
+    public Player(String name, int initialMoney, int ID  ) {
         die = new Die();
         //die2 = new Die();
         this.money = initialMoney;
         this.name = name;
+        this.ID = ID;
     }
 
     public int getMoney() {
@@ -106,6 +110,22 @@ public class Player {
 
     public void setPromisedRealEstate(Boolean value) {
         this.promisedRealEstate = value;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public boolean isInJail() {
+        return inJail;
+    }
+
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
     }
 
     /*public int getDieValue1() {

@@ -85,7 +85,7 @@ public class DiceGame {
             int s = i - 1;
             String playerName = gui.getUserString("Player " + i + ": What is your name?");
             playerName += i;
-            players[s] = new Player(playerName + i, 1000);
+            players[s] = new Player(playerName + i, 1000, i);
             gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName + i, 1000));
             int playerAge = 0;
             try {

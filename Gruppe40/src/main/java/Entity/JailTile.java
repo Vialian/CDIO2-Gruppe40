@@ -17,6 +17,7 @@ public class JailTile extends Tile {
     public void landOn(Player pl) {
         if(sendTo!= 0){
             pl.setCurrentTile(sendTo);
+            pl.setInJail(true);
             //boardet skal updaters efter i diceGame Klassen
         }
     }
