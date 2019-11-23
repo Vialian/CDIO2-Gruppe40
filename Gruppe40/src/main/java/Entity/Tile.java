@@ -4,11 +4,14 @@ public abstract class Tile {
     String name;
     private String text;
     private String type;
+    private String color;
+    private Boolean meIsProperty = false;
 
-    public Tile(String name, String text)
+    public Tile(String name, String text, String color)
     {
         this.name = name;
         this.text = text;
+        this.color = color;
 
     }
     public void landOn(Player pl){
@@ -16,10 +19,18 @@ public abstract class Tile {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getText() {
-        return text;
+        return this.text;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public Boolean isProperty() {
+        return this.meIsProperty;
     }
 }

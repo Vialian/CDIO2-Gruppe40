@@ -25,6 +25,14 @@ public class DiceGame {
     private int youngest = 0;
     private int passStart = 2;
 
+    public Player findPlayer(String name) {
+        for (Player player: players) {
+            if(player.getName().equals(name)) {
+                return player;
+            }
+        }
+        return null;
+    }
 
     private void MakePropertyTile(PropertyTile tile, int pos)
     {
@@ -32,15 +40,15 @@ public class DiceGame {
     }
     private void MakeChanceTile(ChanceTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + "", Color.WHITE, Color.BLACK);
     }
     private void MakeJailTile(JailTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "", Color.WHITE, Color.BLACK);
     }
     private void MakeUseless(UselessTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "", Color.WHITE, Color.BLACK);
     }
 
     public DiceGame() {

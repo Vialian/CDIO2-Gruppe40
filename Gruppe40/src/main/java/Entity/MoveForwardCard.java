@@ -9,7 +9,7 @@ public class MoveForwardCard extends ChanceCard{
     public int getMove(){
         return move;
     }
-    public MoveForwardCard(int move){
+    public MoveForwardCard(/*int move*/){
         setMove(move);
     }
 
