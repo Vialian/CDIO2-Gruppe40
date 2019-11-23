@@ -11,8 +11,8 @@ public class SendToCard extends ChanceCard {
         return sendTo;
     }
 
-    public SendToCard(int sendTo) {
-        setSendTo(sendTo);
+    public SendToCard(/*int sendTo*/) {
+        //setSendTo(sendTo);
     }
 
     public void onDraw(Player player) {

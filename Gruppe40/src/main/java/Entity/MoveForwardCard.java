@@ -13,7 +13,7 @@ public class MoveForwardCard extends ChanceCard{
         setMove(move);
     }
 
-    public void onDraw() {
+    public void onDraw(Player player) {
         //TODO: INSERT METHOD FROM controller and add needed arguments;
     }
     @Override
