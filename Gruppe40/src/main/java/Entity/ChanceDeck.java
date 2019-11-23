@@ -1,3 +1,5 @@
+package Entity;
+
 public class ChanceDeck {
     int index;
     int[] deck;
@@ -6,7 +8,7 @@ public class ChanceDeck {
         mixDeck();
     }
 
-    private mixDeck() {
+    private void mixDeck() {
         int[] initDeck = new int[20];
         for (int i = 0; i < 20; i++)
             initDeck[i] = 1;
@@ -15,9 +17,9 @@ public class ChanceDeck {
         while (mixCount < 20) {
             int i;
             do {
-                i = Math.random() * 20;
+                i = (int)(Math.random() * 20);
             } while (initDeck[i] == 0);
-            deck[mixCount] = i;
+            deck[mixCount++] = i;
             initDeck[i] = 0;
         }
         index = 0;
