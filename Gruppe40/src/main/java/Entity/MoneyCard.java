@@ -9,7 +9,7 @@ public class MoneyCard extends ChanceCard{
     public int getMoney(){
         return money;
     }
-    public MoneyCard(int money){
+    public MoneyCard(/*int money*/){
         setMoney(money);
     }
     public void onDraw(Player player) {

@@ -7,7 +7,7 @@ import gui_main.GUI;
 public class PropertyTile extends Tile {
 
      private int cost;
-     private int colour;
+//     private int colour;
 
 
      public String getOwnedBy() {
@@ -21,19 +21,19 @@ public class PropertyTile extends Tile {
      private String ownedBy = "None";
      private String type = "Property";
 
-     public PropertyTile(String name, String text, int cost, int colour) {
-         super(name, text);
+     public PropertyTile(String name, String text, int cost, String color) {
+         super(name, text, color);
          this.cost = cost;
+//         this.colour = colour;
+     }
+ /*    public void setColour(int colour){
          this.colour = colour;
      }
-     public void setColour(int colour){
-         this.colour = colour;
-     }
-
+*//*
      public int getColour(){
          return colour;
      }
-
+*/
 
      public void landOn(Player pl, GUI gui) {
 
@@ -62,7 +62,7 @@ public class PropertyTile extends Tile {
          this.cost=cost;
      }
 
-     public String colourString(int tilePosition){
+/*     public String colourString(int tilePosition){
 
          // Note til mig selv: der skal ikke være "break" i switch case,
          // fordi i dette tilfælde gør "return" det samme som "break"
@@ -96,5 +96,5 @@ public class PropertyTile extends Tile {
              default:
                  return "No colour";
          }
-     }
+     }*/
  }
