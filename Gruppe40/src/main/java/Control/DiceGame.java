@@ -1,9 +1,6 @@
 package Control;
 
-import Entity.Board;
-import Entity.Player;
-import Entity.Tile;
-import Entity.PropertyTile;
+import Entity.*;
 import gui_codebehind.GUI_Center;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -29,19 +26,19 @@ public class DiceGame {
     private int passStart = 2;
 
 
-    private void MakePropertyTile(propetyTile tile, int pos)
+    private void MakePropertyTile(PropertyTile tile, int pos)
     {
         guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + tile.getCost(), Color.WHITE, Color.BLACK);
     }
-    private void MakeChanceTile(propetyTile tile, int pos)
+    private void MakeChanceTile(ChanceTile tile, int pos)
     {
         guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
     }
-    private void MakeJailTile(propetyTile tile, int pos)
+    private void MakeJailTile(JailTile tile, int pos)
     {
         guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
     }
-    private void MakeUseless(propetyTile tile, int pos)
+    private void MakeUseless(UselessTile tile, int pos)
     {
         guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), Color.WHITE, Color.BLACK);
     }
@@ -52,14 +49,14 @@ public class DiceGame {
         guiFields = new GUI_Field[TILES_COUNT];
         for (int i = 0; i < TILES_COUNT; i++) {
             Tile tile = board.getTile(i);
-            if(tile instanceof propetyTile)
-                MakePropertyTile((propetyTile) tile,i);
-            if(tile instanceof chanceTile)
-                MakeChanceTile((chanceTile) tile,i);
-            if(tile instanceof jailTile)
-                MakeJailTile((jailTile) tile,i);
-            if(tile instanceof useLessTile)
-                MakeUseless((uselessTile) tile,i);
+            if(tile instanceof PropertyTile)
+                MakePropertyTile((PropertyTile) tile,i);
+            if(tile instanceof ChanceTile)
+                MakeChanceTile((ChanceTile) tile,i);
+            if(tile instanceof JailTile)
+                MakeJailTile((JailTile) tile,i);
+            if(tile instanceof UselessTile)
+                MakeUseless((UselessTile) tile,i);
         }
         GUI_Center guic = GUI_Center.getInstance();
 
