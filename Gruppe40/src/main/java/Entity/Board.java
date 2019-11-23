@@ -48,8 +48,8 @@ public class Board {
 
         addProperty(13,"The Casino","This is where you lose your money", 3, "RØD");
         addProperty(14,"The Cinema","This is where you watch movies", 3, "RØD");
-        addProperty(16,"The Toy Store","This is where you get your toys", 3, "GUL");
-        addProperty(17,"The Pet Store","This is where you get your pets", 3, "GUL");
+        addProperty(16,"The Toy Store","This is where you get your toys", 3, "BRUN");
+        addProperty(17,"The Pet Store","This is where you get your pets", 3, "BRUN");
 
         addProperty(19,"The Bowling Alley","This is where you bowl", 4, "GRØN");
         addProperty(20,"The Zoo","This is where you watch animals", 4, "GRØN");

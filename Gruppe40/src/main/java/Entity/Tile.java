@@ -1,7 +1,7 @@
 package Entity;
 
 public abstract class Tile {
-    String name;
+    private String name;
     private String text;
     private String type;
     private String color;
