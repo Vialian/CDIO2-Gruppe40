@@ -8,6 +8,8 @@ public class Player {
     private String name;
     private Die die;
     private int currentTile;
+    private Boolean promisedRealEstate;
+    private int releaseCards;
 
     public int[] getOwnedProperties() {
         return ownedProperties;
@@ -88,6 +90,22 @@ public class Player {
 
     int[] getProperties(){
         return ownedProperties;
+    }
+
+    public int incrementReleaseCards () {
+        return this.releaseCards++;
+    }
+
+    public int getReleaseCards() {
+        return this.releaseCards;
+    }
+
+    public Boolean getPromisedRealEstate() {
+        return this.promisedRealEstate;
+    }
+
+    public void setPromisedRealEstate(Boolean value) {
+        this.promisedRealEstate = value;
     }
 
     /*public int getDieValue1() {
