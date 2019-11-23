@@ -249,4 +249,76 @@ public class DiceGame {
 
 
     }
+
+    public boolean colourPair(position){
+
+        // Position på tile på board
+        Tile tile = board.getTile(position);
+
+        // Tile colour
+        int colour = tile.getColour();
+
+        // Ved nedenstående fås spilleren som ejer den pågældende tile
+        player = getPlayer(tile.getOwnedBy);
+
+
+        // while loop til kontrol af tile og colour i den éne retning
+        int currentPosition = position;
+        while(true){
+
+            // Ved at sige ++, så inkrenmenteres currentPosition med én
+            currentPosition ++;
+            tile = board.getTile(currentPosition);
+
+            // Kontrol om næste tile er propertyTile eller ej
+            // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
+            if (!(tile instanceof propetyTile)){
+                continue;
+            }
+
+            // Kontrol om currentTile har samme farve som næste tile
+            // Hvis det er sandt, så break'er if-sætningen
+            if (((propetyTile) tile).getColour() != colour){
+                break;
+            }
+
+            // Nu VIDES det at det at den næste tile er én propertyTile og currentTile og næste tile har samme farve
+            // Hvis player er forskellig fra spilleren som ejer tilen, så returneres false
+            if (player != getPlayer(((propetyTile) tile).getOwnedBy())){
+                return false;
+            }
+        }
+
+
+        // while loop til kontrol af tile og colour i den anden retning
+        currentPosition = position;
+        while(true){
+
+            // Ved at sige --, så deinkrementeres currentPosition med én
+            currentPosition --;
+            tile = board.getTile(currentPosition);
+
+            // Kontrol om næste tile er propertyTile eller ej
+            // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
+            if (!(tile instanceof propetyTile)){
+                continue;
+            }
+
+            // Kontrol om currentTile har samme farve som næste tile
+            // Hvis det er sandt, så break'er if-sætningen / Nu vides  at det er IKKE samme farve på tilen
+            if (((propetyTile) tile).getColour() != colour){
+                break;
+            }
+
+            // Nu VIDES det at det at den næste tile er én propertyTile og currentTile og næste tile har samme farve
+            // Hvis player er forskellig fra spilleren som ejer tilen, så returneres false
+            if (player != getPlayer(((propetyTile) tile).getOwnedBy())){
+                return false;
+            }
+        }
+
+
+    }
+
+
 }

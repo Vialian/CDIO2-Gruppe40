@@ -22,7 +22,4 @@ public abstract class Tile {
     public String getText() {
         return text;
     }
-
-
-
 }
