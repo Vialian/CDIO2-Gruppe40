@@ -1,8 +1,8 @@
 package Entity;
 
 public abstract class Tile {
-    private String name;
-    private String text; // vil vi have text til felterne ?
+    String name;
+    private String text;
     private String type;
 
     public Tile(String name, String text)
@@ -11,8 +11,8 @@ public abstract class Tile {
         this.text = text;
 
     }
-    public  String landOn(){
-        return type;
+    public void landOn(Player pl){
+
     }
 
     public String getName() {
@@ -22,7 +22,4 @@ public abstract class Tile {
     public String getText() {
         return text;
     }
-
-
-
 }
