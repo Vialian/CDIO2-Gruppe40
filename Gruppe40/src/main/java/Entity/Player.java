@@ -57,6 +57,15 @@ public class Player {
         //int value2 = die2.roll();
         return currentTile = value1;
     }
+    public int getDieValue(){
+        return die.getFaceValue();
+    }
+    public Die getDie(){
+        return die;
+    }
+    public void setDie(Die die){
+        this.die=die;
+    }
     public int getCurrentTile() {
         return currentTile;
     }
