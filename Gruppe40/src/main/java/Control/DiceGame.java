@@ -258,75 +258,79 @@ public class DiceGame {
 
     }
 
-    public boolean colourPair(position){
-
+    public boolean colourPair(int position) {
         // Position på tile på board
         Tile tile = board.getTile(position);
+        if (tile instanceof PropertyTile) {
+            // Tile colour
+            PropertyTile property = (PropertyTile) tile;
+            int colour = property.getColour();
 
-        // Tile colour
-        int colour = tile.getColour();
-
-        // Ved nedenstående fås spilleren som ejer den pågældende tile
-        player = getPlayer(tile.getOwnedBy);
+            // Ved nedenstående fås spilleren som ejer den pågældende tile
+            int player = property.getOwnedBy();
 
 
-        // while loop til kontrol af tile og colour i den éne retning
-        int currentPosition = position;
-        while(true){
+            // while loop til kontrol af tile og colour i den éne retning
+            int currentPosition = position;
+            while (true) {
 
-            // Ved at sige ++, så inkrenmenteres currentPosition med én
-            currentPosition ++;
-            tile = board.getTile(currentPosition);
+                // Ved at sige ++, så inkrenmenteres currentPosition med én vi sørger også for at den aldrig når over 23
+                currentPosition= (currentPosition+1)%TILES_COUNT;
+                //Vi skal tjekke om vi nogensinde når position I dette loop. Vi behøver ikke at tjekke for det næste da det er umuligt.
+                if(currentPosition==position){
+                    //Hvis vi når den samme postion betyder det vi aldrig så andre farver, eller properties af samme farve som var ejet af en anden person. Vi returner derfor true.
+                    return true;
+                }
+                Tile nextProperty = board.getTile(currentPosition);
 
-            // Kontrol om næste tile er propertyTile eller ej
-            // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
-            if (!(tile instanceof propetyTile)){
-                continue;
+                // Kontrol om næste tile er propertyTile eller ej
+                // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
+                if (!(nextProperty instanceof PropertyTile)) {
+                    continue;
+                }
+
+                // Kontrol om currentTile har samme farve som næste tile
+                // Hvis det er sandt, så break'er if-sætningen
+                if (((PropertyTile) nextProperty).getColour() != colour) {
+                    break;
+                }
+
+                // Nu VIDES det at det at den næste tile er én propertyTile og currentTile og næste tile har samme farve
+                // Hvis player er forskellig fra spilleren som ejer tilen, så returneres false
+                if (player != ((PropertyTile) nextProperty).getOwnedBy()) {
+                    return false;
+                }
             }
 
-            // Kontrol om currentTile har samme farve som næste tile
-            // Hvis det er sandt, så break'er if-sætningen
-            if (((propetyTile) tile).getColour() != colour){
-                break;
-            }
 
-            // Nu VIDES det at det at den næste tile er én propertyTile og currentTile og næste tile har samme farve
-            // Hvis player er forskellig fra spilleren som ejer tilen, så returneres false
-            if (player != getPlayer(((propetyTile) tile).getOwnedBy())){
-                return false;
+            // while loop til kontrol af tile og colour i den anden retning
+            currentPosition = position;
+            while (true) {
+
+                // Ved at sige --, så deinkrementeres currentPosition med én Vi sørger også for at den aldrig når under 0
+                currentPosition= (currentPosition-1)%TILES_COUNT;
+                Tile previousProperty = board.getTile(currentPosition);
+
+                // Kontrol om næste tile er propertyTile eller ej
+                // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
+                if (!(tile instanceof PropertyTile)) {
+                    continue;
+                }
+
+                // Kontrol om currentTile har samme farve som næste tile
+                // Hvis det er sandt, så break'er if-sætningen / Nu vides  at det er IKKE samme farve på tilen
+                if (((PropertyTile) previousProperty).getColour() != colour) {
+                    break;
+                }
+
+                // Nu VIDES det at det at den næste tile er én propertyTile og currentTile og næste tile har samme farve
+                // Hvis player er forskellig fra spilleren som ejer tilen, så returneres false
+                if (player != ((PropertyTile) previousProperty).getOwnedBy()) {
+                    return false;
+                }
             }
+            return true;
         }
-
-
-        // while loop til kontrol af tile og colour i den anden retning
-        currentPosition = position;
-        while(true){
-
-            // Ved at sige --, så deinkrementeres currentPosition med én
-            currentPosition --;
-            tile = board.getTile(currentPosition);
-
-            // Kontrol om næste tile er propertyTile eller ej
-            // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
-            if (!(tile instanceof propetyTile)){
-                continue;
-            }
-
-            // Kontrol om currentTile har samme farve som næste tile
-            // Hvis det er sandt, så break'er if-sætningen / Nu vides  at det er IKKE samme farve på tilen
-            if (((propetyTile) tile).getColour() != colour){
-                break;
-            }
-
-            // Nu VIDES det at det at den næste tile er én propertyTile og currentTile og næste tile har samme farve
-            // Hvis player er forskellig fra spilleren som ejer tilen, så returneres false
-            if (player != getPlayer(((propetyTile) tile).getOwnedBy())){
-                return false;
-            }
-        }
-
-
+        return false;
     }
-
-
 }
