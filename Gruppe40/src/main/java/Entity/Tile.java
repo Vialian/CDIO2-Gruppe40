@@ -5,7 +5,7 @@ public abstract class Tile {
     private String text;
     private String type;
     private String color;
-    private Boolean meIsProperty = false;
+    private final Boolean meIsProperty = false;
 
     public Tile(String name, String text, String color)
     {

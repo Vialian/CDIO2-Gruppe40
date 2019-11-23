@@ -8,7 +8,7 @@ public class PropertyTile extends Tile {
 
      private int cost;
 //     private int colour;
-
+    private final Boolean meIsProperty = true;
 
      public String getOwnedBy() {
          return ownedBy;
@@ -38,12 +38,12 @@ public class PropertyTile extends Tile {
      public void landOn(Player pl, GUI gui) {
 
          if(this.getOwnedBy() == "None"){
-             String choose = gui.getUserSelection("Vil du købe ejendommen: " + this.name +"?", "ja","nej");
+             String choose = gui.getUserSelection("Vil du købe ejendommen: " + getName() +"?", "ja","nej");
              if(choose == "ja" ){
                  if(pl.getMoney() >= this.cost){
                      this.setOwnedBy(pl.getName());
                      pl.addMoney(- this.cost);
-                     gui.showMessage("Du er ejer nu: "+ this.name);
+                     gui.showMessage("Du er ejer nu: "+ getName());
 
                  }else{
                      gui.showMessage("Du har ikke nok penge");
