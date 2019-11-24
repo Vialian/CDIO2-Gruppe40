@@ -193,7 +193,6 @@ public class DiceGame {
                 sellPropety(player);
             }
             if (player.getMoney() >= 0) {
-                hasLost = false;
                 return false;
             }
 
@@ -236,7 +235,7 @@ public class DiceGame {
         }
 
         guiPlayers[currentPlayer].setBalance(players[currentPlayer].getMoney());
-        gui.setDice(players[currentPlayer].getDie().getFaceValue());
+        gui.setDie(players[currentPlayer].getDie().getFaceValue());
     }
 
 
