@@ -7,53 +7,48 @@ import gui_main.GUI;
 public class PropertyTile extends Tile {
 
      private int cost;
-//     private int colour;
+     private int colour;
     private final Boolean meIsProperty = true;
 
-     public String getOwnedBy() {
+     public int getOwnedBy() {
          return ownedBy;
      }
 
-     public void setOwnedBy(String ownedBy) {
+     public void setOwnedBy(int ownedBy) {
          this.ownedBy = ownedBy;
      }
 
-     private String ownedBy = "None";
+     private int ownedBy = 0;
      private String type = "Property";
 
-     public PropertyTile(String name, String text, int cost, String color) {
+     public PropertyTile(String name, String text, int cost, int colour) {
          super(name, text, color);
          this.cost = cost;
-//         this.colour = colour;
-     }
- /*    public void setColour(int colour){
          this.colour = colour;
      }
-*//*
+     public void setColour(int colour){
+         this.colour = colour;
+     }
+
      public int getColour(){
          return colour;
      }
-*/
+
 
      public void landOn(Player pl, GUI gui) {
 
-         if(this.getOwnedBy() == "None"){
-             String choose = gui.getUserSelection("Vil du købe ejendommen: " + getName() +"?", "ja","nej");
-             if(choose == "ja" ){
-                 if(pl.getMoney() >= this.cost){
-                     this.setOwnedBy(pl.getName());
-                     pl.addMoney(- this.cost);
-                     gui.showMessage("Du er ejer nu: "+ getName());
-
-                 }else{
-                     gui.showMessage("Du har ikke nok penge");
+         if(this.getOwnedBy() == 0){
+             if(pl.getMoney() >= this.cost){
+                 this.setOwnedBy(pl.getID());
+                 pl.addMoney(- this.cost);
+                 gui.showMessage("Du er ejer nu: "+ pl.getName());
+             }else{
+                 gui.showMessage("Du har ikke nok penge");
                  }
 
              }
          }
 
-
-     }
 
      public int getCost() {
          return cost;

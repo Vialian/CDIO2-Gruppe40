@@ -222,7 +222,7 @@ public class DiceGame {
         }
         else if (board.getTile(pos) instanceof PropertyTile)
         {
-            boolean ownedByThemselves = players[currentPlayer].equals(getPlayer(board.getTile(pos).getOwnedBy()));
+            boolean ownedByThemselves = players[currentPlayer].equals(getPlayer(board.getTile(pos).getOwnedBy())); // get player?
 
             if (ownedByThemselves)
             {
