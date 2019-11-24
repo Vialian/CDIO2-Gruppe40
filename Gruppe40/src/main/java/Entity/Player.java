@@ -108,6 +108,9 @@ public class Player {
         this.promisedRealEstate = value;
     }
 
+    public Boolean hasLost(){
+        return money < 0;
+    }
     /*public int getDieValue1() {
         return die1.getFaceValue();
     }
@@ -124,9 +127,7 @@ public class Player {
         return points >= 3000 /*&& hasDoubleSix();
     }
 
-    public Boolean hasLost(){
-        return points < 0;
-    }
+
 
     /*public Boolean hasDoubleOne() {
         return hasDoubles() && die1.getFaceValue() == 1;
