@@ -1,8 +1,8 @@
 package Entity;
 
 public class ChanceTile extends Tile  {
-    public ChanceTile(String name, String text) {
-        super(name, text);
+    public ChanceTile(String name, String text, String colour) {
+        super(name, text, colour);
     }
 
     @Override
