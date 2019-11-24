@@ -7,8 +7,7 @@ import gui_main.GUI;
 public class PropertyTile extends Tile {
 
      private int cost;
-     private int colour;
-    private final Boolean meIsProperty = true;
+     private final Boolean meIsProperty = true;
 
      public int getOwnedBy() {
          return ownedBy;
@@ -24,16 +23,7 @@ public class PropertyTile extends Tile {
      public PropertyTile(String name, String text, int cost, int colour) {
          super(name, text, colour);
          this.cost = cost;
-         this.colour = colour;
      }
-     public void setColour(int colour){
-         this.colour = colour;
-     }
-
-     public int getColour(){
-         return colour;
-     }
-
 
      public void landOn(Player pl, GUI gui) {
 
