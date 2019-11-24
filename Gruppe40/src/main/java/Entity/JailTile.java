@@ -5,11 +5,11 @@ public class JailTile extends Tile {
 
     private int sendTo = 0;
 
-    public JailTile(String name, String text, int colour, int sendTo) {
+    public JailTile(String name, String text, String colour, int sendTo) {
         super(name, text, colour);
         this.sendTo = sendTo;
     }
-    public JailTile(String name, String text, int colour){
+    public JailTile(String name, String text, String colour){
         super(name, text, colour);
 
     }

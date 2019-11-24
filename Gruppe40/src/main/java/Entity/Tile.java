@@ -4,10 +4,10 @@ public abstract class Tile {
     private String name;
     private String text;
     private String type;
-    private int colour;
+    private String colour;
     private final Boolean meIsProperty = false;
 
-    public Tile(String name, String text, int colour)
+    public Tile(String name, String text, String colour)
     {
         this.name = name;
         this.text = text;
@@ -26,7 +26,7 @@ public abstract class Tile {
         return this.text;
     }
 
-    public int getColour() {
+    public String getColour() {
         return this.colour;
     }
 

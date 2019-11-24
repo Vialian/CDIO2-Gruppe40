@@ -20,7 +20,7 @@ public class PropertyTile extends Tile {
      private int ownedBy = 0;
      private String type = "Property";
 
-     public PropertyTile(String name, String text, int cost, int colour) {
+     public PropertyTile(String name, String text, int cost, String colour) {
          super(name, text, colour);
          this.cost = cost;
      }

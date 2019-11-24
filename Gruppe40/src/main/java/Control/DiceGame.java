@@ -236,7 +236,8 @@ public class DiceGame {
         }
 
         guiPlayers[currentPlayer].setBalance(players[currentPlayer].getMoney());
-        gui.setDice(players[currentPlayer].getDie().getFaceValue());
+        gui.setDice(players[currentPlayer].getDieValue());
+
     }
 
 

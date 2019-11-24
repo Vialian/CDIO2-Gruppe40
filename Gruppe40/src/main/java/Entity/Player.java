@@ -60,6 +60,7 @@ public class Player {
     public int getDieValue(){
         return die.getFaceValue();
     }
+
     public Die getDie(){
         return die;
     }
