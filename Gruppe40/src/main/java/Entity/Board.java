@@ -7,11 +7,11 @@ public class Board {
         return boardTiles;
     }
 
-    public void addUseless(int position, String name, String description){
-        boardTiles[position] = new UselessTile(name, description);
+    public void addUseless(int position, String name, String description, String color){
+        boardTiles[position] = new UselessTile(name, description, color);
     }
 
-    public void addImprisonment(int position, String name, String description, int color){
+    public void addImprisonment(int position, String name, String description, String color){
         boardTiles[position] = new JailTile(name, description, color);
     }
 
@@ -19,8 +19,8 @@ public class Board {
         boardTiles[position] = new PropertyTile(name, description, price, color);
     }
 
-    public void addChance(int[] positions, String name){
-        ChanceTile tile = new ChanceTile(name, "Prøv lykken");
+    public void addChance(int[] positions, String name, String color){
+        ChanceTile tile = new ChanceTile(name, "Prøv lykken", color);
         for (int position : positions){
             boardTiles[position] = 	tile;
         }
@@ -31,10 +31,10 @@ public class Board {
 
     public Board(){//spørg hvor det bør ligge, bør controller gøre det her.
         boardTiles = new Tile[24];
-        addUseless(0,"Go","When you pass Go you gain 1 Dollar.");
-        addUseless(6,"Jail", "This is where the hardest criminals are kept");
-        addUseless(12,"Free Parking", "Just take a break.");
-        addImprisonment(18,"Go To Jail", "Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.");
+        addUseless(0,"Go","When you pass Go you gain 1 Dollar.", "White");
+        addUseless(6,"Jail", "This is where the hardest criminals are kept", "White");
+        addUseless(12,"Free Parking", "Just take a break.", "White");
+        addImprisonment(18,"Go To Jail", "Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", "White");
 
         addProperty(1,"The Burgerbar","This is where you get your burgers", 1, "GRØN");
         addProperty(2,"The Pizzeria","This is where you get pizza pies", 1, "GRØN");
@@ -56,7 +56,7 @@ public class Board {
         addProperty(22,"The Waterpark","This is where you try fun rides", 4, "BLÅ");
         addProperty(23,"The Beach","This is where you get tanned", 4, "BLÅ");
 
-        addChance(new int[]{3, 9, 15, 21},"Chance");
+        addChance(new int[]{3, 9, 15, 21},"Chance", "White");
     }
 // kan bruges til at udvide bordet i fremtiden,
 //hvor den tager en int, hvor bordet vil have size tiles
@@ -76,7 +76,7 @@ public class Board {
     public int getNextTileColor(String color) {
         int index = 0;
         for (Tile tile: boardTiles) {
-            if (tile.getColor().equals(color)) {
+            if (tile.getColour().equals(color)) {
                 return index;
             }
             index++;
@@ -86,7 +86,7 @@ public class Board {
     public int getNextTileColor2(String color1, String color2) {
         int index = 0;
         for (Tile tile: boardTiles) {
-            if (tile.getColor().equals(color1) || tile.getName().equals(color2)) {
+            if (tile.getColour().equals(color1) || tile.getName().equals(color2)) {
                 return index;
             }
             index++;
@@ -107,7 +107,7 @@ public class Board {
         Tile tile = getTile(index);
         if (tile.isProperty()) {
             PropertyTile pTile = (PropertyTile) tile;
-            return pTile.getOwnedBy().equals("None");
+            return pTile.getOwnedBy() == 0;
         }
         return false;
     }

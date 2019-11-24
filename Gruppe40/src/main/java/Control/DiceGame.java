@@ -190,7 +190,7 @@ public class DiceGame {
 //                    }
 //                }
                 //player.sellTile(toSale, toSale2);
-                sellPropety(player);
+//                sellPropety(toSale,toSale2);
             }
             if (player.getMoney() >= 0) {
                 return false;
