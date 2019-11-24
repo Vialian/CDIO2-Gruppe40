@@ -9,8 +9,8 @@ public class JailTile extends Tile {
         super(name, text);
         this.sendTo = sendTo;
     }
-    public JailTile(String name, String text){
-        super(name, text);
+    public JailTile(String name, String text, int colour){
+        super(name, text, colour);
 
     }
 
