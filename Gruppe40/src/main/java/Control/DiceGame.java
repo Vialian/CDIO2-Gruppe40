@@ -25,9 +25,9 @@ public class DiceGame {
     private int youngest = 0;
     private int passStart = 2;
 
-    public Player findPlayer(String name) {
+    public Player findPlayer(int id) {
         for (Player player: players) {
-            if(player.getName().equals(name)) {
+            if(player.getID()==id) {
                 return player;
             }
         }
