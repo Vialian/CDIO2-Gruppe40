@@ -11,8 +11,8 @@ public class Board {
         boardTiles[position] = new UselessTile(name, description);
     }
 
-    public void addImprisonment(int position, String name, String description){
-        boardTiles[position] = new JailTile(name, description);
+    public void addImprisonment(int position, String name, String description, int color){
+        boardTiles[position] = new JailTile(name, description, color);
     }
 
     public void addProperty(int position, String name, String description, int price, String color){

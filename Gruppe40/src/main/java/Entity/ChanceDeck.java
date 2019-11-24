@@ -45,7 +45,7 @@ public class ChanceDeck {
             case 0:
                 gui.displayChanceCard("PROMISED LAND CARD: Bil");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
-                Player bil = game.findPlayer("BIL");
+                Player bil = game.findPlayer(1);
                 bil.setPromisedRealEstate(true);
                 //Giv kort til bilen
                 //Til BIL:
@@ -54,19 +54,19 @@ public class ChanceDeck {
             case 5:
                 gui.displayChanceCard("PROMISED LAND CARD: Skib");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
-                Player skib = game.findPlayer("SKIB");
+                Player skib = game.findPlayer(2);
                 skib.setPromisedRealEstate(true);
                 // Samme, men for SKIBET
             case 11:
                 gui.displayChanceCard("PROMISED LAND CARD: Kat");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
-                Player kat = game.findPlayer("KAT");
+                Player kat = game.findPlayer(3);
                 kat.setPromisedRealEstate(true);
                 // Som 5, men til KAT
             case 12:
                 gui.displayChanceCard("PROMISED LAND CARD: Hund");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
-                Player hund = game.findPlayer("HUND");
+                Player hund = game.findPlayer(4);
                 hund.setPromisedRealEstate(true);
                 // Som 5 men til HUND
 
@@ -184,7 +184,7 @@ public class ChanceDeck {
                 Tile vTile = board.getTile(index);
                 PropertyTile pTile = (PropertyTile)vTile;
                 if(player.getMoney() >= pTile.getCost()){
-                    pTile.setOwnedBy(player.getName());
+                    pTile.setOwnedBy(player.getID());
                     player.addMoney(-pTile.getCost());
                     gui.showMessage("Du ejer nu det orange felt.");
                 } else {

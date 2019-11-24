@@ -25,9 +25,9 @@ public class DiceGame {
     private int youngest = 0;
     private int passStart = 2;
 
-    public Player findPlayer(String name) {
+    public Player findPlayer(int id) {
         for (Player player: players) {
-            if(player.getName().equals(name)) {
+            if(player.getID()==id) {
                 return player;
             }
         }
@@ -193,7 +193,6 @@ public class DiceGame {
                 sellPropety(player);
             }
             if (player.getMoney() >= 0) {
-                hasLost = false;
                 return false;
             }
 
@@ -236,8 +235,7 @@ public class DiceGame {
         }
 
         guiPlayers[currentPlayer].setBalance(players[currentPlayer].getMoney());
-        gui.setDice(players[currentPlayer].getDieValue());
-
+        gui.setDie(players[currentPlayer].getDie().getFaceValue());
     }
 
 
