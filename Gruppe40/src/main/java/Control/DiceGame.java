@@ -129,9 +129,13 @@ public class DiceGame {
                     int currentPosition = players[currentPlayer].getCurrentTile();
 
 
-                    Tile tile = board.getTile(roll + currentPosition % board.getBoard().length);
-                    if (currentPosition + roll >= board.getBoard().length)
+                    //Tile tile = board.getTile(roll + currentPosition % board.getBoard().length);
+
+                    if(roll + currentPosition > board.getBoard().length)
+                    {
                         PassingStart(currentPlayer);
+                    }
+
 
                     updateGui(currentPlayer);
 
@@ -171,21 +175,22 @@ public class DiceGame {
                     }
 
                 }
-                int toSale = 0, toSale2 = 3;
-                int value = 0;
-                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
-                    if (pl[i].length <= toSale) {
-                        if (player.getOwnedProperty[i][0].value >= player.getProperty[toSale][0].value) {
-                            toSale = i;
-                            if (player.getProperty[toSale][0].value >= player.getProperty[toSale][1].value && pl[toSale].length >= 2) {
-                                toSale2 = 0;
-                            } else
-                                toSale2 = 1;
-
-                        }
-                    }
-                }
-                player.sellTile(toSale, toSale2);
+//                int toSale = 0, toSale2 = 3;
+//                int value = 0;
+//                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
+//                    if (pl[i].length <= toSale) {
+//                        if (player.getOwnedProperty[i][0].value >= player.getProperty[toSale][0].value) {
+//                            toSale = i;
+//                            if (player.getProperty[toSale][0].value >= player.getProperty[toSale][1].value && pl[toSale].length >= 2) {
+//                                toSale2 = 0;
+//                            } else
+//                                toSale2 = 1;
+//
+//                        }
+//                    }
+//                }
+                //player.sellTile(toSale, toSale2);
+                sellPropety(player);
             }
             if (player.getMoney() >= 0) {
                 hasLost = false;
@@ -199,7 +204,28 @@ public class DiceGame {
         return true;
     }
 
-    private void updateGui(int currentPlayer) {
+    private void sellPropety(Player pl){
+//        String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
+//        if(res != "nej"){
+//            int propety =  Integer.parseInt(res);
+//            for (int x : pl.getOwnedProperties()){
+//                if(propety == x){
+//                    String res2 = gui.getUserSelection("hvem vil du sælge til, Spiller, Banken");
+//                    if(res2 == "Spiller"){
+//                        String sellTo = gui.getUserString("Skriv navnet på spilleren du vil sælge til");
+//                        //sellToPlayer(propety,sellTo, pl);
+//                    } else if(res2 == "Banken"){
+//                        //pl.addMoney(board.getTileCost(propety));
+//                        pl.removeProperty(propety);
+//
+//                        //postion burde være id;
+//                    }
+//                }
+//            }
+        }
+
+
+        private void updateGui(int currentPlayer) {
         //update all cars
         for (int f = 0; f < TILES_COUNT; f++) {
             guiFields[f].removeAllCars();

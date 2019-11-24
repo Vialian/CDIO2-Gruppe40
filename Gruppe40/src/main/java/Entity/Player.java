@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private Die die;
     private int currentTile;
-    private Boolean promisedRealEstate;
+    private Boolean promisedRealEstate; // Hvis man denne true, må man næste tur tage et felt ligemeget om det er ejet eller ikke ejet.
     private int releaseCards;
     private int ID;
     private boolean inJail = false;
@@ -120,7 +120,9 @@ public class Player {
     public void setPromisedRealEstate(Boolean value) {
         this.promisedRealEstate = value;
     }
-
+    public Boolean hasLost(){
+        return money < 0;
+    }
     public int getID() {
         return ID;
     }
@@ -153,9 +155,7 @@ public class Player {
         return points >= 3000 /*&& hasDoubleSix();
     }
 
-    public Boolean hasLost(){
-        return points < 0;
-    }
+
 
     /*public Boolean hasDoubleOne() {
         return hasDoubles() && die1.getFaceValue() == 1;
