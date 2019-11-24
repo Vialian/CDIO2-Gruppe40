@@ -72,10 +72,10 @@ public class DiceGame {
         gui = new GUI(guiFields);
 
         guic.setBGColor(Color.WHITE);
-        guic.setChanceCard("Welcome");
+//        guic.setChanceCard("Welcome");
 
         gui.getUserString("welcome to Hyperdice");
-        while (MAX_PLAYERS < 2 && MAX_PLAYERS > 4) {
+        while (MAX_PLAYERS < 2 || MAX_PLAYERS > 4) {
             try {
                 MAX_PLAYERS = Integer.parseInt(gui.getUserString("How many players?"));
             } catch (Exception e) {
@@ -290,7 +290,7 @@ public class DiceGame {
         if (tile instanceof PropertyTile) {
             // Tile colour
             PropertyTile property = (PropertyTile) tile;
-            int colour = property.getColour();
+            String colour = property.getColour();
 
             // Ved nedenstående fås spilleren som ejer den pågældende tile
             int player = property.getOwnedBy();
@@ -317,7 +317,7 @@ public class DiceGame {
 
                 // Kontrol om currentTile har samme farve som næste tile
                 // Hvis det er sandt, så break'er if-sætningen
-                if (((PropertyTile) nextProperty).getColour() != colour) {
+                if (!((PropertyTile) nextProperty).getColour().equals(colour) ) {
                     break;
                 }
 
@@ -345,7 +345,7 @@ public class DiceGame {
 
                 // Kontrol om currentTile har samme farve som næste tile
                 // Hvis det er sandt, så break'er if-sætningen / Nu vides  at det er IKKE samme farve på tilen
-                if (((PropertyTile) previousProperty).getColour() != colour) {
+                if (!((PropertyTile) previousProperty).getColour().equals(colour)) {
                     break;
                 }
 
