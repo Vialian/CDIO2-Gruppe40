@@ -26,7 +26,7 @@ public abstract class Tile {
         return this.text;
     }
 
-    public int getColor() {
+    public int getColour() {
         return this.colour;
     }
 
@@ -34,4 +34,3 @@ public abstract class Tile {
         return this.meIsProperty;
     }
 }
- 

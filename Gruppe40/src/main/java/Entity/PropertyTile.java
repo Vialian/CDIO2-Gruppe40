@@ -22,7 +22,7 @@ public class PropertyTile extends Tile {
      private String type = "Property";
 
      public PropertyTile(String name, String text, int cost, int colour) {
-         super(name, text, color);
+         super(name, text, colour);
          this.cost = cost;
          this.colour = colour;
      }
