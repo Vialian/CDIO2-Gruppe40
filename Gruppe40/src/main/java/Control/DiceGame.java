@@ -216,13 +216,14 @@ public class DiceGame {
 
     private void showTileMessage(int pos, int currentPlayer) {//Spørg om det er ok at overfører argumenter som man ikke har “strictly” brug for til metoder.
         String message = "You have landed on " + board.getTile(pos).getName() + ": " + board.getTile(pos).getText() + ". ";
-
-        if (board.getTile(pos) instanceof ChanceTile) {
+        Tile tile=board.getTile(pos);
+        if (tile instanceof ChanceTile) {
             message = board.getTile(pos).toString();
         }
-        else if (board.getTile(pos) instanceof PropertyTile)
+        else if (tile instanceof PropertyTile)
         {
-            boolean ownedByThemselves = players[currentPlayer].equals(getPlayer(board.getTile(pos).getOwnedBy())); // get player?
+            PropertyTile property = (PropertyTile) tile;
+            boolean ownedByThemselves = players[currentPlayer].getID() == property.getOwnedBy(); // get player?
 
             if (ownedByThemselves)
             {
@@ -230,23 +231,23 @@ public class DiceGame {
                 ownedByThemselves = false;
             }
 
-            if (board.getTile(pos).getOwnedBy() == "None")
+            if (property.getOwnedBy() == 0)
             {
                 message = "you can buy this property";
                 //or
                 //message = title.toString()}
             }
 			else {
-                    message = "you owe " + board.getTile(pos).getOwnedBy() + " money, pay : " + board.getTile(pos).getCost();
+                    message = "you owe " + property.getOwnedBy() + " money, pay : " + property.getCost();
                 }
         }
-        else if (board.getTile(pos) instanceof jailTile) {
+        else if (tile instanceof JailTile) {
             message = "go to prusin";
         }
         else{
-            if (board.getTile(pos).getName() == "Jailvisit")
+            if (tile.getName().equals("Jailvisit"))
                 message = "you are visiting the jail";
-            else if (board.getTile(pos).getName() == "Parkinglot")
+            else if (tile.getName().equals("Parkinglot"))
                 message = "you are visiting the jail";
             else
                 message = "Nothing";
