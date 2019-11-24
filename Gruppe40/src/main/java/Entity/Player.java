@@ -55,7 +55,7 @@ public class Player {
     public int rollDie() {
         int value1 = die.roll();
         //int value2 = die2.roll();
-        return currentTile = value1;
+        return value1;
     }
     public int getDieValue(){
         return die.getFaceValue();

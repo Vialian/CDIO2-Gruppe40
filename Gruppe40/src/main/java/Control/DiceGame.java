@@ -52,7 +52,7 @@ public class DiceGame {
     }
 
     public DiceGame() {
-        Board board = new Board();
+        board = new Board();
 
         guiFields = new GUI_Field[TILES_COUNT];
         for (int i = 0; i < TILES_COUNT; i++) {
@@ -108,6 +108,7 @@ public class DiceGame {
             }
 
         }
+        updateGui();
         gui.showMessage("Alright, let's get started..., the youngest one " + players[youngest].getName() + " will start");
 
     }
@@ -131,12 +132,16 @@ public class DiceGame {
 
                     //Tile tile = board.getTile(roll + currentPosition % board.getBoard().length);
 
-                    if(roll + currentPosition > board.getBoard().length)
+                    System.out.println(roll);
+                    System.out.println(currentPosition);
+                    System.out.println(board.toString());
+
+                    if(roll + currentPosition > TILES_COUNT)
                     {
                         PassingStart(currentPlayer);
                     }
 
-
+                    players[currentPlayer].setCurrentTile(roll + currentPosition);
                     updateGui(currentPlayer);
 
 
