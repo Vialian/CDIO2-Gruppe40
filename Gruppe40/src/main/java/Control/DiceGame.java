@@ -36,20 +36,55 @@ public class DiceGame {
 
     private void MakePropertyTile(PropertyTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + tile.getCost(), Color.WHITE, Color.BLACK);
+        Color fieldColor = colorFromString(tile.getColour());
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + tile.getCost(), fieldColor, Color.BLACK);
     }
     private void MakeChanceTile(ChanceTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + "", Color.WHITE, Color.BLACK);
+        Color fieldColor = colorFromString(tile.getColour());
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + "", fieldColor, Color.BLACK);
     }
     private void MakeJailTile(JailTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "", Color.WHITE, Color.BLACK);
+        Color fieldColor = colorFromString(tile.getColour());
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "", fieldColor, Color.BLACK);
     }
     private void MakeUseless(UselessTile tile, int pos)
     {
-        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "", Color.WHITE, Color.BLACK);
+        Color fieldColor = colorFromString(tile.getColour());
+        guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "", fieldColor, Color.BLACK);
     }
+
+    private Color colorFromString(String colour){
+        String x =colour.toUpperCase();
+        if ("HVID".equals(x)) {
+            return Color.WHITE;
+        } else if ("SORT".equals(x)) {
+            return Color.BLACK;
+        } else if ("BLÅ".equals(x)) {
+            return Color.BLUE;
+        } else if ("RÅD".equals(x)) {
+            return Color.RED;
+        } else if ("GRÅ".equals(x)) {
+            return Color.GRAY;
+        } else if ("GRØN".equals(x)) {
+            return Color.GREEN;
+        } else if ("ORANGE".equals(x)) {
+            return Color.ORANGE;
+        } else if ("GUL".equals(x)) {
+            return Color.YELLOW;
+        } else if ("LYSEBLÅ".equals(x)) { // det samme som blå skal fikses
+            return Color.BLUE;
+        } else if ("PINK".equals(x)) {
+            return Color.PINK;
+        }else if ("BRUN".equals(x)) { // bliver sat til grå
+            return Color.LIGHT_GRAY;
+        }
+        return Color.CYAN;
+
+
+    }
+
 
     public DiceGame() {
         board = new Board();
@@ -108,7 +143,7 @@ public class DiceGame {
             }
 
         }
-        updateGui();
+
         gui.showMessage("Alright, let's get started..., the youngest one " + players[youngest].getName() + " will start");
 
     }
