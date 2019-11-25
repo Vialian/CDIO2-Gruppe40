@@ -178,12 +178,12 @@ public class DiceGame {
                     } catch (Exception e){
                         System.out.println("spillern ejer ikke noget");
                     }
-                    if(roll + currentPosition > TILES_COUNT)
+                    if(roll + currentPosition >= TILES_COUNT)
                     {
                         PassingStart(currentPlayer);
                     }
 
-                    pl.addToPos(roll, this.TILES_COUNT);
+                    pl.addToPos(roll, TILES_COUNT);
                     updateGui(currentPlayer);
 
                     Tile tile = board.getTile(pl.getCurrentTile());
