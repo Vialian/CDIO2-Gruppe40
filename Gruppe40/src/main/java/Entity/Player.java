@@ -74,6 +74,16 @@ public class Player {
     public void setCurrentTile(int position){
         this.currentTile = position;
     }
+    public void addToPos(int move){
+        this.setCurrentTile(currentTile + move);
+    }
+    public String propertyToSting(){
+        String res = "Du ejer:";
+        for(int pro : ownedProperties){
+            res = res + " "+ pro +",";
+        }
+        return res;
+    }
 
     public void addProperty (int position) {
         int[] newArray = new int[ownedSize+1];

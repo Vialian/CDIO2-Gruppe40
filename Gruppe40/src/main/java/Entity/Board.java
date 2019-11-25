@@ -29,6 +29,21 @@ public class Board {
         return boardTiles[position];
     }
 
+    public int getTilePos(Tile tile){
+        String name = tile.getName();
+        Tile br[] = getBoard();
+        for(int i =0; i <= br.length; i++){
+            if(name.equals(br[i].getName()))
+                return i;
+        }
+        return 0;// nok ikke den bedste måde at gøre det på
+    }
+
+    public int getFieldCost (int pos){
+        PropertyTile tile = (PropertyTile)getTile(pos);
+        return tile.getCost();
+    }
+
     public Board(){//spørg hvor det bør ligge, bør controller gøre det her.
         boardTiles = new Tile[24];
         addUseless(0,"Go","When you pass Go you gain 1 Dollar.", "White");

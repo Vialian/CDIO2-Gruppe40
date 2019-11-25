@@ -6,6 +6,7 @@ public class MoveForwardCard extends ChanceCard{
     public void setMove(int move){
         this.move=move;
     }
+
     public int getMove(){
         return move;
     }

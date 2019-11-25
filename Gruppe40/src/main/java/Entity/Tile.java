@@ -1,5 +1,8 @@
 package Entity;
 
+import Control.DiceGame;
+import gui_main.GUI;
+
 public abstract class Tile {
     private String name;
     private String text;
@@ -14,7 +17,7 @@ public abstract class Tile {
         this.colour = colour;
 
     }
-    public void landOn(Player pl){
+    public void landOn(Player player, GUI gui, Board board, DiceGame game){
 
     }
 

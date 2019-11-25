@@ -1,5 +1,8 @@
 package Entity;
 
+import Control.DiceGame;
+import gui_main.GUI;
+
 public class JailTile extends Tile {
 
 
@@ -14,10 +17,10 @@ public class JailTile extends Tile {
 
     }
 
-    public void landOn(Player pl) {
+    public void landOn(Player player, GUI gui, Board board, DiceGame game) {
         if(sendTo!= 0){
-            pl.setCurrentTile(sendTo);
-            pl.setInJail(true);
+            player.setCurrentTile(sendTo);
+            player.setInJail(true);
             //boardet skal updaters efter i diceGame Klassen
         }
     }

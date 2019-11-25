@@ -63,7 +63,7 @@ public class DiceGame {
             return Color.BLACK;
         } else if ("BLÅ".equals(x)) {
             return Color.BLUE;
-        } else if ("RÅD".equals(x)) {
+        } else if ("RØD".equals(x)) {
             return Color.RED;
         } else if ("GRÅ".equals(x)) {
             return Color.GRAY;
@@ -151,38 +151,44 @@ public class DiceGame {
 
     public void playDiceGame() {
         gameHasEnded = false;
-
+        for (int i = 0; i < players.length; i++) {
+            System.out.println("updater gui for player " + i);
+            updateGui(i);
+        }
         while (!gameHasEnded) {
 
 
             for (int currentPlayer = youngest; currentPlayer < MAX_PLAYERS && !gameHasEnded; currentPlayer++) {
                 Boolean nextPlayer = false;
                 while (!nextPlayer) {
-                    gui.getUserString(players[currentPlayer].getName() + ": Will you roll your dice?...");
+                    Player pl = players[currentPlayer];
+                    gui.getUserString(pl.getName() + ": Will you roll your dice?...");
 
-                    int roll = players[currentPlayer].rollDie();
+                    int roll = pl.rollDie();
 
-                    int currentPosition = players[currentPlayer].getCurrentTile();
+                    int currentPosition = pl.getCurrentTile();
 
 
-                    //Tile tile = board.getTile(roll + currentPosition % board.getBoard().length);
 
-                    System.out.println(roll);
-                    System.out.println(currentPosition);
-                    System.out.println(board.toString());
 
+                    System.out.println(currentPlayer + " har slået "+roll);
+
+                    try {
+                        System.out.println("spillern ejer: " + pl.getOwnedProperties().length);
+                    } catch (Exception e){
+                        System.out.println("spillern ejer ikke noget");
+                    }
                     if(roll + currentPosition > TILES_COUNT)
                     {
                         PassingStart(currentPlayer);
                     }
 
-                    players[currentPlayer].setCurrentTile(roll + currentPosition);
+                    pl.setCurrentTile(roll + currentPosition);
                     updateGui(currentPlayer);
 
-
-
-
+                    Tile tile = board.getTile(pl.getCurrentTile());
                     showTileMessage(currentPosition, currentPlayer);
+                    tile.landOn(pl,gui, board, this);
 
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
@@ -243,28 +249,22 @@ public class DiceGame {
         return true;
     }
 
-    private void sellPropety(Player pl){
-//        String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
-//        if(res != "nej"){
-//            int propety =  Integer.parseInt(res);
-//            for (int x : pl.getOwnedProperties()){
-//                if(propety == x){
-//                    String res2 = gui.getUserSelection("hvem vil du sælge til, Spiller, Banken");
-//                    if(res2 == "Spiller"){
-//                        String sellTo = gui.getUserString("Skriv navnet på spilleren du vil sælge til");
-//                        //sellToPlayer(propety,sellTo, pl);
-//                    } else if(res2 == "Banken"){
-//                        //pl.addMoney(board.getTileCost(propety));
-//                        pl.removeProperty(propety);
-//
-//                        //postion burde være id;
-//                    }
-//                }
-//            }
+    private void sellPropety(Player pl) {
+        gui.showMessage("Du skal sælge en grund");
+
+        int res = Integer.parseInt(gui.getUserString(pl.propertyToSting()));
+
+        for(int x : pl.getOwnedProperties()){
+            if (x == res ){
+                pl.removeProperty(res);
+                pl.addMoney(board.getFieldCost(res));
+            }
         }
 
+    }
 
-        private void updateGui(int currentPlayer) {
+
+        public void updateGui(int currentPlayer) {
         //update all cars
         for (int f = 0; f < TILES_COUNT; f++) {
             guiFields[f].removeAllCars();

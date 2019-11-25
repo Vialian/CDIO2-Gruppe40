@@ -2,6 +2,7 @@ package Entity;
 
 import Control.DiceGame;
 import gui_codebehind.GUI_BoardController;
+import gui_fields.GUI_Field;
 import gui_main.GUI;
 
 public class PropertyTile extends Tile {
@@ -25,13 +26,19 @@ public class PropertyTile extends Tile {
          this.cost = cost;
      }
 
-     public void landOn(Player pl, GUI gui) {
+     public void landOn(Player player, GUI gui, Board board, DiceGame game) {
+         System.out.println("property landOn er kaldt");
+         if(this.ownedBy == 0){
+             if(player.getMoney() >= this.cost){
+                 System.out.println("felt er købt");
+                 this.setOwnedBy(player.getID());
+                 player.addMoney(- this.cost);
+                 player.addProperty(board.getTilePos(this));
+                 gui.showMessage("Du er ejer nu: "+ this.getName());
+                 GUI_Field fl[] = gui.getFields();
+                 fl[board.getTilePos(this)].setTitle(getName() + player.getName()); //skal nok slettet, da anden løsning vil være mere optimal
+                 fl[board.getTilePos(this)].setDescription(getText() + player.getName());
 
-         if(this.getOwnedBy() == 0){
-             if(pl.getMoney() >= this.cost){
-                 this.setOwnedBy(pl.getID());
-                 pl.addMoney(- this.cost);
-                 gui.showMessage("Du er ejer nu: "+ pl.getName());
              }else{
                  gui.showMessage("Du har ikke nok penge");
                  }

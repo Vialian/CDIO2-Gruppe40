@@ -129,6 +129,7 @@ public class ChanceDeck {
                 int move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
                 moveForwardCard.setMove(move);
                 moveForwardCard.onDraw(player);
+
                 //Ryk op til 5 felter frem
             case 4:
                 gui.displayChanceCard("THE CHOICE IS YOURS CARD");
