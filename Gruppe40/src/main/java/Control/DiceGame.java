@@ -6,7 +6,7 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
-
+import gui_codebehind.JLabelRotatable;
 
 
 import java.awt.*;
@@ -73,12 +73,12 @@ public class DiceGame {
             return Color.ORANGE;
         } else if ("GUL".equals(x)) {
             return Color.YELLOW;
-        } else if ("LYSEBLÅ".equals(x)) { // det samme som blå skal fikses
-            return Color.BLUE;
+        } else if ("LYSEBLÅ".equals(x)) {
+            return new Color(0,191,225);
         } else if ("PINK".equals(x)) {
             return Color.PINK;
-        }else if ("BRUN".equals(x)) { // bliver sat til grå
-            return Color.LIGHT_GRAY;
+        }else if ("BRUN".equals(x)) {
+            return new Color(150,75,0);
         }
         return Color.CYAN;
 
@@ -104,7 +104,7 @@ public class DiceGame {
         GUI_Center guic = GUI_Center.getInstance();
 
 
-        gui = new GUI(guiFields);
+        gui = new GUI(guiFields, new Color(252, 146, 146));
 
         guic.setBGColor(Color.WHITE);
 //        guic.setChanceCard("Welcome");
@@ -183,12 +183,12 @@ public class DiceGame {
                         PassingStart(currentPlayer);
                     }
 
-                    pl.setCurrentTile(roll + currentPosition);
+                    pl.addToPos(roll, this.TILES_COUNT);
                     updateGui(currentPlayer);
 
                     Tile tile = board.getTile(pl.getCurrentTile());
                     showTileMessage(currentPosition, currentPlayer);
-                    tile.landOn(pl,gui, board, this);
+                    //tile.landOn(pl,gui, board, this);
 
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
@@ -258,6 +258,8 @@ public class DiceGame {
             if (x == res ){
                 pl.removeProperty(res);
                 pl.addMoney(board.getFieldCost(res));
+                //updateField();
+                //mangler et opdate af gui, så brikken på pladen bliver unowned eller skifter player.
             }
         }
 
@@ -269,8 +271,10 @@ public class DiceGame {
         for (int f = 0; f < TILES_COUNT; f++) {
             guiFields[f].removeAllCars();
         }
+        //if(players[currentPlayer].getCurrentTile() % 6 == 0) coce til rotation a bil
 
         for (int p = 0; p < MAX_PLAYERS; p++) {
+
             guiFields[players[p].getCurrentTile()].setCar(guiPlayers[p], true);
         }
 
