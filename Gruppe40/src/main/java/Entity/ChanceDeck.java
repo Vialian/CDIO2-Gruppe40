@@ -36,8 +36,7 @@ public class ChanceDeck {
 
     public void drawCard(Player player, GUI gui, Board board, DiceGame game) {
         performAction(index++, player, gui, board, game);
-        if (index == 20)
-            index = 0;
+        index = index%20;
     }
     
     private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {

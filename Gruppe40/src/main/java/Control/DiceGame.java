@@ -188,8 +188,8 @@ public class DiceGame {
 
                     Tile tile = board.getTile(pl.getCurrentTile());
                     showTileMessage(currentPosition, currentPlayer);
-                    //tile.landOn(pl,gui, board, this);
-
+                    tile.landOn(pl,gui, board, this);
+                    System.out.println("after landOn");
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
             }
