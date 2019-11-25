@@ -38,6 +38,7 @@ public class DiceGame {
     {
         guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + tile.getCost(), Color.WHITE, Color.BLACK);
     }
+    //Nedenstående tre metoder burde kunne skrives sammen til én
     private void MakeChanceTile(ChanceTile tile, int pos)
     {
         guiFields[pos] = new GUI_Street(tile.getName(), "", tile.getText(), "" + "", Color.WHITE, Color.BLACK);
@@ -57,6 +58,7 @@ public class DiceGame {
         guiFields = new GUI_Field[TILES_COUNT];
         for (int i = 0; i < TILES_COUNT; i++) {
             Tile tile = board.getTile(i);
+            //Som ovenfor - istedet for fire separate kald, kan nedenfor reduceres til to
             if(tile instanceof PropertyTile)
                 MakePropertyTile((PropertyTile) tile,i);
             if(tile instanceof ChanceTile)
@@ -74,7 +76,12 @@ public class DiceGame {
         guic.setBGColor(Color.WHITE);
 //        guic.setChanceCard("Welcome");
 
+        //Nedenstående skal ændres til noget mere sigende.
         gui.getUserString("welcome to Hyperdice");
+
+        //Nedenstående er ikke særligt smart. Hvis spilleren indtaster
+        // et tal, som ikke er mellem 2 og 4, så får vedkommende ikke
+        //at vide, hvad der er galt med indtastningen.
         while (MAX_PLAYERS < 2 || MAX_PLAYERS > 4) {
             try {
                 MAX_PLAYERS = Integer.parseInt(gui.getUserString("How many players?"));
@@ -88,6 +95,9 @@ public class DiceGame {
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
 
+        //Nedenstående er ikke i overensstemmelse med reglerne. Spillerne hedder: Kat, Hund, Skib og Bil.
+        //Hvis disse labels ikke indgår som spillernavne, så skal de tildeles i en separat variabel. Ellers
+        //fungerer chancekortreglerne ikke.
         int youngestTemp = Integer.MAX_VALUE;
         for (int i = 1; MAX_PLAYERS >= i; i++) {
             int s = i - 1;
@@ -112,6 +122,7 @@ public class DiceGame {
 
     }
 
+    //Generel kommentar: Er der andre end mig, som bliver vanvittige af inkonsistent brug af whitespace?
 
     public void playDiceGame() {
         gameHasEnded = false;
@@ -130,6 +141,11 @@ public class DiceGame {
 
 
                     //Tile tile = board.getTile(roll + currentPosition % board.getBoard().length);
+
+                    //Kommentar: Jeg bliver en lillesmule ekset af rækkefølgen i nedstående addition.
+                    //Er det for hulen ikke mere logisk at sige "position + kast" - i den rækkefølge??
+                    //evt. gøre det på samme linje som kaldet til getCurrentTile(), så får man også separeret
+                    //summationen og den logiske operation. Desuden mangler der vist et kald til player.setCurrentTile()??
 
                     if(roll + currentPosition > board.getBoard().length)
                     {
@@ -150,6 +166,8 @@ public class DiceGame {
         }
     }
 
+    //Hvorfor er metodenavnet med Stort Begyndelsesbogstav? Er der overhovedet brug for
+    //denne metode, og hvis ja, hvorfor er den placeret lige her?
     private void PassingStart(int player)
     {
         players[player].addMoney(passStart);
@@ -158,6 +176,9 @@ public class DiceGame {
 
     private Boolean doPlayerConditions(Player player) {
         if (player.hasLost()) {
+            //Du har allerede testet, om money < 0, så det er overflødigt at repetere.
+            //player.hasLost() skal fjernes, da den ikke længere lever op til sit navn
+            //men har ekstra logik, som befinder sig her:
             if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
                 int[][] pl = new int[8][2];
                 int num = 0;
@@ -203,6 +224,7 @@ public class DiceGame {
         return true;
     }
 
+    //Er denne metode ude af spillet?
     private void sellPropety(Player pl){
 //        String res = gui.getUserString("Indtast nr på den grund du vil sælge: ");
 //        if(res != "nej"){
@@ -243,6 +265,7 @@ public class DiceGame {
         String message = "You have landed on " + board.getTile(pos).getName() + ": " + board.getTile(pos).getText() + ". ";
         Tile tile=board.getTile(pos);
         if (tile instanceof ChanceTile) {
+            //Hvorfor kalde board.getTile(pos) én gang mere??
             message = board.getTile(pos).toString();
         }
         else if (tile instanceof PropertyTile)
@@ -267,7 +290,7 @@ public class DiceGame {
                 }
         }
         else if (tile instanceof JailTile) {
-            message = "go to prusin";
+            message = "go to prusin"; //Hvad betyder 'prusin'?
         }
         else{
             if (tile.getName().equals("Jailvisit"))
