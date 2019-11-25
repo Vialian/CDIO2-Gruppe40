@@ -77,7 +77,7 @@ public class Player {
 
     public void addToPos(int move, int boardLength){
         if(currentTile + move > boardLength-1)
-            currentTile = currentTile - boardLength-1;
+            currentTile = currentTile - boardLength;
         this.setCurrentTile(currentTile + move);
     }
     public String propertyToSting(){
