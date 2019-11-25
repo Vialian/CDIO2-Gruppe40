@@ -27,20 +27,20 @@ public class PropertyTile extends Tile {
      }
 
      public void landOn(Player player, GUI gui, Board board, DiceGame game) {
-         System.out.println("property landOn er kaldt");
+         System.out.println("Property landOn has been invoked");
          if(this.ownedBy == 0){
              if(player.getMoney() >= this.cost){
-                 System.out.println("felt er købt");
+                 System.out.println("Field is bought");
                  this.setOwnedBy(player.getID());
                  player.addMoney(- this.cost);
                  player.addProperty(board.getTilePos(this));
-                 gui.showMessage("Du er ejer nu: "+ this.getName());
+                 gui.showMessage("You are now the owner: "+ this.getName());
                  GUI_Field fl[] = gui.getFields();
                  fl[board.getTilePos(this)].setTitle(getName() + player.getName()); //skal nok slettet, da anden løsning vil være mere optimal
                  fl[board.getTilePos(this)].setDescription(getText() + player.getName());
 
              }else{
-                 gui.showMessage("Du har ikke nok penge");
+                 gui.showMessage("You don't have enought money.");
                  }
 
              }
