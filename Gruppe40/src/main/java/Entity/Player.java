@@ -17,6 +17,18 @@ public class Player {
         return ownedProperties;
     }
 
+    public int[] playerOwnedProperty()
+    {
+        int[] owned = new int[getOwnedProperties().length];
+        for (int s : getOwnedProperties())
+        {
+            for (int i = 0; i < owned.length; i++) {
+                owned[i] = s;
+            }
+        }
+        return owned;
+    }
+
     private int[] ownedProperties;
     private int ownedSize = 0;
 

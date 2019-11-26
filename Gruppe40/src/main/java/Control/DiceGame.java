@@ -150,7 +150,7 @@ public class DiceGame {
 
     }
 
-    public void propertyAvailable ()
+    private void propertyAvailable ()
     {
 
         for (int i = 0; i < TILES_COUNT; i++) {
@@ -162,6 +162,18 @@ public class DiceGame {
             }
         }
     }
+
+//    private int[] playerOwnedProperty(Player player)
+//    {
+//        int[] owned = new int[player.getOwnedProperties().length];
+//        for (int s : player.getOwnedProperties())
+//        {
+//            for (int i = 0; i < owned.length; i++) {
+//                owned[i] = s;
+//            }
+//        }
+//        return owned;
+//    }
 
     public void playDiceGame() {
         gameHasEnded = false;
@@ -274,27 +286,29 @@ public class DiceGame {
 
     private Boolean doPlayerConditions(Player player) {
         if (player.hasLost()) {
-            if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
-                int[][] pl = new int[8][2];
-                int num = 0;
-                int amount = 1;
-                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
-                    for (int s : player.getOwnedProperties()) {
-                        if (s == i)
-                        {
-                            pl[i][num] = amount;
-                            num++;
-                            amount++;
-                            if (amount >= 2)
-                                amount = 1;
-                        }
-                    }
-
-                }
+//            if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
+//                int[][] pl = new int[8][2];
+//                int num = 0;
+//                int amount = 1;
+//                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
+//                    for (int s : player.getOwnedProperties()) {
+//                        if (s == i)
+//                        {
+//                            pl[i][num] = amount;
+//                            num++;
+//                            amount++;
+//                            if (amount >= 2)
+//                                amount = 1;
+//                        }
+//                    }
+//
+//                }
 //                int toSale = 0, toSale2 = 3;
 //                int value = 0;
 //                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
+//                    int[] owned = playerOwnedProperty(player);
 //                    if (pl[i].length <= toSale) {
+//
 //                        if (player.getOwnedProperty[i][0].value >= player.getProperty[toSale][0].value) {
 //                            toSale = i;
 //                            if (player.getProperty[toSale][0].value >= player.getProperty[toSale][1].value && pl[toSale].length >= 2) {
@@ -305,12 +319,17 @@ public class DiceGame {
 //                        }
 //                    }
 //                }
-                //player.sellTile(toSale, toSale2);
-//                sellPropety(toSale,toSale2);
+//                sellPropety(player);
+////                sellPropety(toSale,toSale2);
+//            }
+            while (player.getOwnedProperties().length > 0)
+            {
+                if (player.getMoney() >= 0)
+                    return false;
+                else
+                    sellPropety(player);
             }
-            if (player.getMoney() >= 0) {
-                return false;
-            }
+
 
             gui.showMessage(player.getName() + " has lost the game!");
             gameHasEnded = true;
@@ -320,12 +339,20 @@ public class DiceGame {
         return true;
     }
 
-    private void findWinner()
-    {
+    private void findWinner() {
+        int winner = 0;
+        int money = 0;
+        for (int i = 0; i < players.length; i++) {
 
+            if (money < players[i].getMoney()) {
+                winner = i;
+
+            }
+        }
+        gui.showMessage("The winner is: " + players[winner].getName() + " with the amount of " + players[winner].getMoney());
     }
 
-    private void sellPropety(Player pl) {
+        private void sellPropety(Player pl) {
         gui.showMessage("You must sell a property");
 
         int res = Integer.parseInt(gui.getUserString(pl.propertyToSting()));
