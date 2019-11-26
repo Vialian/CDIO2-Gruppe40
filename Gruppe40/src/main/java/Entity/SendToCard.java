@@ -21,14 +21,22 @@ public class SendToCard extends ChanceCard {
     public void onDraw(Player pl, GUI gui,Board br, DiceGame game, boolean fieldFree) {
 
         pl.setCurrentTile(sendTo);
-        PropertyTile tile = (PropertyTile) br.getTile(pl.getCurrentTile());
 
+
+        Tile tl = br.getTile(pl.getCurrentTile());
+        if(tl instanceof PropertyTile){
+            PropertyTile tile = (PropertyTile) tl;
             if (tile.getOwnedBy() == 0) {
                 if(fieldFree) {
                     pl.addMoney(tile.getCost());
                 }
             }
             tile.landOn(pl, gui, br, game);
+        }else{
+            tl.landOn(pl, gui, br, game);
+        }
+        
+
 
     }
     @Override
