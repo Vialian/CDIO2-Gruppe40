@@ -175,18 +175,26 @@ public class DiceGame {
                     {
                         boolean choiceBoolean = false;
 
+                        String choiceString = gui.getUserSelection("Choose which property you want");
                         int propertyChosen = 0;
-                        boolean propChose = false;
-                        while (propChose) {
+                        int choice = 0;
+                        boolean toInt = false;
+                        while (toInt = false) {
+                            try {
+                                choice = Integer.parseInt(choiceString);
+                                toInt = true;
 
+                            } catch (Exception e) {
+                                gui.showMessage("indtast et tal");
+                            }
+                        }
 
-                            String choice = gui.getUserString("Choose which property you want");
                             for (int i = 0; i < players.length; i++) {
                                 Player tempPl = players[i];
 
                                 int[] prop = tempPl.getOwnedProperties();
                                 for (int s : prop) {
-                                    if (s == Integer.parseInt(choice)) {
+                                    if (s == choice) {
                                         gui.showMessage("this property can you not take");
                                         if (s == propertyChosen)
                                             propertyChosen = 0;
@@ -197,8 +205,7 @@ public class DiceGame {
                                 }
                             }
 
-                        }
-                        pl.setCurrentTile(propertyChosen);
+
                     }
                     else
                     {
