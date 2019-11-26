@@ -175,7 +175,6 @@ public class DiceGame {
                 Boolean nextPlayer = false;
                 while (!nextPlayer) {
                     Player pl = players[currentPlayer];
-
                     if (pl.getPromisedRealEstate())
                     {
                         String choiceString = gui.getUserSelection("Choose which property you want");
@@ -231,12 +230,11 @@ public class DiceGame {
                                 }
                             }
                             pl.setCurrentTile(jailPos);
+
                         }
                         gui.getUserString(pl.getName() + ": Will you roll your dice?...");
 
                         int roll = pl.rollDie();
-
-                        int currentPosition = pl.getCurrentTile();
 
                         System.out.println(currentPlayer + " has rolled "+roll);
 
@@ -245,25 +243,25 @@ public class DiceGame {
                         } catch (Exception e){
                             System.out.println("The player doesn't own anything");
                         }
-                        if(roll + currentPosition >= TILES_COUNT)
+                        if(roll + pl.getCurrentTile() >= TILES_COUNT)
                         {
                             PassingStart(currentPlayer);
                         }
 
                         pl.addToPos(roll, TILES_COUNT);
-                        updateGui(currentPlayer);
 
-                        Tile tile = board.getTile(pl.getCurrentTile());
-                        showTileMessage(currentPosition, currentPlayer);
-                        tile.landOn(pl,gui, board, this);
-                        updateGui(currentPlayer);
-                        System.out.println("after landOn");
-                        nextPlayer = doPlayerConditions(players[currentPlayer]);
-                        currentPlayer++;
-                        if(currentPlayer >= MAX_PLAYERS)
-                            currentPlayer = 0;
                     }
 
+                    updateGui(currentPlayer);
+                    Tile tile = board.getTile(pl.getCurrentTile());
+                    showTileMessage(pl.getCurrentTile(), currentPlayer);
+                    tile.landOn(pl,gui, board, this);
+                    updateGui(currentPlayer);
+                    System.out.println("after landOn");
+                    nextPlayer = doPlayerConditions(players[currentPlayer]);
+                    currentPlayer++;
+                    if(currentPlayer >= MAX_PLAYERS)
+                        currentPlayer = 0;
                 }
         }
     }
