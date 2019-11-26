@@ -228,7 +228,7 @@ public class ChanceDeck {
             case 10:
                 gui.displayChanceCard("Strandpromenaden CARD");
                 sendToCard.setSendTo(23);
-                sendToCard.onDraw(player,gui,board,game,false);
+                sendToCard.onDraw(player,false);
             case 13:
                 gui.displayChanceCard("BIRTHDAY CARD");
                 gui.showMessage("Det er din fødselsdag. Modtag 1M.");
