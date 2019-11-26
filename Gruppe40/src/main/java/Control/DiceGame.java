@@ -110,12 +110,12 @@ public class DiceGame {
         guic.setBGColor(Color.WHITE);
 //        guic.setChanceCard("Welcome");
 
-        gui.getUserString("welcome to Hyperdice");
+        gui.getUserString("Welcome to Hyperdice");
         while (MAX_PLAYERS < 2 || MAX_PLAYERS > 4) {
             try {
                 MAX_PLAYERS = Integer.parseInt(gui.getUserString("How many players?"));
             } catch (Exception e) {
-                gui.getUserString("fejl, indtast et tal 2-4");
+                gui.getUserString("Error, type in a number between 2-4");
             }
 
         }
@@ -135,7 +135,7 @@ public class DiceGame {
             try {
                 playerAge = Integer.parseInt(gui.getUserString("Player " + i + ": What is your age?"));
             } catch (Exception e) {
-                gui.getUserString("fejl, indtast alder");
+                gui.getUserString("Error, type in your age");
             }
 
             if (youngestTemp > playerAge) {
@@ -145,7 +145,7 @@ public class DiceGame {
 
         }
 
-        gui.showMessage("Alright, let's get started..., the youngest one " + players[youngest].getName() + " will start");
+        gui.showMessage("Alright, let's get started... The youngest one " + players[youngest].getName() + " will start");
 
     }
 
@@ -153,7 +153,7 @@ public class DiceGame {
     public void playDiceGame() {
         gameHasEnded = false;
         for (int i = 0; i < players.length; i++) {
-            System.out.println("updater gui for player " + i);
+            System.out.println("Updater GUI for player " + i);
             updateGui(i);
         }
         int currentPlayer = youngest;
@@ -218,12 +218,12 @@ public class DiceGame {
 
                         int currentPosition = pl.getCurrentTile();
 
-                        System.out.println(currentPlayer + " har slået "+roll);
+                        System.out.println(currentPlayer + " has rolled "+roll);
 
                         try {
-                            System.out.println("spillern ejer: " + pl.getOwnedProperties().length);
+                            System.out.println("The player own's: " + pl.getOwnedProperties().length);
                         } catch (Exception e){
-                            System.out.println("spillern ejer ikke noget");
+                            System.out.println("The player doesn't own anything");
                         }
                         if(roll + currentPosition >= TILES_COUNT)
                         {
@@ -307,7 +307,7 @@ public class DiceGame {
     }
 
     private void sellPropety(Player pl) {
-        gui.showMessage("Du skal sælge en grund");
+        gui.showMessage("You must sell a property");
 
         int res = Integer.parseInt(gui.getUserString(pl.propertyToSting()));
 
@@ -359,22 +359,22 @@ public class DiceGame {
 
             if (property.getOwnedBy() == 0)
             {
-                message = "you can buy this property";
+                message = "You can buy this property";
                 //or
                 //message = title.toString()}
             }
 			else {
-                    message = "you owe " + property.getOwnedBy() + " money, pay : " + property.getCost();
+                    message = "You owe " + property.getOwnedBy() + " money, pay : " + property.getCost();
                 }
         }
         else if (tile instanceof JailTile) {
-            message = "go to prusin";
+            message = "Go to prison";
         }
         else{
             if (tile.getName().equals("Jailvisit"))
-                message = "you are visiting the jail";
+                message = "You are visiting the jail";
             else if (tile.getName().equals("Parkinglot"))
-                message = "you are visiting the jail";
+                message = "You are visiting the parkinglot";
             else
                 message = "Nothing";
         }

@@ -42,7 +42,7 @@ public class ChanceDeck {
     private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
         switch(index) {
             case 0:
-                gui.displayChanceCard("PROMISED LAND CARD: Bil");
+                gui.displayChanceCard("PROMISED LAND CARD: Car");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
                 Player bil = game.findPlayer(1);
                 bil.setPromisedRealEstate(true);
@@ -51,19 +51,19 @@ public class ChanceDeck {
                 //På næste tur skal du flytte til ledigt felt og køb det
                 //HVIS Ingen ledige: Køb af anden spiller
             case 5:
-                gui.displayChanceCard("PROMISED LAND CARD: Skib");
+                gui.displayChanceCard("PROMISED LAND CARD: Ship");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
                 Player skib = game.findPlayer(2);
                 skib.setPromisedRealEstate(true);
                 // Samme, men for SKIBET
             case 11:
-                gui.displayChanceCard("PROMISED LAND CARD: Kat");
+                gui.displayChanceCard("PROMISED LAND CARD: Cat");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
                 Player kat = game.findPlayer(3);
                 kat.setPromisedRealEstate(true);
                 // Som 5, men til KAT
             case 12:
-                gui.displayChanceCard("PROMISED LAND CARD: Hund");
+                gui.displayChanceCard("PROMISED LAND CARD: Dog");
                 drawCard(player, gui, board, game); //Tage et chancekort mere
                 Player hund = game.findPlayer(4);
                 hund.setPromisedRealEstate(true);
@@ -77,26 +77,26 @@ public class ChanceDeck {
                 //HVIS ledigt: Modtag felt gratis
                 //ELLERS betal leje til ejeren
             case 7:
-                gui.displayChanceCard("FREE PROPERTY CARD: ORANGE/GRØN");
-                tileIndex = board.getNextTileColor2("ORANGE","GRØN");
+                gui.displayChanceCard("FREE PROPERTY CARD: ORANGE/GREEN");
+                tileIndex = board.getNextTileColor2("ORANGE","GREEN");
                 moveBuyTile (index, player, board, gui, game);
                 //GRATIS FELT
                 //Ryk frem til ORANGE eller GRØNT felt
                 //HVIS ledigt: Modtag felt
                 //ELLERS betal leje
             case 8:
-                gui.displayChanceCard("FREE PROPERTY CARD: LYSEBLÅ");
+                gui.displayChanceCard("FREE PROPERTY CARD: LIGHT BLUE");
                 tileIndex = board.getNextTileColor("LYSEBLÅ");
                 moveBuyTile (index, player, board, gui, game);
                 // Samme, men for LYSEBLÅT felt
             case 14:
-                gui.displayChanceCard("FREE PROPERTY CARD: PINK/LYSEBLÅ");
-                tileIndex = board.getNextTileColor2("PINK", "LYSEBLÅ");
+                gui.displayChanceCard("FREE PROPERTY CARD: PINK/LIGHT BLUE");
+                tileIndex = board.getNextTileColor2("PINK", "LIGHT BLUE");
                 moveBuyTile (index, player, board, gui, game);
                 // som 7, men for pink eller Lyseblåt
             case 16:
-                gui.displayChanceCard("FREE PROPERTY CARD: RØD");
-                tileIndex = board.getNextTileColor("RØD");
+                gui.displayChanceCard("FREE PROPERTY CARD: RED");
+                tileIndex = board.getNextTileColor("RED");
                 moveBuyTile (index, player, board, gui, game);
                 // som 8, men for Rødt
             case 17:
@@ -107,13 +107,13 @@ public class ChanceDeck {
                 // HVIS ledigt: Modtag gratis
                 // ELLERS betal leje til ejer
             case 18:
-                gui.displayChanceCard("FREE PROPERTY CARD: RØD");
-                tileIndex = board.getNextTileColor2("LYSEBLÅ", "RØD");
+                gui.displayChanceCard("FREE PROPERTY CARD: RED");
+                tileIndex = board.getNextTileColor2("LYSEBLÅ", "RED");
                 moveBuyTile (index, player, board, gui, game);
                 // Som 8, men for Lyseblåt eller Rødt
             case 19:
-                gui.displayChanceCard("FREE PROPERTY CARD: BRUN/GUL");
-                tileIndex = board.getNextTileColor2("BRUN", "GUL");
+                gui.displayChanceCard("FREE PROPERTY CARD: BROWN/YELLOW");
+                tileIndex = board.getNextTileColor2("BROWN", "YELLOW");
                 moveBuyTile (index, player, board, gui, game);
                 // Som 8, men for Brunt eller Gult
 
@@ -125,15 +125,15 @@ public class ChanceDeck {
                 //Modtag 2M
             case 2:
                 gui.displayChanceCard("MOVE FORWARD CARD");
-                int move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
+                int move = gui.getUserInteger("How many fields do you want to move forward (1-5)?");
                 moveForwardCard.setMove(move);
                 moveForwardCard.onDraw(player);
 
                 //Ryk op til 5 felter frem
             case 4:
                 gui.displayChanceCard("THE CHOICE IS YOURS CARD");
-                String vilDu = gui.getUserSelection("Vil du rykke 1 felt frem eller tage et chancekort mere?", "1 felt frem", "Chancekort");
-                if (vilDu.equals("1 felt frem")) {
+                String vilDu = gui.getUserSelection("Do you want to move 1 field forward or take a change card more?", "1 field forward", "Chance card");
+                if (vilDu.equals("1 field forward")) {
                     moveForwardCard.setMove(1);
                     moveForwardCard.onDraw(player);
                 } else {
@@ -143,7 +143,7 @@ public class ChanceDeck {
                 //ELLER tag et chancekort mere
             case 6:
                 gui.displayChanceCard("TOO MUCH CANDY CARD");
-                gui.showMessage("Du har spist for meget slik. Minus 2M :(.");
+                gui.showMessage("You have eaten to much candy. Minus 2M :(");
                 moneyCard.setMoney(-2);
                 moneyCard.onDraw(player);
                 //Du har spist for meget slik
@@ -158,8 +158,8 @@ public class ChanceDeck {
                 tileIndex = board.getNextTileName("Strandpromenaden");
                 sendToCard.setSendTo(index);
                 sendToCard.onDraw(player);
-                String jaNej = gui.getUserSelection("Har du fødselsdag i dag?", "Ja", "Nej");
-                if(jaNej.equals("Ja")) {
+                String jaNej = gui.getUserSelection("Do you have birthday today?", "Yes", "No");
+                if(jaNej.equals("Yes")) {
                     moneyCard.setMoney(1);
                     moneyCard.onDraw(player);
                 }
@@ -167,7 +167,7 @@ public class ChanceDeck {
                 // Fødselsdag: Modtag 1 M
             case 15:
                 gui.displayChanceCard("GOOD JOB HOMEWORK CARD");
-                gui.showMessage("Du har lavet lektier. Modtag 2M.");
+                gui.showMessage("You have done your homework. Receive 2M");
                 moneyCard.setMoney(2);
                 moneyCard.onDraw(player);
                 // Lektier: Modtag 2M
@@ -179,20 +179,20 @@ public class ChanceDeck {
         sendToCard.onDraw(player);
         Boolean isVacant = board.isVacant(index);
         if (isVacant) {
-            String jaNej = gui.getUserSelection("Du er nu på et orange felt. Vil du købe det?", "ja","nej");
-            if (jaNej.equals("ja")) {
+            String jaNej = gui.getUserSelection("You are now on a orange field. Do you want to buy it?", "Yes","No");
+            if (jaNej.equals("Yes")) {
                 Tile vTile = board.getTile(index);
                 PropertyTile pTile = (PropertyTile)vTile;
                 if(player.getMoney() >= pTile.getCost()){
                     pTile.setOwnedBy(player.getID());
                     player.addMoney(-pTile.getCost());
-                    gui.showMessage("Du ejer nu det orange felt.");
+                    gui.showMessage("You now own the orange field.");
                 } else {
-                    gui.showMessage("Du har desværre ikke penge nok til at købe feltet.");
+                    gui.showMessage("Unfortunately, you don't have enough money to buy the field.");
                 }
             }
         } else {
-            gui.showMessage("Du skal betale leje til ejeren.");
+            gui.showMessage("You must pay rent to the owner.");
             Tile ownedTile = board.getTile(index);
             if (ownedTile.isProperty()) {
                 PropertyTile pTile = (PropertyTile) ownedTile;
