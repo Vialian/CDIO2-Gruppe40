@@ -62,13 +62,17 @@ public class ChanceDeck {
             case 11:
                 gui.displayChanceCard("PROMISED LAND CARD: Kat");
                 Player kat = game.findPlayer(3);
-                freeRealEstateCard.onDraw(kat);
+                if(!kat.equals(null)) {
+                    freeRealEstateCard.onDraw(kat);
+                }
                 drawCard(player, gui, board, game);
                 // Som 5, men til KAT
             case 12:
                 gui.displayChanceCard("PROMISED LAND CARD: Hund");
                 Player hund = game.findPlayer(4);
-                freeRealEstateCard.onDraw(hund);
+                if(!hund.equals(null)) {
+                    freeRealEstateCard.onDraw(hund);
+                }
                 drawCard(player, gui, board, game);
                 // Som 5 men til HUND
 

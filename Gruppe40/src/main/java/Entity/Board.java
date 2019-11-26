@@ -11,8 +11,8 @@ public class Board {
         boardTiles[position] = new UselessTile(name, description, color);
     }
 
-    public void addImprisonment(int position, String name, String description, String color){
-        boardTiles[position] = new JailTile(name, description, color);
+    public void addImprisonment(int position, String name, String description, String color, int sendTo){
+        boardTiles[position] = new JailTile(name, description, color, sendTo);
     }
 
     public void addProperty(int position, String name, String description, int price, String color){
@@ -49,7 +49,7 @@ public class Board {
         addUseless(0,"Go","When you pass Go you gain 1 Dollar.", "WHITE");
         addUseless(6,"Jail", "This is where the hardest criminals are kept", "WHITE");
         addUseless(12,"Free Parking", "Just take a break.", "WHITE");
-        addImprisonment(18,"Go To Jail", "Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", "WHITE");
+        addImprisonment(18,"Go To Jail", "Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", "WHITE", 6);
 
         addProperty(1,"The Burgerbar","This is where you get your burgers", 1, "GREEN");
         addProperty(2,"The Pizzeria","This is where you get pizza pies", 1, "GREEN");
