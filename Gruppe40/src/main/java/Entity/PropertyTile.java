@@ -43,7 +43,10 @@ public class PropertyTile extends Tile {
                  gui.showMessage("You don't have enought money.");
                  }
 
-             }
+             }else{
+                player.addMoney(- this.cost);
+                game.findPlayer(this.ownedBy).addMoney(this.cost);
+         }
          }
 
 

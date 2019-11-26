@@ -242,7 +242,21 @@ public class ChanceDeck {
         }
     }
 
-    private void moveBuyTile (int index, Player player, Board board, GUI gui, DiceGame game) {
+    private void moveBuyTile(int pos, Player pl, Board br, GUI gui, DiceGame game){
+        pl.setCurrentTile(pos);
+        PropertyTile tile = (PropertyTile) br.getTile(pl.getCurrentTile());
+
+        if(tile.getOwnedBy() == 0){
+            pl.addMoney(tile.getCost());
+            tile.landOn(pl, gui, br, game);
+        }else{
+            tile.landOn(pl, gui, br, game);
+
+        }
+
+    }
+
+    private void MoveBuyTile (int index, Player player, Board board, GUI gui, DiceGame game) {
         sendToCard.setSendTo(index);
         sendToCard.onDraw(player);
         Boolean isVacant = board.isVacant(index);
