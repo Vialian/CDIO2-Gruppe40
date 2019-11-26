@@ -53,8 +53,8 @@ public class Board {
 
         addProperty(1,"The Burgerbar","This is where you get your burgers", 1, "GREEN");
         addProperty(2,"The Pizzeria","This is where you get pizza pies", 1, "GREEN");
-        addProperty(4,"The Candyshop","This is where you get your candy", 1, "LIGHT BLUE");
-        addProperty(5,"The Ice Cream Shop", "This is where you get ice cream", 1, "LIGHT BLUE");
+        addProperty(4,"The Candyshop","This is where you get your candy", 1, "LIGHTBLUE");
+        addProperty(5,"The Ice Cream Shop", "This is where you get ice cream", 1, "LIGHTBLUE");
 
         addProperty(7,"The Museum","This is where you look at old stuff", 2, "PINK");
         addProperty(8,"The Library","This is where you get your knowledge", 2, "PINK");

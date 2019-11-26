@@ -25,7 +25,8 @@ public class DiceGame {
     private int youngest = 0;
     private int passStart = 2;
     private int jailCost = 1;
-
+    int[] avaliable = new int[16];
+    int jailPos = 6;
     public Player findPlayer(int id) {
         for (Player player: players) {
             if(player.getID()==id) {
@@ -58,27 +59,27 @@ public class DiceGame {
 
     private Color colorFromString(String colour){
         String x =colour.toUpperCase();
-        if ("HVID".equals(x)) {
+        if ("WHITE".equals(x)) {
             return Color.WHITE;
-        } else if ("SORT".equals(x)) {
+        } else if ("BLACK".equals(x)) {
             return Color.BLACK;
-        } else if ("BLÅ".equals(x)) {
+        } else if ("BLUE".equals(x)) {
             return Color.BLUE;
-        } else if ("RØD".equals(x)) {
+        } else if ("RED".equals(x)) {
             return Color.RED;
-        } else if ("GRÅ".equals(x)) {
+        } else if ("GREY".equals(x)) {
             return Color.GRAY;
-        } else if ("GRØN".equals(x)) {
+        } else if ("GREEN".equals(x)) {
             return Color.GREEN;
         } else if ("ORANGE".equals(x)) {
             return Color.ORANGE;
-        } else if ("GUL".equals(x)) {
+        } else if ("YELLOW".equals(x)) {
             return Color.YELLOW;
-        } else if ("LYSEBLÅ".equals(x)) {
+        } else if ("LIGHTBLUR".equals(x)) {
             return new Color(0,191,225);
         } else if ("PINK".equals(x)) {
             return Color.PINK;
-        }else if ("BRUN".equals(x)) {
+        }else if ("BROWN".equals(x)) {
             return new Color(150,75,0);
         }
         return Color.CYAN;
@@ -105,7 +106,7 @@ public class DiceGame {
         GUI_Center guic = GUI_Center.getInstance();
 
 
-        gui = new GUI(guiFields, new Color(252, 146, 146));
+        gui = new GUI(guiFields, Color.lightGray);
 
         guic.setBGColor(Color.WHITE);
 //        guic.setChanceCard("Welcome");
@@ -149,12 +150,16 @@ public class DiceGame {
 
     }
 
-    public void propertyAvailable (int a)
+    public void propertyAvailable ()
     {
-        int[] avaliable = new int[16];
-        for (int i = 0; i < avaliable.length; i++) {
 
+        for (int i = 0; i < TILES_COUNT; i++) {
 
+            Tile tile = board.getTile(i);
+            if(tile instanceof PropertyTile)
+            {
+               avaliable[i] = board.getTilePos(tile);
+            }
         }
     }
 
@@ -173,39 +178,36 @@ public class DiceGame {
 
                     if (pl.getPromisedRealEstate())
                     {
-                        boolean choiceBoolean = false;
-
                         String choiceString = gui.getUserSelection("Choose which property you want");
                         int propertyChosen = 0;
                         int choice = 0;
-                        boolean toInt = false;
-                        while (toInt = false) {
-                            try {
+                        while (true)
+                        {
+                            try
+                            {
                                 choice = Integer.parseInt(choiceString);
-                                toInt = true;
-
+                                break;
                             } catch (Exception e) {
                                 gui.showMessage("indtast et tal");
                             }
                         }
+                        propertyAvailable();
+                        for (int s : avaliable)
+                        {
+                            if (s == choice)
+                            {
+                                gui.showMessage("this property can you not take");
 
-                            for (int i = 0; i < players.length; i++) {
-                                Player tempPl = players[i];
+                            } else {
 
-                                int[] prop = tempPl.getOwnedProperties();
-                                for (int s : prop) {
-                                    if (s == choice) {
-                                        gui.showMessage("this property can you not take");
-                                        if (s == propertyChosen)
-                                            propertyChosen = 0;
-                                    } else {
-
-                                        propertyChosen = s;
-                                    }
-                                }
+                                propertyChosen = s;
                             }
-
-
+                            if(propertyChosen == 0)
+                            {
+                                propertyChosen = choice;
+                            }
+                        }
+                        pl.setCurrentTile(propertyChosen);
                     }
                     else
                     {
@@ -228,6 +230,7 @@ public class DiceGame {
                                     pl.setMoney(currentMoney);
                                 }
                             }
+                            pl.setCurrentTile(jailPos);
                         }
                         gui.getUserString(pl.getName() + ": Will you roll your dice?...");
 
