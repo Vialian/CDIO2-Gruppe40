@@ -125,6 +125,10 @@ public class Player {
         return this.releaseCards;
     }
 
+    public int useReleaseCards() {
+        return this.releaseCards--;
+    }
+
     public Boolean getPromisedRealEstate() {
         return this.promisedRealEstate;
     }

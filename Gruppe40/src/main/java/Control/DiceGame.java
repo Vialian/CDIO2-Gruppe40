@@ -24,6 +24,7 @@ public class DiceGame {
     private GUI gui;
     private int youngest = 0;
     private int passStart = 2;
+    private int jailCost = 1;
 
     public Player findPlayer(int id) {
         for (Player player: players) {
@@ -128,8 +129,8 @@ public class DiceGame {
             int s = i - 1;
             String playerName = gui.getUserString("Player " + i + ": What is your name?");
             playerName += i;
-            players[s] = new Player(playerName + i, 20, i);
-            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName + i, 20));
+            players[s] = new Player(playerName, 20, i);
+            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName, 20));
             int playerAge = 0;
             try {
                 playerAge = Integer.parseInt(gui.getUserString("Player " + i + ": What is your age?"));
@@ -155,44 +156,94 @@ public class DiceGame {
             System.out.println("updater gui for player " + i);
             updateGui(i);
         }
+        int currentPlayer = youngest;
         while (!gameHasEnded) {
 
-
-            for (int currentPlayer = youngest; currentPlayer < MAX_PLAYERS && !gameHasEnded; currentPlayer++) {
                 Boolean nextPlayer = false;
                 while (!nextPlayer) {
                     Player pl = players[currentPlayer];
-                    gui.getUserString(pl.getName() + ": Will you roll your dice?...");
 
-                    int roll = pl.rollDie();
-
-                    int currentPosition = pl.getCurrentTile();
-
-
-
-
-                    System.out.println(currentPlayer + " har slået "+roll);
-
-                    try {
-                        System.out.println("spillern ejer: " + pl.getOwnedProperties().length);
-                    } catch (Exception e){
-                        System.out.println("spillern ejer ikke noget");
-                    }
-                    if(roll + currentPosition >= TILES_COUNT)
+                    if (pl.getPromisedRealEstate())
                     {
-                        PassingStart(currentPlayer);
+                        boolean choiceBoolean = false;
+
+                        int propertyChosen = 0;
+                            String choice = gui.getUserSelection("Choose which property you want");
+                            for (int i = 0; i < players.length; i++) {
+                                Player tempPl = players[i];
+
+                                int[] prop = tempPl.getOwnedProperties();
+                                for (int s: prop) {
+                                    if (s == Integer.parseInt(choice))
+                                    {
+                                        gui.showMessage("this property can you not take");
+                                        if (s == propertyChosen)
+                                            propertyChosen = 0;
+                                    }
+                                    else
+                                    {
+
+                                        propertyChosen = s;
+                                    }
+                                }
+                        }
+
+                        //Move pl to propertyChosen tile
+                    }
+                    else
+                    {
+                        if(pl.isInJail())
+                        {
+                            if(pl.getReleaseCards() >= 1)
+                            {
+                                pl.useReleaseCards();
+                            }
+                            else
+                            {
+                                if(pl.getMoney() < 0)
+                                {
+                                    pl.hasLost();
+                                    doPlayerConditions(pl);
+                                }
+                                else
+                                {
+                                    int currentMoney = pl.getMoney() - jailCost;
+                                    pl.setMoney(currentMoney);
+                                }
+                            }
+                        }
+                        gui.getUserString(pl.getName() + ": Will you roll your dice?...");
+
+                        int roll = pl.rollDie();
+
+                        int currentPosition = pl.getCurrentTile();
+
+                        System.out.println(currentPlayer + " har slået "+roll);
+
+                        try {
+                            System.out.println("spillern ejer: " + pl.getOwnedProperties().length);
+                        } catch (Exception e){
+                            System.out.println("spillern ejer ikke noget");
+                        }
+                        if(roll + currentPosition >= TILES_COUNT)
+                        {
+                            PassingStart(currentPlayer);
+                        }
+
+                        pl.addToPos(roll, TILES_COUNT);
+                        updateGui(currentPlayer);
+
+                        Tile tile = board.getTile(pl.getCurrentTile());
+                        showTileMessage(currentPosition, currentPlayer);
+                        tile.landOn(pl,gui, board, this);
+                        System.out.println("after landOn");
+                        nextPlayer = doPlayerConditions(players[currentPlayer]);
+                        currentPlayer++;
+                        if(currentPlayer >= MAX_PLAYERS)
+                            currentPlayer = 0;
                     }
 
-                    pl.addToPos(roll, TILES_COUNT);
-                    updateGui(currentPlayer);
-
-                    Tile tile = board.getTile(pl.getCurrentTile());
-                    showTileMessage(currentPosition, currentPlayer);
-                    tile.landOn(pl,gui, board, this);
-                    System.out.println("after landOn");
-                    nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
-            }
         }
     }
 
@@ -244,9 +295,15 @@ public class DiceGame {
 
             gui.showMessage(player.getName() + " has lost the game!");
             gameHasEnded = true;
+            findWinner();
             return true;
         }
         return true;
+    }
+
+    private void findWinner()
+    {
+
     }
 
     private void sellPropety(Player pl) {
