@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private Die die;
     private int currentTile;
-    private Boolean promisedRealEstate; // Hvis man denne true, må man næste tur tage et felt ligemeget om det er ejet eller ikke ejet.
+    private Boolean promisedRealEstate = false; // Hvis man denne true, må man næste tur tage et felt ligemeget om det er ejet eller ikke ejet.
     private int releaseCards;
     private int ID;
     private boolean inJail = false;
