@@ -12,10 +12,6 @@ public class JailTile extends Tile {
         super(name, text, colour);
         this.sendTo = sendTo;
     }
-    public JailTile(String name, String text, String colour){
-        super(name, text, colour);
-
-    }
 
     public void landOn(Player player, GUI gui, Board board, DiceGame game) {
         if(sendTo!= 0){

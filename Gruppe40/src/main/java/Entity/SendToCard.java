@@ -1,5 +1,8 @@
 package Entity;
 
+import Control.DiceGame;
+import gui_main.GUI;
+
 public class SendToCard extends ChanceCard {
     private int sendTo;
 
@@ -15,10 +18,27 @@ public class SendToCard extends ChanceCard {
         //setSendTo(sendTo);
     }
 
-    public void onDraw(Player player) {
-        //TODO: INSERT METHOD FROM IMPRISONMENTTILE;
-    }
+    public void onDraw(Player pl, GUI gui,Board br, DiceGame game, boolean fieldFree) {
 
+        pl.setCurrentTile(sendTo);
+
+
+        Tile tl = br.getTile(pl.getCurrentTile());
+        if(tl instanceof PropertyTile){
+            PropertyTile tile = (PropertyTile) tl;
+            if (tile.getOwnedBy() == 0) {
+                if(fieldFree) {
+                    pl.addMoney(tile.getCost());
+                }
+            }
+            tile.landOn(pl, gui, br, game);
+        }else{
+            tl.landOn(pl, gui, br, game);
+        }
+        
+
+
+    }
     @Override
     public String toString() {
         return "____________";
