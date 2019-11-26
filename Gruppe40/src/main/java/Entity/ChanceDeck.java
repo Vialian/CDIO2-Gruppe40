@@ -41,9 +41,9 @@ public class ChanceDeck {
     }
     
     private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
+        int position;
+        String goTo;
         switch(index) {
-            int position;
-            String goTo;
             case 0:
                 gui.displayChanceCard("PROMISED LAND CARD: Bil");
                 Player bil = game.findPlayer(1);
