@@ -41,9 +41,9 @@ public class ChanceDeck {
     }
     
     private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
+        int position;
+        String goTo;
         switch(index) {
-            int position;
-            String goTo;
             case 0:
                 gui.displayChanceCard("PROMISED LAND CARD: Bil");
                 Player bil = game.findPlayer(1);
@@ -183,7 +183,7 @@ public class ChanceDeck {
             case 1:
                 gui.displayChanceCard("GO TO START CARD");
                 sendToCard.setSendTo(0);
-                sendToCard.onDraw(player,false);
+                sendToCard.onDraw(player,gui,board,game,false);
                 moneyCard.setMoney(2);
                 moneyCard.onDraw(player);
                 //Ryk frem til start
@@ -224,7 +224,6 @@ public class ChanceDeck {
             case 10:
                 gui.displayChanceCard("Strandpromenaden CARD");
                 sendToCard.setSendTo(23);
-
                 sendToCard.onDraw(player,false);
             case 13:
                 gui.displayChanceCard("BIRTHDAY CARD");
