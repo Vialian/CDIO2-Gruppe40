@@ -183,7 +183,7 @@ public class ChanceDeck {
             case 1:
                 gui.displayChanceCard("GO TO START CARD");
                 sendToCard.setSendTo(0);
-                sendToCard.onDraw(player,false);
+                sendToCard.onDraw(player,gui,board,game,false);
                 moneyCard.setMoney(2);
                 moneyCard.onDraw(player);
                 //Ryk frem til start
@@ -224,7 +224,7 @@ public class ChanceDeck {
             case 10:
                 gui.displayChanceCard("Strandpromenaden CARD");
                 sendToCard.setSendTo(23);
-                sendToCard.onDraw(player,false);
+                sendToCard.onDraw(player,gui,board,game,false);
             case 13:
                 gui.displayChanceCard("BIRTHDAY CARD");
                 gui.showMessage("Det er din fødselsdag. Modtag 1M.");
