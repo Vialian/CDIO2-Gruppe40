@@ -189,6 +189,7 @@ public class DiceGame {
                     Tile tile = board.getTile(pl.getCurrentTile());
                     showTileMessage(currentPosition, currentPlayer);
                     tile.landOn(pl,gui, board, this);
+                    updateGui(currentPlayer);
                     System.out.println("after landOn");
                     nextPlayer = doPlayerConditions(players[currentPlayer]);
                 }
@@ -276,9 +277,10 @@ public class DiceGame {
         for (int p = 0; p < MAX_PLAYERS; p++) {
 
             guiFields[players[p].getCurrentTile()].setCar(guiPlayers[p], true);
+            guiPlayers[p].setBalance(players[currentPlayer].getMoney());
         }
 
-        guiPlayers[currentPlayer].setBalance(players[currentPlayer].getMoney());
+
         gui.setDie(players[currentPlayer].getDie().getFaceValue());
     }
 

@@ -183,9 +183,8 @@ public class ChanceDeck {
             tile.landOn(pl, gui, br, game);
         }else{
             tile.landOn(pl, gui, br, game);
+
         }
-
-
 
     }
 
