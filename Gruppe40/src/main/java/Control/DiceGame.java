@@ -2,6 +2,7 @@ package Control;
 
 import Entity.*;
 import gui_codebehind.GUI_Center;
+import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
@@ -32,7 +33,9 @@ public class DiceGame {
                 return player;
             }
         }
+
         return null;
+
     }
 
     private void MakePropertyTile(PropertyTile tile, int pos)
@@ -123,12 +126,12 @@ public class DiceGame {
         guic.setBGColor(Color.WHITE);
 //        guic.setChanceCard("Welcome");
 
-        gui.getUserString("Welcome to Hyperdice");
+        gui.showMessage("Welcome to Hyperdice");
         while (MAX_PLAYERS < 2 || MAX_PLAYERS > 4) {
             try {
                 MAX_PLAYERS = Integer.parseInt(gui.getUserString("How many players?"));
             } catch (Exception e) {
-                gui.getUserString("Error, type in a number between 2-4");
+                gui.showMessage("Error, type in a number between 2-4");
             }
 
         }
@@ -136,19 +139,22 @@ public class DiceGame {
 
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
-
+        int startMoney = 1;
         int youngestTemp = Integer.MAX_VALUE;
         for (int i = 1; MAX_PLAYERS >= i; i++) {
             int s = i - 1;
             String playerName = gui.getUserString("Player " + i + ": What is your name?");
             playerName += i;
-            players[s] = new Player(playerName, 20, i);
-            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName, 20));
+            players[s] = new Player(playerName, startMoney, i);
+           // GUI_Car car = new GUI_Car(Color.cyan, Co);
+
+            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName, startMoney));
+
             int playerAge = 0;
             try {
                 playerAge = Integer.parseInt(gui.getUserString("Player " + i + ": What is your age?"));
             } catch (Exception e) {
-                gui.getUserString("Error, type in your age");
+                gui.showMessage("Error, type in your age");
             }
 
             if (youngestTemp > playerAge) {
@@ -158,7 +164,7 @@ public class DiceGame {
 
         }
 
-        gui.showMessage("Alright, let's get started... The youngest one " + players[youngest].getName() + " will start");
+        gui.showMessage("Alright, let's get started... The youngest one, player " + players[youngest].getName() + " will start");
 
     }
 
@@ -244,7 +250,7 @@ public class DiceGame {
                                 if(pl.getMoney() < 0)
                                 {
                                     pl.hasLost();
-                                    doPlayerConditions(pl);
+                                    doPlayerConditions(pl, currentPlayer);
                                 }
                                 else
                                 {
@@ -255,7 +261,7 @@ public class DiceGame {
                             //pl.setCurrentTile(jailPos);
 
                         }
-                        gui.getUserString(pl.getName() + ": Will you roll your dice?...");
+                        gui.showMessage(pl.getName() + ": Will you roll your dice?...");
 
                         int roll = pl.rollDie();
 
@@ -281,7 +287,8 @@ public class DiceGame {
                     tile.landOn(pl,gui, board, this);
                     updateGui(currentPlayer);
                     System.out.println("after landOn");
-                    nextPlayer = doPlayerConditions(players[currentPlayer]);
+
+                    nextPlayer = doPlayerConditions(players[currentPlayer], currentPlayer);
                     currentPlayer++;
                     if(currentPlayer >= MAX_PLAYERS)
                         currentPlayer = 0;
@@ -295,7 +302,8 @@ public class DiceGame {
     }
 
 
-    private Boolean doPlayerConditions(Player player) {
+    private Boolean doPlayerConditions(Player player, int currentplayer) {
+
         if (player.hasLost()) {
 //            if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
 //                int[][] pl = new int[8][2];
@@ -335,10 +343,12 @@ public class DiceGame {
 //            }
             while (player.getOwnedProperties().length > 0)
             {
+                System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
                 if (player.getMoney() >= 0)
                     return false;
                 else
                     sellPropety(player);
+                    updateGui(currentplayer);
             }
 
 
@@ -364,14 +374,16 @@ public class DiceGame {
     }
 
         private void sellPropety(Player pl) {
+            System.out.println("Sell grund er kaldt");
         gui.showMessage("You must sell a property");
 
-        int res = Integer.parseInt(gui.getUserString(pl.propertyToSting()));
+        int res = gui.getUserInteger(pl.propertyToSting());
 
         for(int x : pl.getOwnedProperties()){
             if (x == res ){
                 pl.removeProperty(res);
                 pl.addMoney(board.getFieldCost(res));
+
                 //updateField();
                 //mangler et opdate af gui, så brikken på pladen bliver unowned eller skifter player.
             }
@@ -388,12 +400,10 @@ public class DiceGame {
         //if(players[currentPlayer].getCurrentTile() % 6 == 0) coce til rotation a bil
 
         for (int p = 0; p < MAX_PLAYERS; p++) {
-
             guiFields[players[p].getCurrentTile()].setCar(guiPlayers[p], true);
-            guiPlayers[p].setBalance(players[currentPlayer].getMoney());
+            guiPlayers[p].setBalance(players[p].getMoney());
         }
 
-        //guiPlayers[currentPlayer].setBalance(players[currentPlayer].getMoney());
         gui.setDie(players[currentPlayer].getDie().getFaceValue());
     }
 

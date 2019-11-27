@@ -13,4 +13,10 @@ public class ChanceTile extends Tile  {
     public void landOn(Player player, GUI gui, Board board, DiceGame game ) {
         chanceDeck.drawCard(player, gui, board, game); // Vi skal fidne ud af hvordan vi vil hente kort.
     }
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
