@@ -10,11 +10,10 @@ public class GetOutOfJailFreeCardTest {
     public void onDraw() {
         GetOutOfJailFreeCard card = new GetOutOfJailFreeCard();
         Player player = new Player("Laurits",20,1);
-        assertTrue(!player.getPromisedRealEstate());
+        assertEquals(0,player.getReleaseCards());
         card.onDraw(player);
-        assertTrue(player.getPromisedRealEstate());
+        assertEquals(1,player.getReleaseCards());
         card.onDraw(player);
-        assertTrue(player.getPromisedRealEstate());
-
+        assertEquals(2,player.getReleaseCards());
     }
 }

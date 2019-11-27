@@ -15,6 +15,5 @@ public class FreeRealEstateCardTest {
         assertTrue(player.getPromisedRealEstate());
         card.onDraw(player);
         assertTrue(player.getPromisedRealEstate());
-
     }
 }
