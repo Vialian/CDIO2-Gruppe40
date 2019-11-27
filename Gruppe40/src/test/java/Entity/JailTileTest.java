@@ -25,6 +25,9 @@ public class JailTileTest {
 
     @Test
     public void landOn() {
+        int totalmove = 0;
+        GUI gui = new GUI();
+        DiceGame game = new DiceGame(gui);
         player = new Player("Player", 2,1);
         System.out.println(player.isInJail());
         assertTrue(!player.isInJail());
