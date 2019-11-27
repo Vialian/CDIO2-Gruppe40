@@ -6,4 +6,5 @@ public class UselessTile extends Tile {
     public UselessTile(String name, String text, String Colour) {
         super(name, text, Colour);
     }
+
 }

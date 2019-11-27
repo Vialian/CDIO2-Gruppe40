@@ -19,7 +19,7 @@ public class PropertyTile extends Tile {
      }
 
      private int ownedBy = 0;
-     private String type = "Property";
+
 
      public PropertyTile(String name, String text, int cost, String colour) {
          super(name, text, colour);
@@ -49,8 +49,12 @@ public class PropertyTile extends Tile {
          }
          }
 
+    @Override
+    public String toString() {
+        return super.toString() + " Cost =" + this.cost;
+    }
 
-     public int getCost() {
+    public int getCost() {
          return cost;
      }
      public void setCost(int cost){
