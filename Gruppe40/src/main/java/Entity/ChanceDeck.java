@@ -126,7 +126,7 @@ public class ChanceDeck {
                 // Samme, men for LYSEBLÅT felt
             case 14:
                 gui.displayChanceCard("FREE PROPERTY CARD: PINK/MØRKEBLÅ");
-                goTo = gui.getUserSelection("You can choose between landing on either orange or green tiles.","The museum","The library","The waterpark","The beach");
+                goTo = gui.getUserSelection("You can choose between landing on either pink or blue tiles.","The museum","The library","The waterpark","The beach");
                 position = 7;
                 if(goTo.equals("The library")){
                     position = 8;
@@ -209,7 +209,13 @@ public class ChanceDeck {
                 gui.displayChanceCard("MOVE FORWARD CARD");
                 int move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
                 while(!(0<move && move<6)){
-                    move = gui.getUserInteger("Du skal vælge en heltal mellem (1-5)?");
+                    try {
+                        move = gui.getUserInteger("Du skal vælge en heltal mellem (1-5)?");
+                        break;
+                    }
+                    catch (Exception e){
+                        gui.showMessage("indtast et tal mellem 1 og 5");
+                    }
                 }
                 moveForwardCard.setMove(move);
                 moveForwardCard.onDraw(player,board,gui,game);
