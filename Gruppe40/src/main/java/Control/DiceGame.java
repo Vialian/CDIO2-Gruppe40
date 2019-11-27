@@ -37,6 +37,9 @@ public class DiceGame {
         return null;
 
     }
+    public Player[] getPlayers(){
+        return players;
+    }
 
     private void MakePropertyTile(PropertyTile tile, int pos)
     {
@@ -93,11 +96,12 @@ public class DiceGame {
         board = new Board(24);
         for(int i=0; i<24;i++){
             board.addUseless(i,"tile" + i,"useless","WHITE");
-            System.out.println(board.getTile(i));
+//            System.out.println(board.getTile(i));
         }
 
-        players = new Player[1];
+        players = new Player[2];
         players[0] = new Player("Jeff", 20, 1);
+        players[1] = new Player("Jim", 20, 2);
         this.gui = gui;
     }
     public Board getBoard(){

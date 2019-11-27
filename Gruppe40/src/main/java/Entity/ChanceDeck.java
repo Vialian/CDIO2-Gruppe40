@@ -18,7 +18,7 @@ public class ChanceDeck {
         mixDeck();
     }
 
-    private void mixDeck() {
+    public void mixDeck() {
         int[] initDeck = new int[20];
         for (int i = 0; i < 20; i++)
             initDeck[i] = 1;
@@ -38,7 +38,7 @@ public class ChanceDeck {
     public void drawCard(Player player, GUI gui, Board board, DiceGame game) {
         index++;
         index = index%20;
-        performAction(deck[index], player, gui, board, game);
+//        performAction(deck[index], player, gui, board, game);
     }
     
     private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
@@ -271,7 +271,7 @@ public class ChanceDeck {
         }
     }
 
-    private void moveBuyTile(int pos, Player pl, Board br, GUI gui, DiceGame game){
+    public void moveBuyTile(int pos, Player pl, Board br, GUI gui, DiceGame game){
         pl.setCurrentTile(pos);
         PropertyTile tile = (PropertyTile) br.getTile(pl.getCurrentTile());
 
