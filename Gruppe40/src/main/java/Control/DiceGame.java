@@ -319,8 +319,8 @@ public class DiceGame {
                         choice = playerChoise;
                         break;
                     }
-                    propertyAvailable();
-                    for (int s : avaliable)
+                    int[] available = {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
+                    for (int s : available)
                     {
                         if (s == choice)
                         {
@@ -336,6 +336,8 @@ public class DiceGame {
                         }
                     }
                     pl.setCurrentTile(propertyChosen);
+                    pl.setPromisedRealEstate(false);
+                    System.out.println(propertyChosen);
                 }
                 else
                 {

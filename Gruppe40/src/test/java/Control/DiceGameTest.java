@@ -21,9 +21,22 @@ public class DiceGameTest {
     public void playDiceGame() {
         Player player = game.findPlayer(1);
         player.setInJail(true);
-        game.playDiceGameStump(0,2);
+        game.playDiceGameStump(0,1);
         assertTrue(!player.isInJail());
         assertEquals(19,player.getMoney() );
+        player.incrementReleaseCards();
+        player.setInJail(true);
+        game.playDiceGameStump(0,1);
+        assertTrue(!player.isInJail());
+        assertEquals(19,player.getMoney());
+        assertEquals(0,player.getReleaseCards());
+        player.setPromisedRealEstate(true);
+        game.playDiceGameStump(1,1);
+        assertTrue(!player.getPromisedRealEstate());
+
+        player.addProperty(1);
+
+
     }
 
     @Test
