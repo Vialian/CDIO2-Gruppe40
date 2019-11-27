@@ -5,10 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MoneyCardTest {
-
+    int[] moneys = {3,6,-2,-30103,43,34435,-1,-4,0,5};
     @Test
     public void setGetMoney() {
-        int[] moneys = {3,6,-2,-30103,43,34435,-1,-4,0,5};
         MoneyCard card = new MoneyCard();
         for(int money : moneys) {
             card.setMoney(money);
@@ -20,7 +19,6 @@ public class MoneyCardTest {
     public void onDraw() {
         int totalMoney = 20;
         Player player = new Player("Jens", totalMoney, 1);
-        int[] moneys = {3,6,-2,-30103,43,34435,-1,-4,0,5};
         MoneyCard card = new MoneyCard();
 
         for(int money : moneys) {

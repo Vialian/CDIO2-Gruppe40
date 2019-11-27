@@ -88,7 +88,9 @@ public class Player {
     }
 
     public void addToPos(int move, int boardLength){
-         this.setCurrentTile((currentTile + move)%boardLength);
+        System.out.println(currentTile);
+        this.setCurrentTile((currentTile + move)%boardLength);
+        System.out.println(currentTile);
     }
     public String propertyToSting(){
         String res = "Du ejer:";

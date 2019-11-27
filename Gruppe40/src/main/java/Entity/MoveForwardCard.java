@@ -21,6 +21,9 @@ public class MoveForwardCard extends ChanceCard{
 
         pl.addToPos(move,br.getBoard().length);
         Tile tile = br.getTile(pl.getCurrentTile());
+        System.out.println(pl);
+        System.out.println(gui);
+        System.out.println(game);
         tile.landOn(pl,gui,br,game);
 
     }
