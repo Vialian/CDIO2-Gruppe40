@@ -88,7 +88,7 @@ public class DiceGame {
 
     public DiceGame(GUI gui){
         board = new Board(24);
-        for(int i=0; i<=24;i++){
+        for(int i=0; i<24;i++){
             board.addUseless(i,"tile" + i,"useless","WHITE");
             System.out.println(board.getTile(i));
         }
