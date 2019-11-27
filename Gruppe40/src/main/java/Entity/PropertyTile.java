@@ -49,8 +49,12 @@ public class PropertyTile extends Tile {
          }
          }
 
+    @Override
+    public String toString() {
+        return super.toString() + " Cost =" + this.cost;
+    }
 
-     public int getCost() {
+    public int getCost() {
          return cost;
      }
      public void setCost(int cost){

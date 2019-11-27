@@ -4,13 +4,14 @@ import Control.DiceGame;
 import gui_main.GUI;
 
 public class ChanceDeck {
-    int index;
-    int[] deck;
-    FreeRealEstateCard freeRealEstateCard = new FreeRealEstateCard();
-    GetOutOfJailFreeCard getOutOfJailFreeCard = new GetOutOfJailFreeCard();
-    MoneyCard moneyCard = new MoneyCard();
-    MoveForwardCard moveForwardCard = new MoveForwardCard();
-    SendToCard sendToCard = new SendToCard();
+
+    private int index;
+    private int[] deck;
+    private FreeRealEstateCard freeRealEstateCard = new FreeRealEstateCard();
+    private GetOutOfJailFreeCard getOutOfJailFreeCard = new GetOutOfJailFreeCard();
+    private MoneyCard moneyCard = new MoneyCard();
+    private MoveForwardCard moveForwardCard = new MoveForwardCard();
+    private SendToCard sendToCard = new SendToCard();
 
     public ChanceDeck() {
         deck = new int[20];
@@ -311,5 +312,76 @@ public class ChanceDeck {
                 owner.addMoney(pTile.getCost());
             }
         }
+    }
+
+    // Getter for deck
+    public int[] getDeck() {
+        return this.deck;
+    }
+
+    // Setter for deck
+    public void setDeck(int[] newDeck) {
+        this.deck = newDeck;
+    }
+
+
+    // Getter for index
+    public int getIndex() {
+        return this.index;
+    }
+
+    // Setter for index
+    public void setIndex(int newIndex) {
+        this.index = newIndex;
+    }
+
+    // Getter for moveForwardCard
+    public MoveForwardCard getMoveForwardCard(){
+        return this.moveForwardCard;
+    }
+
+    // Setter for moveForwardCard
+    public void setMoveForwardCard(MoveForwardCard newMoreForwardCard){
+        this.moveForwardCard = newMoreForwardCard;
+    }
+
+    // Getter for sendToCard
+    public SendToCard getSendToCard() {
+        return this.sendToCard;
+    }
+
+    // Setter for sendToCard
+    public void setSendToCard(SendToCard newSendToCard) {
+        this.sendToCard = newSendToCard;
+    }
+
+    //Getter for moneyCard
+    public MoneyCard getMoneyCard(){
+        return this.moneyCard;
+    }
+
+    // Sette for moneyCard
+    public void setMoneyCard(MoneyCard newMoneyCard){
+        this.moneyCard = newMoneyCard;
+    }
+
+    // Getter for getOutOfJailFreeCard
+    public GetOutOfJailFreeCard getGetOutOfJailFreeCard(){
+        return this.getGetOutOfJailFreeCard();
+    }
+
+    // Setter for getOutOfJailFreeCard
+    public void setGetOutOfJailFreeCard(GetOutOfJailFreeCard newGetOutOfJailFreeCard){
+        this.getOutOfJailFreeCard = newGetOutOfJailFreeCard;
+    }
+
+    // Getter for freeRealEstateCard
+    public FreeRealEstateCard getFreeRealEstateCard(){
+        return this.getFreeRealEstateCard();
+    }
+
+    // Setter for freeRealEstateCard
+    public void setFreeRealEstateCard(FreeRealEstateCard newFreeRealEstateCard){
+        this.freeRealEstateCard = newFreeRealEstateCard;
     }
 }

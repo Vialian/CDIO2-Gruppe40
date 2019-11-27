@@ -51,20 +51,20 @@ public class Board {
         addUseless(12,"Free Parking", "Just take a break.", "WHITE");
         addImprisonment(18,"Go To Jail", "Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", "WHITE", 6);
 
-        addProperty(1,"The Burgerbar","This is where you get your burgers", 1, "GREEN");
-        addProperty(2,"The Pizzeria","This is where you get pizza pies", 1, "GREEN");
+        addProperty(1,"The Burgerbar","This is where you get your burgers", 1, "BROWN");
+        addProperty(2,"The Pizzeria","This is where you get pizza pies", 1, "BROWN");
         addProperty(4,"The Candyshop","This is where you get your candy", 1, "LIGHTBLUE");
         addProperty(5,"The Ice Cream Shop", "This is where you get ice cream", 1, "LIGHTBLUE");
 
         addProperty(7,"The Museum","This is where you look at old stuff", 2, "PINK");
         addProperty(8,"The Library","This is where you get your knowledge", 2, "PINK");
-        addProperty(10,"The Skatepark","This is where you get your grind on", 2, "YELLOW");
-        addProperty(11,"The Swimmingpool","This is where you get to swim", 2, "YELLOW");
+        addProperty(10,"The Skatepark","This is where you get your grind on", 2, "ORANGE");
+        addProperty(11,"The Swimmingpool","This is where you get to swim", 2, "ORANGE");
 
         addProperty(13,"The Casino","This is where you lose your money", 3, "RED");
         addProperty(14,"The Cinema","This is where you watch movies", 3, "RED");
-        addProperty(16,"The Toy Store","This is where you get your toys", 3, "BROWN");
-        addProperty(17,"The Pet Store","This is where you get your pets", 3, "BROWN");
+        addProperty(16,"The Toy Store","This is where you get your toys", 3, "YELLOW");
+        addProperty(17,"The Pet Store","This is where you get your pets", 3, "YELLOW");
 
         addProperty(19,"The Bowling Alley","This is where you bowl", 4, "GREEN");
         addProperty(20,"The Zoo","This is where you watch animals", 4, "GREEN");
