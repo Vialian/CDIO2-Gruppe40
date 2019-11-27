@@ -49,6 +49,7 @@ public class ChanceDeck {
                 Player bil = game.findPlayer(1);
                 freeRealEstateCard.onDraw(bil);
                 drawCard(player, gui, board, game);
+                break;
                 //Giv kort til bilen
                 //Til BIL:
                 //På næste tur skal du flytte til ledigt felt og køb det
@@ -59,6 +60,7 @@ public class ChanceDeck {
                 freeRealEstateCard.onDraw(skib);
                 drawCard(player, gui, board, game);
                 // Samme, men for SKIBET
+                break;
             case 11:
                 gui.displayChanceCard("PROMISED LAND CARD: Kat");
                 Player kat = game.findPlayer(3);
@@ -66,6 +68,7 @@ public class ChanceDeck {
                     freeRealEstateCard.onDraw(kat);
                 }
                 drawCard(player, gui, board, game);
+                break;
                 // Som 5, men til KAT
             case 12:
                 gui.displayChanceCard("PROMISED LAND CARD: Hund");
@@ -74,6 +77,7 @@ public class ChanceDeck {
                     freeRealEstateCard.onDraw(hund);
                 }
                 drawCard(player, gui, board, game);
+                break;
                 // Som 5 men til HUND
 
             case 3:
@@ -85,6 +89,7 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 //Ryk frem til et orange felt
                 //HVIS ledigt: Modtag felt gratis
                 //ELLERS betal leje til ejeren
@@ -103,6 +108,7 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 //GRATIS FELT
                 //Ryk frem til ORANGE eller GRØNT felt
                 //HVIS ledigt: Modtag felt
@@ -116,6 +122,7 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 // Samme, men for LYSEBLÅT felt
             case 14:
                 gui.displayChanceCard("FREE PROPERTY CARD: PINK/MØRKEBLÅ");
@@ -132,6 +139,7 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 // som 7, men for pink eller Lyseblåt
             case 16:
                 gui.displayChanceCard("FREE PROPERTY CARD: RØD");
@@ -142,12 +150,14 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 // som 8, men for Rødt
             case 17:
                 gui.displayChanceCard("FREE PROPERTY CARD: Skaterparken");
 
                 sendToCard.setSendTo(10);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 //Skaterparken: Ryk til Sk.
                 // HVIS ledigt: Modtag gratis
                 // ELLERS betal leje til ejer
@@ -166,6 +176,7 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 // Som 8, men for Lyseblåt eller Rødt
             case 19:
                 gui.displayChanceCard("FREE PROPERTY CARD: BRUN/GUL");
@@ -182,6 +193,7 @@ public class ChanceDeck {
                 }
                 sendToCard.setSendTo(position);
                 sendToCard.onDraw(player,gui,board,game,true);
+                break;
                 // Som 8, men for Brunt eller Gult
 
             case 1:
@@ -190,6 +202,7 @@ public class ChanceDeck {
                 sendToCard.onDraw(player,gui,board,game,false);
                 moneyCard.setMoney(2);
                 moneyCard.onDraw(player);
+                break;
                 //Ryk frem til start
                 //Modtag 2M
             case 2:
@@ -200,7 +213,7 @@ public class ChanceDeck {
                 }
                 moveForwardCard.setMove(move);
                 moveForwardCard.onDraw(player);
-
+                break;
                 //Ryk op til 5 felter frem
             case 4:
                 gui.displayChanceCard("THE CHOICE IS YOURS CARD");
@@ -211,6 +224,7 @@ public class ChanceDeck {
                 } else {
                     drawCard(player, gui, board, game);
                 }
+                break;
                 //ENTEN ryk 1 felt frem
                 //ELLER tag et chancekort mere
             case 6:
@@ -218,23 +232,26 @@ public class ChanceDeck {
                 gui.showMessage("Du har spist for meget slik. Minus 2M :(.");
                 moneyCard.setMoney(-2);
                 moneyCard.onDraw(player);
+                break;
                 //Du har spist for meget slik
                 //Betal 2M til banken
 
             case 9:
                 gui.displayChanceCard("GET OUT OF JAIL FREE CARD");
                 getOutOfJailFreeCard.onDraw(player);
+                break;
                 // LØSLADELSESKORT
             case 10:
                 gui.displayChanceCard("Strandpromenaden CARD");
                 sendToCard.setSendTo(23);
                 sendToCard.onDraw(player, gui, board, game, false);
+                break;
             case 13:
                 gui.displayChanceCard("BIRTHDAY CARD");
                 gui.showMessage("Det er din fødselsdag. Modtag 1M.");
                 moneyCard.setMoney(1);
                 moneyCard.onDraw(player);
-
+                break;
                 // Ryk frem til Strandpromenaden
                 // Fødselsdag: Modtag 1 M
             case 15:
@@ -242,6 +259,7 @@ public class ChanceDeck {
                 gui.showMessage("Du har lavet lektier. Modtag 2M.");
                 moneyCard.setMoney(2);
                 moneyCard.onDraw(player);
+                break;
                 // Lektier: Modtag 2M
         }
     }
