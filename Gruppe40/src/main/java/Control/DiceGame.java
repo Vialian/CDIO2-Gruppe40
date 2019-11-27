@@ -96,7 +96,7 @@ public class DiceGame {
         board = new Board(24);
         for(int i=0; i<24;i++){
             board.addUseless(i,"tile" + i,"useless","WHITE");
-            System.out.println(board.getTile(i));
+//            System.out.println(board.getTile(i));
         }
 
         players = new Player[2];

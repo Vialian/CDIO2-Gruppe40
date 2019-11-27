@@ -9,19 +9,22 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class ChanceDeckTest {
+    GUI gui = new GUI();
+    DiceGame diceGame = new DiceGame(gui);
+    Board board = new Board();
+    Player player = new Player("Ben",20,1);
 
     @Test
     public void drawCard() {
         ChanceDeck chanceDeck = new ChanceDeck();
-        Player player = new Player("Ben",20,1);
-        GUI gui = new GUI();
-        Board board = new Board();
-        DiceGame diceGame = new DiceGame();
 
-        assertEquals(0, chanceDeck.getIndex());
+        for (int i = 0; i < 20; i++) {
+            assertEquals(i, chanceDeck.getIndex());
+            chanceDeck.drawCard(player, gui, board, diceGame);
 
-        chanceDeck.drawCard(player, gui, board, diceGame);
-        assertEquals(1, chanceDeck.getIndex());
+        }
+
+
     }
     @Test
     public void mixDeck() {
@@ -45,8 +48,14 @@ public class ChanceDeckTest {
             }
             assertFalse(Arrays.equals(mix, mix2));
         }
+    }
 
-
-
+    @Test
+    public void moveBuyTile() {
+    ChanceDeck chanceDeck = new ChanceDeck();
+    int pos = 5;
+    chanceDeck.moveBuyTile(pos,player,board, gui, diceGame);
+        System.out.println("test " + player.getCurrentTile() + " or " + pos);
+    assertEquals(pos, player.getCurrentTile());
     }
 }
