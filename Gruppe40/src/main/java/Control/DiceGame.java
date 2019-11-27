@@ -241,7 +241,7 @@ public class DiceGame {
                                     pl.setMoney(currentMoney);
                                 }
                             }
-                            pl.setCurrentTile(jailPos);
+                            //pl.setCurrentTile(jailPos);
 
                         }
                         gui.getUserString(pl.getName() + ": Will you roll your dice?...");
@@ -369,7 +369,7 @@ public class DiceGame {
     }
 
 
-        public void updateGui(int currentPlayer) {
+        private void updateGui(int currentPlayer) {
         //update all cars
         for (int f = 0; f < TILES_COUNT; f++) {
             guiFields[f].removeAllCars();
