@@ -8,6 +8,8 @@ public class DieTest {
     private int faceValue;
     private int prob = (1/6);
     int[] amountCount = new int[7];
+
+
     @Test
     public void roll() {
         int amountTest =  1001;
@@ -30,8 +32,7 @@ public class DieTest {
 
         for(int i = 0; i < 7; i++) {
             faceValue = (int)(Math.random() * 6.0 + 1.0);
-            Die1 = new Die(i);
-            assertEquals(i, die1.getFaceValue());
+            assertEquals(i, faceValue);
         }
     }
 }
