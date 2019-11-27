@@ -17,9 +17,9 @@ public class MoveForwardCard extends ChanceCard{
         setMove(move);
     }
 
-    public void onDraw(int numberOfMove, Player pl, Board br, GUI gui, DiceGame game) {
+    public void onDraw(Player pl, Board br, GUI gui, DiceGame game) {
 
-        pl.addToPos(numberOfMove,br.getBoard().length);
+        pl.addToPos(move,br.getBoard().length);
         Tile tile = br.getTile(pl.getCurrentTile());
         tile.landOn(pl,gui,br,game);
 

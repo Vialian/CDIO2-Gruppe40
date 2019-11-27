@@ -64,7 +64,7 @@ public class ChanceDeck {
             case 11:
                 gui.displayChanceCard("PROMISED LAND CARD: Kat");
                 Player kat = game.findPlayer(3);
-                if(!kat.equals(null)) {
+                if(!(kat == null)) {
                     freeRealEstateCard.onDraw(kat);
                 }
                 drawCard(player, gui, board, game);
@@ -73,7 +73,7 @@ public class ChanceDeck {
             case 12:
                 gui.displayChanceCard("PROMISED LAND CARD: Hund");
                 Player hund = game.findPlayer(4);
-                if(!hund.equals(null)) {
+                if(!(hund == null)) {
                     freeRealEstateCard.onDraw(hund);
                 }
                 drawCard(player, gui, board, game);
@@ -209,10 +209,10 @@ public class ChanceDeck {
                 gui.displayChanceCard("MOVE FORWARD CARD");
                 int move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
                 while(!(0<move && move<6)){
-                    move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
+                    move = gui.getUserInteger("Du skal vælge en heltal mellem (1-5)?");
                 }
                 moveForwardCard.setMove(move);
-                moveForwardCard.onDraw(player);
+                moveForwardCard.onDraw(player,board,gui,game);
                 break;
                 //Ryk op til 5 felter frem
             case 4:
@@ -220,7 +220,7 @@ public class ChanceDeck {
                 String vilDu = gui.getUserSelection("Vil du rykke 1 felt frem eller tage et chancekort mere?", "1 felt frem", "Chancekort");
                 if (vilDu.equals("1 felt frem")) {
                     moveForwardCard.setMove(1);
-                    moveForwardCard.onDraw(player);
+                    moveForwardCard.onDraw(player,board,gui,game);
                 } else {
                     drawCard(player, gui, board, game);
                 }
