@@ -8,5 +8,6 @@ public class ChanceTileTest {
 
     @Test
     public void landOn() {
+
     }
 }
