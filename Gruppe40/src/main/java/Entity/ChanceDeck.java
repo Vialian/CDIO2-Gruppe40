@@ -18,7 +18,7 @@ public class ChanceDeck {
         mixDeck();
     }
 
-    private void mixDeck() {
+    public void mixDeck() {
         int[] initDeck = new int[20];
         for (int i = 0; i < 20; i++)
             initDeck[i] = 1;
