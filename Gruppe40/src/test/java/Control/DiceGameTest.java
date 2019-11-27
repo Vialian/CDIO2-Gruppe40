@@ -17,11 +17,8 @@ public class DiceGameTest {
     }
 
     @Test
-    public void getBoard() {
-    }
-
-    @Test
     public void playDiceGame() {
+
     }
 
     @Test
