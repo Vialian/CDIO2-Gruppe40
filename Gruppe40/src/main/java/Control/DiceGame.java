@@ -189,14 +189,13 @@ public class DiceGame {
                     Player pl = players[currentPlayer];
                     if (pl.getPromisedRealEstate())
                     {
-                        String choiceString = gui.getUserSelection("Choose which property you want");
                         int propertyChosen = 0;
                         int choice = 0;
                         while (true)
                         {
                             try
                             {
-                                choice = Integer.parseInt(choiceString);
+                                choice = gui.getUserInteger("Choose which property you want");
                                 break;
                             } catch (Exception e) {
                                 gui.showMessage("indtast et tal");
