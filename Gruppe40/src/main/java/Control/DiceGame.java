@@ -6,7 +6,6 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
-import gui_codebehind.JLabelRotatable;
 
 
 import java.awt.*;
@@ -87,7 +86,20 @@ public class DiceGame {
 
     }
 
+    public DiceGame(GUI gui){
+        board = new Board(24);
+        for(int i=0; i<24;i++){
+            board.addUseless(i,"tile" + i,"useless","WHITE");
+            System.out.println(board.getTile(i));
+        }
 
+        players = new Player[1];
+        players[0] = new Player("Jeff", 20, 1);
+        this.gui = gui;
+    }
+    public Board getBoard(){
+        return board;
+    }
     public DiceGame() {
         board = new Board();
 
