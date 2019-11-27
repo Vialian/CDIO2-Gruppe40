@@ -19,6 +19,7 @@ public class DiceGameTest {
 
     @Test
     public void playDiceGame() {
+        //test jail
         Player player = game.findPlayer(1);
         player.setInJail(true);
         game.playDiceGameStump(0,1);
@@ -30,16 +31,19 @@ public class DiceGameTest {
         assertTrue(!player.isInJail());
         assertEquals(19,player.getMoney());
         assertEquals(0,player.getReleaseCards());
+        //promised real estate test
         player.setPromisedRealEstate(true);
         game.playDiceGameStump(1,1);
         assertTrue(!player.getPromisedRealEstate());
-
-        player.addProperty(1);
-
+        //passing go test
+        player.setCurrentTile(23);
+        game.playDiceGameStump(0,1);
+        assertEquals(21,player.getMoney() );
 
     }
 
     @Test
     public void colourPair() {
+
     }
 }

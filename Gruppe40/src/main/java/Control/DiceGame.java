@@ -329,15 +329,17 @@ public class DiceGame {
                         } else {
 
                             propertyChosen = s;
+                            System.out.println("promised start "+propertyChosen);
                         }
                         if(propertyChosen == 0)
                         {
                             propertyChosen = choice;
+                            System.out.println("promised middle "+propertyChosen);
                         }
                     }
                     pl.setCurrentTile(propertyChosen);
                     pl.setPromisedRealEstate(false);
-                    System.out.println(propertyChosen);
+                    System.out.println("promised end "+propertyChosen);
                 }
                 else
                 {
