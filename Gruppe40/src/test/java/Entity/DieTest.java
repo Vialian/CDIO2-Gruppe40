@@ -12,7 +12,7 @@ public class DieTest {
 
     @Test
     public void roll() {
-        int amountTest =  1001;
+        int amountTest =  100001;
         for (int i = 1; i < amountTest; i++) {
             faceValue = (int)(Math.random() * 6.0 + 1.0);
             assertEquals(3.5, faceValue,2.5);
