@@ -207,10 +207,10 @@ public class ChanceDeck {
                 //Modtag 2M
             case 2:
                 gui.displayChanceCard("MOVE FORWARD CARD");
-                int move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
-                while(!(0<move && move<6)){
+                int move = 0;
+                while(!(0< move && move<6)){
                     try {
-                        move = gui.getUserInteger("Du skal vælge en heltal mellem (1-5)?");
+                        move = gui.getUserInteger("Hvor mange felter vil du flytte frem (1-5)?");
                         break;
                     }
                     catch (Exception e){
