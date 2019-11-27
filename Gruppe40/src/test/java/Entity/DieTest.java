@@ -27,8 +27,11 @@ public class DieTest {
     @Test
     public void getFaceValue() {
 
-        for (int i = 1; i < 6; i++) {
 
-        }assertEquals(1,faceValue,6);
+        for(int i = 0; i < 7; i++) {
+            faceValue = (int)(Math.random() * 6.0 + 1.0);
+            Die1 = new Die(i);
+            assertEquals(i, die1.getFaceValue());
+        }
     }
 }
