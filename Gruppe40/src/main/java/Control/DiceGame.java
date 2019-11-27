@@ -232,6 +232,7 @@ public class DiceGame {
                             if(pl.getReleaseCards() >= 1)
                             {
                                 pl.useReleaseCards();
+                                pl.setInJail(false);
                             }
                             else
                             {
@@ -244,6 +245,7 @@ public class DiceGame {
                                 {
                                     int currentMoney = pl.getMoney() - jailCost;
                                     pl.setMoney(currentMoney);
+                                    pl.setInJail(false);
                                 }
                             }
                             //pl.setCurrentTile(jailPos);
