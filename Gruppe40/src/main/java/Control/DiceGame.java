@@ -149,6 +149,14 @@ public class DiceGame {
 
     }
 
+    public void propertyAvailable (int a)
+    {
+        int[] avaliable = new int[16];
+        for (int i = 0; i < avaliable.length; i++) {
+
+
+        }
+    }
 
     public void playDiceGame() {
         gameHasEnded = false;
@@ -167,28 +175,37 @@ public class DiceGame {
                     {
                         boolean choiceBoolean = false;
 
+                        String choiceString = gui.getUserSelection("Choose which property you want");
                         int propertyChosen = 0;
-                            String choice = gui.getUserSelection("Choose which property you want");
+                        int choice = 0;
+                        boolean toInt = false;
+                        while (toInt = false) {
+                            try {
+                                choice = Integer.parseInt(choiceString);
+                                toInt = true;
+
+                            } catch (Exception e) {
+                                gui.showMessage("indtast et tal");
+                            }
+                        }
+
                             for (int i = 0; i < players.length; i++) {
                                 Player tempPl = players[i];
 
                                 int[] prop = tempPl.getOwnedProperties();
-                                for (int s: prop) {
-                                    if (s == Integer.parseInt(choice))
-                                    {
+                                for (int s : prop) {
+                                    if (s == choice) {
                                         gui.showMessage("this property can you not take");
                                         if (s == propertyChosen)
                                             propertyChosen = 0;
-                                    }
-                                    else
-                                    {
+                                    } else {
 
                                         propertyChosen = s;
                                     }
                                 }
-                        }
+                            }
 
-                        //Move pl to propertyChosen tile
+
                     }
                     else
                     {
