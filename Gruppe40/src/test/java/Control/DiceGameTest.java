@@ -1,5 +1,6 @@
 package Control;
 
+import Entity.Player;
 import gui_main.GUI;
 import org.junit.Test;
 
@@ -18,7 +19,11 @@ public class DiceGameTest {
 
     @Test
     public void playDiceGame() {
-
+        Player player = game.findPlayer(1);
+        player.setInJail(true);
+        game.playDiceGameStump(0,2);
+        assertTrue(!player.isInJail());
+        assertEquals(19,player.getMoney() );
     }
 
     @Test

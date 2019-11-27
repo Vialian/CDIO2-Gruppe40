@@ -248,6 +248,7 @@ public class DiceGame {
                             if(pl.getReleaseCards() >= 1)
                             {
                                 pl.useReleaseCards();
+                                pl.setInJail(false);
                             }
                             else
                             {
@@ -260,6 +261,7 @@ public class DiceGame {
                                 {
                                     int currentMoney = pl.getMoney() - jailCost;
                                     pl.setMoney(currentMoney);
+                                    pl.setInJail(false);
                                 }
                             }
                             //pl.setCurrentTile(jailPos);
@@ -300,11 +302,120 @@ public class DiceGame {
         }
     }
 
+    public void playDiceGameStump(int playerChoise, int turns) {
+        gameHasEnded = false;
+        int currentPlayer = 0;
+        for (int i =0; i<=turns;i++) {
+
+            Boolean nextPlayer = false;
+            while (!nextPlayer) {
+                Player pl = players[currentPlayer];
+                if (pl.getPromisedRealEstate())
+                {
+                    int propertyChosen = 0;
+                    int choice = 0;
+                    while (true)
+                    {
+                        choice = playerChoise;
+                        break;
+                    }
+                    propertyAvailable();
+                    for (int s : avaliable)
+                    {
+                        if (s == choice)
+                        {
+                            System.out.println("this property can you not take");
+
+                        } else {
+
+                            propertyChosen = s;
+                        }
+                        if(propertyChosen == 0)
+                        {
+                            propertyChosen = choice;
+                        }
+                    }
+                    pl.setCurrentTile(propertyChosen);
+                }
+                else
+                {
+                    if(pl.isInJail())
+                    {
+                        if(pl.getReleaseCards() >= 1)
+                        {
+                            pl.useReleaseCards();
+                            pl.setInJail(false);
+                        }
+                        else
+                        {
+                            if(pl.getMoney() < 0)
+                            {
+                                pl.hasLost();
+                                doPlayerConditionsStump(pl, currentPlayer);
+                            }
+                            else
+                            {
+                                int currentMoney = pl.getMoney() - jailCost;
+                                pl.setMoney(currentMoney);
+                                pl.setInJail(false);
+                            }
+                        }
+                        //pl.setCurrentTile(jailPos);
+
+                    }
+
+                    int roll = pl.rollDie();
+
+                    System.out.println(currentPlayer + " has rolled "+roll);
+
+                    try {
+                        System.out.println("The player own's: " + pl.getOwnedProperties().length);
+                    } catch (Exception e){
+                        System.out.println("The player doesn't own anything");
+                    }
+                    if(roll + pl.getCurrentTile() >= TILES_COUNT)
+                    {
+                        PassingStart(currentPlayer);
+                    }
+
+                    pl.addToPos(roll, TILES_COUNT);
+
+                }
+
+                Tile tile = board.getTile(pl.getCurrentTile());
+                tile.landOn(pl,gui, board, this);
+                System.out.println("after landOn");
+
+                nextPlayer = doPlayerConditionsStump(players[currentPlayer], currentPlayer);
+                currentPlayer++;
+                if(currentPlayer >= MAX_PLAYERS)
+                    currentPlayer = 0;
+            }
+        }
+    }
+
     private void PassingStart(int player)
     {
         players[player].addMoney(passStart);
     }
+    private Boolean doPlayerConditionsStump(Player player, int currentplayer) {
 
+        if (player.hasLost()) {
+
+            while (player.getOwnedProperties().length > 0)
+            {
+                System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
+                if (player.getMoney() >= 0)
+                    return false;
+                else
+                    sellPropetyStump(player);
+            }
+            gameHasEnded = true;
+            findWinner();
+            return true;
+        }
+        return true;
+    }
 
     private Boolean doPlayerConditions(Player player, int currentplayer) {
 
@@ -376,7 +487,22 @@ public class DiceGame {
         }
         gui.showMessage("The winner is: " + players[winner].getName() + " with the amount of " + players[winner].getMoney());
     }
+    private void sellPropetyStump(Player pl) {
+        System.out.println("Sell grund er kaldt");
 
+        int res = 1;
+
+        for(int x : pl.getOwnedProperties()){
+            if (x == res ){
+                pl.removeProperty(res);
+                pl.addMoney(board.getFieldCost(res));
+
+                //updateField();
+                //mangler et opdate af gui, så brikken på pladen bliver unowned eller skifter player.
+            }
+        }
+
+    }
         private void sellPropety(Player pl) {
             System.out.println("Sell grund er kaldt");
         gui.showMessage("You must sell a property");
