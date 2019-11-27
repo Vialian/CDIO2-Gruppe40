@@ -13,19 +13,25 @@ public class JailTileTest {
     GUI gui;
     Player player;
     DiceGame diceGame;
-    @org.junit.jupiter.api.BeforeEach
-    void setUp() {
-        diceGame = new DiceGame();
-        player = new Player("test", 2,1);
-        gui = new GUI();
-        board = new Board();
-        jailTile = new JailTile("Jail","You are in jail","GREY",6);
-
-    }
+//    @org.junit.jupiter.api.BeforeEach
+//    void setUp() {
+//        diceGame = new DiceGame();
+//        player = new Player("test", 2,1);
+//        gui = new GUI();
+//        board = new Board();
+//        jailTile = new JailTile("Jail","You are in jail","GREY",6);
+//
+//    }
 
     @Test
     public void landOn() {
+        player = new Player("Player", 2,1);
+        System.out.println(player.isInJail());
+        assertTrue(!player.isInJail());
 
+        diceGame = new DiceGame();
+        jailTile.landOn(player,gui,board, diceGame);
 
+        assertTrue(player.isInJail());
     }
 }
