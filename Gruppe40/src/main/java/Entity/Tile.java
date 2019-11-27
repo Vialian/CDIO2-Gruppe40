@@ -6,7 +6,6 @@ import gui_main.GUI;
 public abstract class Tile {
     private String name;
     private String text;
-    private String type;
     private String colour;
     private final boolean meIsProperty = false;
 
@@ -35,5 +34,14 @@ public abstract class Tile {
 
     public Boolean isProperty() {
         return this.meIsProperty;
+    }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                ", colour='" + colour + '\'' +
+                '}';
     }
 }
