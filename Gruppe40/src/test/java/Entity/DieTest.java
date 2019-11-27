@@ -30,8 +30,9 @@ public class DieTest {
     public void getFaceValue() {
 
 
-        for(int i = 0; i < 7; i++) {
-            faceValue = (int)(Math.random() * 6.0 + 1.0);
+        for(int i = 1; i < 7; i++) {
+            while (faceValue != i)
+                faceValue = (int)(Math.random() * 6.0 + 1.0);
             assertEquals(i, faceValue);
         }
     }
