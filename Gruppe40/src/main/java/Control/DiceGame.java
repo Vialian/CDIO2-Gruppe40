@@ -127,16 +127,16 @@ public class DiceGame {
 
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
-
+        int startMoney = 1;
         int youngestTemp = Integer.MAX_VALUE;
         for (int i = 1; MAX_PLAYERS >= i; i++) {
             int s = i - 1;
             String playerName = gui.getUserString("Player " + i + ": What is your name?");
             playerName += i;
-            players[s] = new Player(playerName, 20, i);
+            players[s] = new Player(playerName, startMoney, i);
            // GUI_Car car = new GUI_Car(Color.cyan, Co);
 
-            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName, 20));
+            gui.addPlayer(guiPlayers[s] = new GUI_Player(playerName, startMoney));
 
             int playerAge = 0;
             try {
@@ -238,7 +238,7 @@ public class DiceGame {
                                 if(pl.getMoney() < 0)
                                 {
                                     pl.hasLost();
-                                    doPlayerConditions(pl);
+                                    doPlayerConditions(pl, currentPlayer);
                                 }
                                 else
                                 {
@@ -275,7 +275,8 @@ public class DiceGame {
                     tile.landOn(pl,gui, board, this);
                     updateGui(currentPlayer);
                     System.out.println("after landOn");
-                    nextPlayer = doPlayerConditions(players[currentPlayer]);
+
+                    nextPlayer = doPlayerConditions(players[currentPlayer], currentPlayer);
                     currentPlayer++;
                     if(currentPlayer >= MAX_PLAYERS)
                         currentPlayer = 0;
@@ -289,7 +290,8 @@ public class DiceGame {
     }
 
 
-    private Boolean doPlayerConditions(Player player) {
+    private Boolean doPlayerConditions(Player player, int currentplayer) {
+
         if (player.hasLost()) {
 //            if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
 //                int[][] pl = new int[8][2];
@@ -329,10 +331,12 @@ public class DiceGame {
 //            }
             while (player.getOwnedProperties().length > 0)
             {
+                System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
                 if (player.getMoney() >= 0)
                     return false;
                 else
                     sellPropety(player);
+                    updateGui(currentplayer);
             }
 
 
@@ -358,14 +362,16 @@ public class DiceGame {
     }
 
         private void sellPropety(Player pl) {
+            System.out.println("Sell grund er kaldt");
         gui.showMessage("You must sell a property");
 
-        int res = Integer.parseInt(gui.getUserString(pl.propertyToSting()));
+        int res = gui.getUserInteger(pl.propertyToSting());
 
         for(int x : pl.getOwnedProperties()){
             if (x == res ){
                 pl.removeProperty(res);
                 pl.addMoney(board.getFieldCost(res));
+
                 //updateField();
                 //mangler et opdate af gui, så brikken på pladen bliver unowned eller skifter player.
             }

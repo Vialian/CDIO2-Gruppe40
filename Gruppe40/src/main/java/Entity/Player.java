@@ -90,6 +90,7 @@ public class Player {
     public void addToPos(int move, int boardLength){
          this.setCurrentTile((currentTile + move)%boardLength);
     }
+
     public String propertyToSting(){
         String res = "Du ejer:";
         for(int pro : ownedProperties){
@@ -99,31 +100,42 @@ public class Player {
     }
 
     public void addProperty (int position) {
+        System.out.println("Property " + position +" er blevet addet til spiller "+ this.name);
         int[] newArray = new int[ownedSize+1];
         for( int i = 0; i < ownedSize; i++) {
             newArray[i] = ownedProperties[i];
         }
-        newArray[ownedSize++] = position;
+        newArray[this.ownedSize++] = position;
         ownedProperties = newArray;
+
     }
 
     public void removeProperty (int position) {
+        System.out.println("remove er kaldt");
         int i;
-        for (i = 0; i < ownedSize; i++) {
-            if (position == ownedProperties[i])
+        int [] res =new int[this.ownedProperties.length -1];
+
+        for(i = 0; i <= ownedProperties.length; i++){
+            if(position == this.ownedProperties[i]){
+                int x =0;
+                for(int j = 0; j < ownedProperties.length; j++){
+                    if(j != i) {
+                        System.out.println("adder til res værdi: "+ ownedProperties[j]);
+                        res[x] = ownedProperties[j];
+                        x++;
+                    }
+
+                };
+                this.ownedProperties = res;
+                this.ownedSize = ownedSize-1;
+                System.out.println(propertyToSting());
                 break;
+            }
         }
-        if (i == ownedSize)
-            return;
-        int[] newArray = new int[ownedSize-1];
-        for (int j = 0; j < i; j++) {
-            newArray[j] = ownedProperties[j];
-        }
-        for (int j = i; j < ownedSize-1; j++) {
-            newArray[j] = ownedProperties[j+1];
-        }
-        ownedProperties = newArray;
+
     }
+
+
 
     int[] getProperties(){
         return ownedProperties;
