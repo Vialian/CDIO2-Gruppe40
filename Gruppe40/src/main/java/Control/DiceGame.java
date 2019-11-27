@@ -223,6 +223,7 @@ public class DiceGame {
                                 propertyChosen = choice;
                             }
                         }
+                        pl.setPromisedRealEstate(false);
                         pl.setCurrentTile(propertyChosen);
                     }
                     else
