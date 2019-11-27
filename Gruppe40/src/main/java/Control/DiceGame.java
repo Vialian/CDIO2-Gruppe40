@@ -152,7 +152,7 @@ public class DiceGame {
 
         }
 
-        gui.showMessage("Alright, let's get started... The youngest one " + players[youngest].getName() + " will start");
+        gui.showMessage("Alright, let's get started... The youngest one, player " + players[youngest].getName() + " will start");
 
     }
 
