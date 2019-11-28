@@ -104,6 +104,19 @@ public class DiceGame {
         players[1] = new Player("Jim", 20, 2);
         this.gui = gui;
     }
+
+    public DiceGame(GUI gui,int useless){
+        board = new Board(24);
+        for(int i=0; i<24;i++){
+            board.addProperty(i,"tile" + i,"useless",2,"WHITE");
+//            System.out.println(board.getTile(i));
+        }
+
+        players = new Player[2];
+        players[0] = new Player("Jeff", 20, 1);
+        players[1] = new Player("Jim", 20, 2);
+        this.gui = gui;
+    }
     public Board getBoard(){
         return board;
     }
