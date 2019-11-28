@@ -332,7 +332,7 @@ public class DiceGame {
 //                sellPropety(player);
 ////                sellPropety(toSale,toSale2);
 //            }
-            while (player.getOwnedProperties().length > 0)
+            while (player.getOwnedProperties().length > 0 || player.getMoney() >= 0)
             {
                 System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
                 if (player.getMoney() >= 0)
@@ -355,10 +355,8 @@ public class DiceGame {
         int winner = 0;
         int money = 0;
         for (int i = 0; i < players.length; i++) {
-
             if (money < players[i].getMoney()) {
                 winner = i;
-
             }
         }
         gui.showMessage("The winner is: " + players[winner].getName() + " with the amount of " + players[winner].getMoney());
