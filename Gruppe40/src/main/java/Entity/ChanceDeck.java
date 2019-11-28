@@ -38,10 +38,15 @@ public class ChanceDeck {
     public void drawCard(Player player, GUI gui, Board board, DiceGame game) {
         index++;
         index = index%20;
+        performAction(deck[index], player, gui, board, game);
+    }
+    public void drawCard() {
+        index++;
+        index = index%20;
 //        performAction(deck[index], player, gui, board, game);
     }
     
-    private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
+    public void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
         int position;
         String goTo;
         switch(index) {
@@ -284,6 +289,8 @@ public class ChanceDeck {
         }
 
     }
+
+
 
     private void MoveBuyTile (int index, Player player, Board board, GUI gui, DiceGame game) {
         sendToCard.setSendTo(index);

@@ -4,6 +4,6 @@ public class Main {
     public static void main(String[] args) {
 
         DiceGame game = new DiceGame();
-        game.playDiceGame();
+        game.playDiceGameStump(0,0);
     }
 }

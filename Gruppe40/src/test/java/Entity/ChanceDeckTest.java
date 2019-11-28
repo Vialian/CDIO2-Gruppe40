@@ -13,6 +13,7 @@ public class ChanceDeckTest {
     DiceGame diceGame = new DiceGame(gui);
     Board board = new Board();
     Player player = new Player("Ben",20,1);
+    ChanceDeck chanceDeck = new ChanceDeck();
 
     @Test
     public void drawCard() {
@@ -20,7 +21,7 @@ public class ChanceDeckTest {
 
         for (int i = 0; i < 20; i++) {
             assertEquals(i, chanceDeck.getIndex());
-            chanceDeck.drawCard(player, gui, board, diceGame);
+            chanceDeck.drawCard();
 
         }
 
@@ -28,55 +29,86 @@ public class ChanceDeckTest {
     }
     @Test
     public void mixDeck() {
-        ChanceDeck chanceDeck = new ChanceDeck();
 
-        int[] chanceArr = chanceDeck.getDeck();
+        chanceDeck.mixDeck();
         int[] mix = new int[chanceDeck.getDeck().length];
-        mix = chanceDeck.getDeck();
-
-        for(int i =0; i <mix.length; i++){
-            mix[i] = chanceArr[i];
-        }
         int[] mix2 = new int[chanceDeck.getDeck().length];
 
         chanceDeck.mixDeck();
-        int[]chanceArr1 = chanceDeck.getDeck();
-        for(int i =0; i <mix.length; i++){
-            mix2[i] = chanceArr1[i];
-        }
-        System.out.println(mix);
-        System.out.println(mix2);
+                int i = 0, j = 0;
+                    for (int mixing: chanceDeck.getDeck()) {
+                        mix[i] = mixing;
+//                        System.out.println(mix[i]);
+                        i++;
+                    }
+                for (int k = 0; k < 1; k++) {
+                    boolean passed = false;
 
-        for(int i =0; i <mix.length; i++){
-            System.out.println(chanceArr[i] + " == " + chanceArr1[i]);
-           // assertFalse(mix[i] == mix2[i]);
+                    chanceDeck.mixDeck();
+                    for (int mixing: chanceDeck.getDeck()) {
+                        mix[j] = mixing;
+//                        System.out.println("test " + mix[j]);
+                        if(mix[j] != mix2[j])
+                        {
+                            passed = true;
+                        }
+                        assertTrue(passed);
+                        j++;
+                    }
+                }
+    }
+
+//    @Test
+//    public void moveBuyTile() {
+//    int pos = 5;
+//    chanceDeck.moveBuyTile(pos,player,board, gui, diceGame);
+//        System.out.println("test " + player.getCurrentTile() + " or " + pos);
+//    assertEquals(pos, player.getCurrentTile());
+//    }
+//
+//    @Test
+//    public void performAction() {
+//        chanceDeck.performAction(5,player,gui,board,diceGame);
+//
+//    }
+
+    @Test
+    public void getDeck() {
+        int[] initDeck = new int[10];
+        for (int i = 0; i < initDeck.length ; i++) {
+            initDeck[i] = i;
         }
-        //chanceDeck.mixDeck();
-        //        int i = 0, j = 0;
-        //            for (int mixing: chanceDeck.getDeck()) {
-        //                mix[i] = mixing;
-        ////                System.out.println(mix[i]);
-        //                i++;
-        //            }
-        //        for (int k = 0; k < 100; k++) {
-        //            chanceDeck.mixDeck();
-        //            for (int mixing: chanceDeck.getDeck()) {
-        //                mix[j] = mixing;
-        ////                System.out.println("test " + mix[j]);
-        //                j++;
-        //            }
-        //            System.out.println(mix.toString());
-        //            System.out.println(mix2.toString());
-        //            assertFalse(Arrays.equals(mix, mix2));
-        //        }
+        chanceDeck.setDeck(initDeck);
+        for (int i = 0; i < initDeck.length; i++) {
+            assertEquals(chanceDeck.getDeck()[i], initDeck[i]);
+
+        }
+    }
+    @Test
+    public void setDeck() {
+        int[] initDeck = new int[10];
+        for (int i = 0; i < initDeck.length ; i++) {
+            initDeck[i] = i;
+        }
+        chanceDeck.setDeck(initDeck);
+        for (int i = 0; i < initDeck.length; i++) {
+            assertEquals(chanceDeck.getDeck()[i], initDeck[i]);
+
+        }
+
     }
 
     @Test
-    public void moveBuyTile() {
-    ChanceDeck chanceDeck = new ChanceDeck();
-    int pos = 5;
-    chanceDeck.moveBuyTile(pos,player,board, gui, diceGame);
-        System.out.println("test " + player.getCurrentTile() + " or " + pos);
-    assertEquals(pos, player.getCurrentTile());
+    public void getIndex() {
+        int setint = 5;
+        chanceDeck.setIndex(setint);
+        assertEquals(chanceDeck.getIndex(), setint);
     }
+    @Test
+    public void setIndex() {
+        int setint = 5;
+        chanceDeck.setIndex(setint);
+        assertEquals(chanceDeck.getIndex(), setint);
+    }
+
 }
