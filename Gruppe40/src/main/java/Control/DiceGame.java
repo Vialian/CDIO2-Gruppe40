@@ -494,7 +494,7 @@ public class DiceGame {
             while (true) {
 
                 // Ved at sige --, så deinkrementeres currentPosition med én Vi sørger også for at den aldrig når under 0
-                currentPosition= (currentPosition-1);
+                currentPosition = (currentPosition-1);
                 while(currentPosition<0){
                     System.out.println("altered "+(TILES_COUNT-currentPosition));
                     currentPosition = TILES_COUNT+currentPosition;
