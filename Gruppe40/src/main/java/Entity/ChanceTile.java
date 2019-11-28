@@ -1,6 +1,5 @@
 package Entity;
 
-import Control.DiceGame;
 import gui_main.GUI;
 
 public class ChanceTile extends Tile  {

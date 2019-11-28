@@ -1,4 +1,4 @@
-import Control.DiceGame;
+import Entity.DiceGame;
 
 public class Main {
     public static void main(String[] args) {

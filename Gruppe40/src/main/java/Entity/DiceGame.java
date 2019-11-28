@@ -1,4 +1,4 @@
-package Control;
+package Entity;
 
 import Entity.*;
 import gui_codebehind.GUI_Center;

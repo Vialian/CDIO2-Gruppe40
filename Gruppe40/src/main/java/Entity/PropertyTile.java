@@ -1,7 +1,5 @@
 package Entity;
 
-import Control.DiceGame;
-import gui_codebehind.GUI_BoardController;
 import gui_fields.GUI_Field;
 import gui_main.GUI;
 
