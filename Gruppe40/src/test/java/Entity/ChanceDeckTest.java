@@ -13,6 +13,7 @@ public class ChanceDeckTest {
     DiceGame diceGame = new DiceGame(gui);
     Board board = new Board();
     Player player = new Player("Ben",20,1);
+    ChanceDeck chanceDeck = new ChanceDeck();
 
     @Test
     public void drawCard() {
@@ -28,7 +29,7 @@ public class ChanceDeckTest {
     }
     @Test
     public void mixDeck() {
-        ChanceDeck chanceDeck = new ChanceDeck();
+
         chanceDeck.mixDeck();
         int[] mix = new int[chanceDeck.getDeck().length];
         int[] mix2 = new int[chanceDeck.getDeck().length];
@@ -59,10 +60,55 @@ public class ChanceDeckTest {
 
     @Test
     public void moveBuyTile() {
-    ChanceDeck chanceDeck = new ChanceDeck();
     int pos = 5;
     chanceDeck.moveBuyTile(pos,player,board, gui, diceGame);
         System.out.println("test " + player.getCurrentTile() + " or " + pos);
     assertEquals(pos, player.getCurrentTile());
     }
+
+    @Test
+    public void performAction() {
+        chanceDeck.performAction(5,player,gui,board,diceGame);
+
+    }
+
+    @Test
+    public void getDeck() {
+        int[] initDeck = new int[10];
+        for (int i = 0; i < initDeck.length ; i++) {
+            initDeck[i] = i;
+        }
+        chanceDeck.setDeck(initDeck);
+        for (int i = 0; i < initDeck.length; i++) {
+            assertEquals(chanceDeck.getDeck()[i], initDeck[i]);
+
+        }
+    }
+    @Test
+    public void setDeck() {
+        int[] initDeck = new int[10];
+        for (int i = 0; i < initDeck.length ; i++) {
+            initDeck[i] = i;
+        }
+        chanceDeck.setDeck(initDeck);
+        for (int i = 0; i < initDeck.length; i++) {
+            assertEquals(chanceDeck.getDeck()[i], initDeck[i]);
+
+        }
+
+    }
+
+    @Test
+    public void getIndex() {
+        int setint = 5;
+        chanceDeck.setIndex(setint);
+        assertEquals(chanceDeck.getIndex(), setint);
+    }
+    @Test
+    public void setIndex() {
+        int setint = 5;
+        chanceDeck.setIndex(setint);
+        assertEquals(chanceDeck.getIndex(), setint);
+    }
+
 }
