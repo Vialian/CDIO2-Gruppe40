@@ -1,6 +1,5 @@
 package Entity;
 
-import Control.DiceGame;
 import gui_main.GUI;
 import org.junit.Test;
 

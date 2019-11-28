@@ -1,9 +1,9 @@
 package Control;
 
+import Entity.DiceGame;
 import Entity.Player;
 import Entity.PropertyTile;
 import Entity.Tile;
-import com.sun.deploy.panel.IProperty;
 import gui_main.GUI;
 import org.junit.Test;
 
@@ -12,6 +12,14 @@ import static org.junit.Assert.*;
 public class DiceGameTest {
     GUI gui = new GUI();
     DiceGame game = new DiceGame(gui);
+
+    @Test
+    public void runAll(){
+        findPlayer();
+        playDiceGame();
+        colourPair();
+    }
+
     @Test
     public void findPlayer() {
 
