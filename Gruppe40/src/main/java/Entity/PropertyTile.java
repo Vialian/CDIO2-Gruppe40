@@ -34,7 +34,7 @@ public class PropertyTile extends Tile {
                  this.setOwnedBy(player.getID());
                  player.addMoney(- this.cost);
                  player.addProperty(board.getTilePos(this));
-                 gui.showMessage("You are now the owner: "+ this.getName());
+                // gui.showMessage("You are now the owner: "+ this.getName());
                  GUI_Field fl[] = gui.getFields();
                  fl[board.getTilePos(this)].setTitle(getName() + "\n " + player.getName() ); //skal nok slettet, da anden løsning vil være mere optimal
                  fl[board.getTilePos(this)].setDescription(getText() + ":  owner " + player.getName());

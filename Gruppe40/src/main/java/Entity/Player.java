@@ -144,7 +144,7 @@ public class Player {
     }
 
     public int incrementReleaseCards () {
-        return this.releaseCards++;
+        return ++this.releaseCards;
     }
 
     public int getReleaseCards() {

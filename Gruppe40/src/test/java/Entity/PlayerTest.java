@@ -58,8 +58,7 @@ private Player pl = new Player(Testname,testStartMoney,testID);
 
     @Test
     public void getDie() {
-        Die die = new Die();
-        assertSame(die,pl.getDie());
+        assertTrue(pl.getDie() instanceof Die);
     }
 
     @Test
