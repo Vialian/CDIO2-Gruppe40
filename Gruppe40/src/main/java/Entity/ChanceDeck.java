@@ -41,7 +41,7 @@ public class ChanceDeck {
 //        performAction(deck[index], player, gui, board, game);
     }
     
-    private void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
+    public void performAction(int index, Player player, GUI gui, Board board, DiceGame game) {
         int position;
         String goTo;
         switch(index) {
