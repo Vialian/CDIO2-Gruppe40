@@ -29,46 +29,32 @@ public class ChanceDeckTest {
     @Test
     public void mixDeck() {
         ChanceDeck chanceDeck = new ChanceDeck();
-
-        int[] chanceArr = chanceDeck.getDeck();
+        chanceDeck.mixDeck();
         int[] mix = new int[chanceDeck.getDeck().length];
-        mix = chanceDeck.getDeck();
-
-        for(int i =0; i <mix.length; i++){
-            mix[i] = chanceArr[i];
-        }
         int[] mix2 = new int[chanceDeck.getDeck().length];
 
         chanceDeck.mixDeck();
-        int[]chanceArr1 = chanceDeck.getDeck();
-        for(int i =0; i <mix.length; i++){
-            mix2[i] = chanceArr1[i];
-        }
-        System.out.println(mix);
-        System.out.println(mix2);
+                int i = 0, j = 0;
+                    for (int mixing: chanceDeck.getDeck()) {
+                        mix[i] = mixing;
+                        System.out.println(mix[i]);
+                        i++;
+                    }
+                for (int k = 0; k < 1; k++) {
+                    boolean passed = false;
 
-        for(int i =0; i <mix.length; i++){
-            System.out.println(chanceArr[i] + " == " + chanceArr1[i]);
-           // assertFalse(mix[i] == mix2[i]);
-        }
-        //chanceDeck.mixDeck();
-        //        int i = 0, j = 0;
-        //            for (int mixing: chanceDeck.getDeck()) {
-        //                mix[i] = mixing;
-        ////                System.out.println(mix[i]);
-        //                i++;
-        //            }
-        //        for (int k = 0; k < 100; k++) {
-        //            chanceDeck.mixDeck();
-        //            for (int mixing: chanceDeck.getDeck()) {
-        //                mix[j] = mixing;
-        ////                System.out.println("test " + mix[j]);
-        //                j++;
-        //            }
-        //            System.out.println(mix.toString());
-        //            System.out.println(mix2.toString());
-        //            assertFalse(Arrays.equals(mix, mix2));
-        //        }
+                    chanceDeck.mixDeck();
+                    for (int mixing: chanceDeck.getDeck()) {
+                        mix[j] = mixing;
+                        System.out.println("test " + mix[j]);
+                        if(mix[j] != mix2[j])
+                        {
+                            passed = true;
+                        }
+                        assertTrue(passed);
+                        j++;
+                    }
+                }
     }
 
     @Test
