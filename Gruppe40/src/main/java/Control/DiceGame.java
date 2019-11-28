@@ -634,14 +634,25 @@ public class DiceGame {
 
             // while loop til kontrol af tile og colour i den anden retning
             currentPosition = position;
+            System.out.println(currentPosition);
             while (true) {
 
                 // Ved at sige --, så deinkrementeres currentPosition med én Vi sørger også for at den aldrig når under 0
-                currentPosition= (currentPosition-1)%TILES_COUNT;
+                currentPosition= (currentPosition-1);
+                while(currentPosition<0){
+                    System.out.println("altered "+(TILES_COUNT-currentPosition));
+                    currentPosition = TILES_COUNT+currentPosition;
+                }
+                if(currentPosition==position){
+                    //Hvis vi når den samme postion betyder det vi aldrig så andre farver, eller properties af samme farve som var ejet af en anden person. Vi returner derfor true.
+                    return true;
+                }
+                System.out.println("current "+currentPosition);
                 Tile previousProperty = board.getTile(currentPosition);
 
                 // Kontrol om næste tile er propertyTile eller ej
                 // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
+                System.out.println(tile instanceof UselessTile);
                 if (!(tile instanceof PropertyTile)) {
                     continue;
                 }

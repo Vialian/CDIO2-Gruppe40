@@ -1,6 +1,9 @@
 package Control;
 
 import Entity.Player;
+import Entity.PropertyTile;
+import Entity.Tile;
+import com.sun.deploy.panel.IProperty;
 import gui_main.GUI;
 import org.junit.Test;
 
@@ -44,6 +47,42 @@ public class DiceGameTest {
 
     @Test
     public void colourPair() {
-
+        //first setup only one blue tile is owned by player 1
+        game.getBoard().addProperty(0,"First","First property",0,"BLUE");
+        game.getBoard().addProperty(1,"Second","Second property",0,"BLUE");
+        Tile tile = game.getBoard().getTile(0);
+        PropertyTile property = (PropertyTile) tile;
+        property.setOwnedBy(1);
+        assertTrue(!game.colourPair(0));
+        //both tiles are owned by player 1
+        tile = game.getBoard().getTile(1);
+        property = (PropertyTile) tile;
+        property.setOwnedBy(1);
+        assertTrue(game.colourPair(0));
+        //add a tile behind the beginning tile which is not owned by the same
+        game.getBoard().addProperty(23,"Twentythird","Twentythird property",0,"BLUE");
+        assertTrue(!game.colourPair(0));
+        //add a tile which is not owned by 1 and has a few useless tiles between them
+        game.getBoard().addProperty(20,"Third","Third property",0,"BLUE");
+        assertTrue(!game.colourPair(0));
+        //set the tile beside the others to owned by 1
+        tile = game.getBoard().getTile(23);
+        property = (PropertyTile) tile;
+        property.setOwnedBy(1);
+        assertTrue(!game.colourPair(0));
+        //set the last propertytile to owned by the same player
+        tile = game.getBoard().getTile(20);
+        property = (PropertyTile) tile;
+        property.setOwnedBy(1);
+        assertTrue(game.colourPair(0));
+        //encase a tile between two propertytiles with a diffenent color
+        game.getBoard().addProperty(22,"Twentysecond","Twenty property",0,"RED");
+        game.getBoard().addProperty(2,"Third","Third property",0,"RED");
+        assertTrue(game.colourPair(0));
+        //test if the owner of the tile between the differentcolored tiles matters
+        tile = game.getBoard().getTile(20);
+        property = (PropertyTile) tile;
+        property.setOwnedBy(0);
+        assertTrue(game.colourPair(0));
     }
 }
