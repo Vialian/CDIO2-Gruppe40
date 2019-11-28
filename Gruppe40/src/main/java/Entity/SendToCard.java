@@ -22,7 +22,6 @@ public class SendToCard extends ChanceCard {
 
         pl.setCurrentTile(sendTo);
 
-
         Tile tl = br.getTile(pl.getCurrentTile());
         if(tl instanceof PropertyTile){
             PropertyTile tile = (PropertyTile) tl;
