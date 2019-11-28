@@ -503,7 +503,7 @@ public class DiceGame {
 
                 // Kontrol om næste tile er propertyTile eller ej
                 // Hvis tile ikke er en instans af propertyTile, så forsættes eksekvering af koden
-                if (!(tile instanceof PropertyTile)) {
+                if (!(previousProperty instanceof PropertyTile)) {
                     continue;
                 }
 
