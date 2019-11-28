@@ -643,10 +643,6 @@ public class DiceGame {
                     System.out.println("altered "+(TILES_COUNT-currentPosition));
                     currentPosition = TILES_COUNT+currentPosition;
                 }
-                if(currentPosition==position){
-                    //Hvis vi når den samme postion betyder det vi aldrig så andre farver, eller properties af samme farve som var ejet af en anden person. Vi returner derfor true.
-                    return true;
-                }
                 System.out.println("current "+currentPosition);
                 Tile previousProperty = board.getTile(currentPosition);
 
