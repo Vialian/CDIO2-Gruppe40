@@ -37,7 +37,7 @@ public class ChanceDeckTest {
                 int i = 0, j = 0;
                     for (int mixing: chanceDeck.getDeck()) {
                         mix[i] = mixing;
-                        System.out.println(mix[i]);
+//                        System.out.println(mix[i]);
                         i++;
                     }
                 for (int k = 0; k < 1; k++) {
@@ -46,7 +46,7 @@ public class ChanceDeckTest {
                     chanceDeck.mixDeck();
                     for (int mixing: chanceDeck.getDeck()) {
                         mix[j] = mixing;
-                        System.out.println("test " + mix[j]);
+//                        System.out.println("test " + mix[j]);
                         if(mix[j] != mix2[j])
                         {
                             passed = true;
