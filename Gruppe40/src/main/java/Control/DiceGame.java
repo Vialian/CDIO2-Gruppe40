@@ -160,11 +160,12 @@ public class DiceGame {
     {
 
         for (int i = 0; i < TILES_COUNT; i++) {
-
+            int x = 0;
             Tile tile = board.getTile(i);
             if(tile instanceof PropertyTile)
             {
-               avaliable[i] = board.getTilePos(tile);
+               avaliable[x] = board.getTilePos(tile);
+               x++;
             }
         }
     }
