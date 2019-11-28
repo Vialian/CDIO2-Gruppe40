@@ -419,7 +419,7 @@ public class DiceGame {
 
         if (player.hasLost()) {
 
-            while (player.getOwnedProperties().length > 0)
+            while (player.getOwnedProperties().length > 0 || player.getMoney() >= 0)
             {
                 System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
                 if (player.getMoney() >= 0)
