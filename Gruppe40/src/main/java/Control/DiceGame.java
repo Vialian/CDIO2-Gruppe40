@@ -127,7 +127,7 @@ public class DiceGame {
 
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
-        int startMoney = 20;
+        int startMoney = 2;
         int youngestTemp = Integer.MAX_VALUE;
         for (int i = 1; MAX_PLAYERS >= i; i++) {
             int s = i - 1;
@@ -213,7 +213,6 @@ public class DiceGame {
                         {
                             if (s == choice)
                             {
-                                gui.showMessage("this property can you not take");
 
                             } else {
 
@@ -337,7 +336,9 @@ public class DiceGame {
             {
                 System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
                 if (player.getMoney() >= 0)
+                {
                     return false;
+                }
                 else
                     sellPropety(player);
                     updateGui(currentplayer);
@@ -422,7 +423,7 @@ public class DiceGame {
                 //message = title.toString()}
             }
 			else {
-                    message = "You owe " + property.getOwnedBy() + " money, pay : " + property.getCost();
+                    message = "You owe player: " + property.getOwnedBy() + " money, pay : " + property.getCost();
                 }
         }
         else if (tile instanceof JailTile) {
