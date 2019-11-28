@@ -127,7 +127,7 @@ public class DiceGame {
 
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
-        int startMoney = 1;
+        int startMoney = 20;
         int youngestTemp = Integer.MAX_VALUE;
         for (int i = 1; MAX_PLAYERS >= i; i++) {
             int s = i - 1;
