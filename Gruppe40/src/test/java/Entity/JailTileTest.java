@@ -25,16 +25,19 @@ public class JailTileTest {
 
     @Test
     public void landOn() {
-        int totalmove = 0;
         GUI gui = new GUI();
         DiceGame game = new DiceGame(gui);
-        player = new Player("Player", 2,1);
-        System.out.println(player.isInJail());
-        assertTrue(!player.isInJail());
+        Board board = new Board();
 
-        diceGame = new DiceGame();
-        jailTile.landOn(player,gui,board, diceGame);
+        int testSendTo = 5;
+        JailTile tile = new JailTile("Jail","lars sendes i fængsel","pink",testSendTo);
+        Player player = new Player("Player", 2,1);
+        assertEquals(0,player.getCurrentTile());
+        assertTrue(!player.isInJail());
+      
+        tile.landOn(player,gui,board,game);
 
         assertTrue(player.isInJail());
+        assertEquals(testSendTo, player.getCurrentTile());
     }
 }

@@ -30,10 +30,40 @@ public class PropertyTileTest {
 
     @Test
     public void landOn() {
-        Player player = new Player("Lars",100,1);
+
         GUI gui = new GUI();
-        Board board = new Board();
-        DiceGame game = new DiceGame();
+        DiceGame game = new DiceGame(gui,5);
+        Board board = game.getBoard();
+        int testTilePos =4 ;
+
+        PropertyTile tile1 = (PropertyTile)board.getTile(testTilePos);
+        PropertyTile tile2 = (PropertyTile)board.getTile(testTilePos+1);
+
+        Player[] players  = game.getPlayers();
+        Player pl1 =players[0];
+        Player pl2 = players[1];
+        int testStartM = 100;
+        pl1.setMoney(testStartM);
+        pl2.setMoney(testStartM);
+
+
+        //Hvis feltet er ejer af en anden spiller
+        tile1.setOwnedBy(pl2.getID());
+        assertEquals(pl2.getID(), tile1.getOwnedBy());
+        tile1.landOn(pl1,gui,board,game);
+
+        assertEquals(testStartM - tile1.getCost(),pl1.getMoney());
+        assertEquals(testStartM + tile1.getCost(),pl2.getMoney());
+
+        //Hvis feltet ikke er ejet af nogle
+        pl1.setMoney(testStartM);
+        pl2.setMoney(testStartM);
+
+        tile2.landOn(pl1,gui,board,game);
+        System.out.println(tile2.getCost());
+        assertEquals(testStartM - tile2.getCost(),pl1.getMoney());
+        int[] expectedOwned = {board.getTilePos(tile2)};
+        assertArrayEquals(expectedOwned,pl1.getOwnedProperties());
 
 
 
