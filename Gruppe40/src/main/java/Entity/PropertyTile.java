@@ -44,10 +44,7 @@ public class PropertyTile extends Tile {
                  }
 
              }else{
-             if(game.colourPair(board.getTilePos(this))){
-                 player.addMoney(- (this.cost*2));
-                 game.findPlayer(this.ownedBy).addMoney(this.cost*2);
-             }else{
+
                  if(game.colourPair(board.getTilePos(this))){
 
                      System.out.println();
@@ -57,7 +54,7 @@ public class PropertyTile extends Tile {
                      player.addMoney(- this.cost);
                      game.findPlayer(this.ownedBy).addMoney(this.cost);
                  }
-             }
+
 
          }
          }

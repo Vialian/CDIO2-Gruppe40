@@ -127,7 +127,7 @@ public class DiceGame {
 
         players = new Player[MAX_PLAYERS];
         guiPlayers = new GUI_Player[MAX_PLAYERS];
-        int startMoney = 2;
+        int startMoney = 20;
         int youngestTemp = Integer.MAX_VALUE;
         for (int i = 1; MAX_PLAYERS >= i; i++) {
             int s = i - 1;
@@ -188,6 +188,7 @@ public class DiceGame {
             System.out.println("Updater GUI for player " + i);
             updateGui(i);
         }
+
         int currentPlayer = youngest;
         while (!gameHasEnded) {
 
@@ -227,7 +228,7 @@ public class DiceGame {
                         pl.setCurrentTile(propertyChosen);
                     }
                     else
-                    {
+                        {
                         if(pl.isInJail())
                         {
                             if(pl.getReleaseCards() >= 1)
@@ -249,8 +250,6 @@ public class DiceGame {
                                     pl.setInJail(false);
                                 }
                             }
-                            //pl.setCurrentTile(jailPos);
-
                         }
                         gui.showMessage(pl.getName() + ": Will you roll your dice?...");
 
@@ -296,42 +295,7 @@ public class DiceGame {
     private Boolean doPlayerConditions(Player player, int currentplayer) {
 
         if (player.hasLost()) {
-//            if (player.getOwnedProperties().length > 0 && player.getMoney() < 0) {
-//                int[][] pl = new int[8][2];
-//                int num = 0;
-//                int amount = 1;
-//                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
-//                    for (int s : player.getOwnedProperties()) {
-//                        if (s == i)
-//                        {
-//                            pl[i][num] = amount;
-//                            num++;
-//                            amount++;
-//                            if (amount >= 2)
-//                                amount = 1;
-//                        }
-//                    }
-//
-//                }
-//                int toSale = 0, toSale2 = 3;
-//                int value = 0;
-//                for (int i = 0; i <= player.getOwnedProperties().length; i++) {
-//                    int[] owned = playerOwnedProperty(player);
-//                    if (pl[i].length <= toSale) {
-//
-//                        if (player.getOwnedProperty[i][0].value >= player.getProperty[toSale][0].value) {
-//                            toSale = i;
-//                            if (player.getProperty[toSale][0].value >= player.getProperty[toSale][1].value && pl[toSale].length >= 2) {
-//                                toSale2 = 0;
-//                            } else
-//                                toSale2 = 1;
-//
-//                        }
-//                    }
-//                }
-//                sellPropety(player);
-////                sellPropety(toSale,toSale2);
-//            }
+
             while (player.getOwnedProperties().length > 0 || player.getMoney() >= 0)
             {
                 System.out.println("spillern __ antal ejer " + player.getOwnedProperties().length);
@@ -347,23 +311,33 @@ public class DiceGame {
 
             gui.showMessage(player.getName() + " has lost the game!");
             gameHasEnded = true;
-            findWinner();
             return true;
         }
         return true;
     }
 
     private void findWinner() {
-        int winner = 0;
+
         int money = 0;
+
+
         for (int i = 0; i < players.length; i++) {
             if (money < players[i].getMoney()) {
-                winner = i;
-            }
-        }
-        gui.showMessage("The winner is: " + players[winner].getName() + " with the amount of " + players[winner].getMoney());
-    }
+                money = players[i].getMoney();
 
+            }
+
+        }
+
+        String winnerMsg = "Vinderen er = ";
+        for (int i = 0; i < players.length; i++) {
+            if (money == players[i].getMoney()) {
+                winnerMsg = winnerMsg + players[i].getName() + ", ";
+            }
+
+        }
+        gui.showMessage(winnerMsg);
+    }
         private void sellPropety(Player pl) {
             System.out.println("Sell grund er kaldt");
         gui.showMessage("You must sell a property");
@@ -403,7 +377,7 @@ public class DiceGame {
         String message = "You have landed on " + board.getTile(pos).getName() + ": " + board.getTile(pos).getText() + ". ";
         Tile tile=board.getTile(pos);
         if (tile instanceof ChanceTile) {
-            message = board.getTile(pos).toString();
+            message = "Prøv lykken";
         }
         else if (tile instanceof PropertyTile)
         {
